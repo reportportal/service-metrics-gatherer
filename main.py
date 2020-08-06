@@ -17,16 +17,22 @@
 import logging
 import logging.config
 import os
+from commons import postgres_dao
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://elasticsearch:9201"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
-    "postgresPassword":  os.getenv("POSTGRES_PASSWORD", "")
+    "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
+    "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
+    "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
+    "postgresPort":      os.getenv("POSTGRES_PORT", 5432)
 }
 
 def initialize_connection():
 	logger.info("Application started...")
+	_postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
+	print(_postgres_dao.get_auto_analysis_attribute_id())
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
 logging.config.fileConfig(log_file_path)
