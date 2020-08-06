@@ -18,6 +18,7 @@ import logging
 import logging.config
 import os
 from commons import postgres_dao
+import datetime
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://elasticsearch:9201"),
@@ -33,7 +34,8 @@ APP_CONFIG = {
 def initialize_connection():
     logger.info("Application started...")
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
-    print(_postgres_dao.get_auto_analysis_attribute_id())
+    print(_postgres_dao.get_activities_by_project(1,
+          datetime.datetime(2020, 7, 1), datetime.datetime(2020, 8, 10)))
 
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
