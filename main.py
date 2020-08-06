@@ -29,10 +29,12 @@ APP_CONFIG = {
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432)
 }
 
+
 def initialize_connection():
-	logger.info("Application started...")
-	_postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
-	print(_postgres_dao.get_auto_analysis_attribute_id())
+    logger.info("Application started...")
+    _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
+    print(_postgres_dao.get_auto_analysis_attribute_id())
+
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
 logging.config.fileConfig(log_file_path)

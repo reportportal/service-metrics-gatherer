@@ -18,6 +18,7 @@ import psycopg2
 
 logger = logging.getLogger("metricsGatherer.postgres_dao")
 
+
 class PostgresDAO:
 
     def __init__(self, app_settings):
@@ -47,9 +48,10 @@ class PostgresDAO:
 
     def get_column_names_for_table(self, table_name):
         return self.query_db(
-            "select column_name, data_type from information_schema.columns where table_name = '%s';"%table_name)
+            """select column_name, data_type from
+            information_schema.columns where table_name = '%s';""" % table_name)
 
     def get_auto_analysis_attribute_id(self):
         return self.query_db(
-            "select id, name from attribute where name = 'analyzer.isAutoAnalyzerEnabled'", query_all=False)[0]
-
+            """select id, name from attribute
+            where name = 'analyzer.isAutoAnalyzerEnabled'""", query_all=False)[0]
