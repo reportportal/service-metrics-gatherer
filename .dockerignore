@@ -1,0 +1,11 @@
+**/__pycache__
+**/*.pyc
+**/env/
+**/venv/
+.bumpversion.cgf
+**/*.log
+Docker*
+Jenkins*
+**/*.md
+**/*.bat
+requirements_windows.txt

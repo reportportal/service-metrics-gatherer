@@ -159,15 +159,19 @@ class MetricsGatherer:
     def gather_metrics(self, period_start, period_end):
         all_projects = self.postgres_dao.get_all_projects()
         for project_info in all_projects:
-            project_id = project_info["id"]
-            project_name = project_info["name"]
-            gathered_rows = []
-            project_aa_states = {}
-            for st_date_day in range((period_end - period_start).days + 1):
-                cur_date = period_start + datetime.timedelta(days=st_date_day)
-                project_aa_states = self.find_sequence_of_aa_enability(project_id, cur_date, project_aa_states)
-                gathered_row = self.gather_metrics_by_project(project_id, project_name, cur_date)
-                gathered_rows.append(gathered_row)
-            gathered_rows = self.fill_right_aa_enable_states(gathered_rows, project_aa_states)
-            print(gathered_rows)
-            self.es_client.bulk_index("rp_stats", gathered_rows)
+            try:
+                project_id = project_info["id"]
+                project_name = project_info["name"]
+                gathered_rows = []
+                project_aa_states = {}
+                for st_date_day in range((period_end - period_start).days + 1):
+                    cur_date = period_start + datetime.timedelta(days=st_date_day)
+                    project_aa_states = self.find_sequence_of_aa_enability(
+                        project_id, cur_date, project_aa_states)
+                    gathered_row = self.gather_metrics_by_project(project_id, project_name, cur_date)
+                    gathered_rows.append(gathered_row)
+                gathered_rows = self.fill_right_aa_enable_states(gathered_rows, project_aa_states)
+                self.es_client.bulk_index("rp_stats", gathered_rows)
+            except Exception as err:
+                logger.error("Error occured for project %s", project_info)
+                logger.error(err)
