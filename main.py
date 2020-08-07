@@ -17,11 +17,12 @@
 import logging
 import logging.config
 import os
-from commons import postgres_dao
+from commons import metrics_gatherer
 import datetime
 
 APP_CONFIG = {
-    "esHost":            os.getenv("ES_HOST", "http://elasticsearch:9201"),
+    "esHost":            os.getenv("ES_HOST", "http://localhost:9201"),
+    "kibanaHost":        os.getenv("KIBANA_HOST", "http://localhost:5601"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
@@ -33,9 +34,8 @@ APP_CONFIG = {
 
 def initialize_connection():
     logger.info("Application started...")
-    _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
-    print(_postgres_dao.get_activities_by_project(1,
-          datetime.datetime(2020, 7, 1), datetime.datetime(2020, 8, 10)))
+    _metrics = metrics_gatherer.MetricsGatherer(APP_CONFIG)
+    print(_metrics.gather_metrics(datetime.datetime(2020, 8, 1), datetime.datetime(2020, 8, 10)))
 
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')

@@ -1,0 +1,14 @@
+{
+    "properties": {
+        "on": {"type": "integer"},
+        "changed_type": {"type": "integer"},
+        "AA_analyzed": {"type": "integer"},
+        "f1-score": {"type": "float"},
+        "accuracy": {"type": "float"},
+        "launch_analyzed": {"type": "integer"},
+        "manually_analyzed": {"type": "integer"},
+        "project": {"type": "keyword"},
+        "project_name": {"type": "keyword"},
+        "gather_date": {"type": "date"}
+    }
+}
