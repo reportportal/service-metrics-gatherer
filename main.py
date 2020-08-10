@@ -17,10 +17,13 @@
 import logging
 import logging.config
 import os
-from commons import metrics_gatherer
+import schedule
+import time
+from commons import metrics_gatherer, es_client
 import datetime
 from flask import Flask
 from flask_cors import CORS
+from utils import utils
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9202"),
@@ -30,7 +33,9 @@ APP_CONFIG = {
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
     "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
     "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
-    "postgresPort":      os.getenv("POSTGRES_PORT", 5432)
+    "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
+    "allowed_start_time": os.getenv("ALLOWED_START_TIME", "22:00"),
+    "allowed_end_time":   os.getenv("ALLOWED_END_TIME", "08:00"),
 }
 
 
@@ -40,11 +45,26 @@ def create_application():
     return _application
 
 
-def initialize_connection():
-    logger.info("Application started...")
-    _metrics = metrics_gatherer.MetricsGatherer(APP_CONFIG)
-    print(_metrics.gather_metrics(datetime.datetime(2020, 8, 1),
-          datetime.datetime(2020, 8, 10)))
+def start_metrics_gathering():
+    _es_client = es_client.EsClient(APP_CONFIG)
+    if not utils.is_the_time_for_task_starting(APP_CONFIG["allowed_start_time"],
+                                               APP_CONFIG["allowed_end_time"]):
+        logger.debug("Starting of tasks is allowed only from %s to %s",
+                     APP_CONFIG["allowed_start_time"],
+                     APP_CONFIG["allowed_end_time"])
+        return
+    if not _es_client.is_the_date_metrics_calculated(datetime.datetime.now()):
+        _es_client.bulk_task_done_index([{
+            "gather_date": datetime.datetime.now().date(),
+            "started_task_time": datetime.datetime.now()
+        }])
+        logger.debug("Task started...")
+        _metrics = metrics_gatherer.MetricsGatherer(APP_CONFIG)
+        _metrics.gather_metrics(datetime.datetime.now(),
+                                datetime.datetime.now())
+        logger.debug("Task finished...")
+    else:
+        logger.debug("Task for today was already completed...")
 
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
@@ -59,6 +79,14 @@ logger = logging.getLogger("metricsGatherer")
 
 application = create_application()
 CORS(application)
-initialize_connection()
+schedule.every().hour.do(start_metrics_gathering)
+try:
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+except Exception as e:
+    logger.error(e)
+    logger.error("Metrics gatherer has finished with errors")
+    exit(0)
 logger.info("The metrics gatherer has finished")
 exit(0)

@@ -29,6 +29,12 @@ class EsClient:
     def __init__(self, app_settings):
         self.app_settings = app_settings
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
+        self.main_index_properties = utils.read_json_file(
+            "", "index_mapping_settings.json", to_json=True)
+        self.done_task_index_properties = utils.read_json_file(
+            "", "done_tasks_settings.json", to_json=True)
+        self.main_index = "rp_stats"
+        self.task_done_index = "done_tasks"
         self.es_client = elasticsearch.Elasticsearch(self.app_settings["esHost"])
 
     def index_exists(self, index_name, print_error=True):
@@ -42,12 +48,12 @@ class EsClient:
                 logger.error(err)
             return False
 
-    def create_index(self, index_name):
+    def create_index(self, index_name, index_properties):
         logger.debug("Creating '%s' Elasticsearch index", str(index_name))
         try:
             response = self.es_client.indices.create(index=str(index_name), body={
                 'settings': {"number_of_shards": 1},
-                'mappings': {"default": utils.read_json_file("", "index_mapping_settings.json", to_json=True)}
+                'mappings': {"default": index_properties}
             })
             logger.debug("Created '%s' Elasticsearch index", str(index_name))
             return response
@@ -74,16 +80,9 @@ class EsClient:
             })
         ).raise_for_status()
 
-    def bulk_index(self, index_name, data):
+    def bulk_index(self, index_name, bulk_actions, index_properties, create_pattern=False):
         if not self.index_exists(index_name, print_error=False):
-            self.create_index(index_name)
-
-        bulk_actions = [{
-            '_id': "%s_%s" % (row["project_id"], row["gather_date"]),
-            '_index': index_name,
-            '_type': "default",
-            '_source': row,
-        } for row in data]
+            self.create_index(index_name, index_properties)
 
         logger.debug('Indexing %d docs...' % len(bulk_actions))
         success_count, errors = elasticsearch.helpers.bulk(self.es_client,
@@ -95,5 +94,37 @@ class EsClient:
         logger.debug("Processed %d logs", success_count)
         if errors:
             logger.debug("Occured errors %s", errors)
+        if create_pattern:
+            self.create_pattern(pattern_id=index_name, time_field="gather_date")
 
-        self.create_pattern(pattern_id=index_name, time_field="gather_date")
+    def bulk_main_index(self, data):
+        bulk_actions = [{
+            '_id': "%s_%s" % (row["project_id"], row["gather_date"]),
+            '_index': self.main_index,
+            '_type': "default",
+            '_source': row,
+        } for row in data]
+        self.bulk_index(
+            self.main_index, bulk_actions, self.main_index_properties, create_pattern=True)
+
+    def bulk_task_done_index(self, data):
+        bulk_actions = [{
+            '_index': self.task_done_index,
+            '_type': "default",
+            '_source': row,
+        } for row in data]
+        self.bulk_index(
+            self.task_done_index, bulk_actions, self.done_task_index_properties, create_pattern=False)
+
+    def is_the_date_metrics_calculated(self, date):
+        if not self.index_exists(self.task_done_index, print_error=False):
+            return False
+        res = self.es_client.search(self.task_done_index, body={
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"term": {"gather_date": date.date()}}
+                    ]
+                }
+            }})
+        return len(res["hits"]["hits"]) > 0

@@ -1,0 +1,6 @@
+{
+    "properties": {
+        "started_task_time": {"type": "date"},
+        "gather_date": {"type": "date"}
+    }
+}

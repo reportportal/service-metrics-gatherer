@@ -19,6 +19,7 @@ import re
 import os
 import json
 from urllib.parse import urlparse
+import datetime
 
 logger = logging.getLogger("metricsGatherer.utils")
 
@@ -33,3 +34,11 @@ def read_json_file(folder, filename, to_json=False):
     """Read fixture from file"""
     with open(os.path.join(folder, filename), "r") as file:
         return file.read() if not to_json else json.loads(file.read())
+
+
+def is_the_time_for_task_starting(allowed_start_time, allowed_end_time):
+    start = datetime.time(int(allowed_start_time.split(":")[0]), int(allowed_start_time.split(":")[1]))
+    end = datetime.time(int(allowed_end_time.split(":")[0]), int(allowed_end_time.split(":")[1]))
+    now_time = datetime.datetime.now().time()
+    return (now_time >= start and now_time <= datetime.time(23, 59)) or\
+        (now_time >= datetime.time(0, 0) and now_time <= end)
