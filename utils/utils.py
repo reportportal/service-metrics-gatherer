@@ -42,3 +42,10 @@ def is_the_time_for_task_starting(allowed_start_time, allowed_end_time):
     now_time = datetime.datetime.now().time()
     return (now_time >= start and now_time <= datetime.time(23, 59)) or\
         (now_time >= datetime.time(0, 0) and now_time <= end)
+
+
+def take_the_date_to_check():
+    now_time = datetime.datetime.now().time()
+    if (now_time >= datetime.time(12, 0) and now_time <= datetime.time(23, 59)):
+        return datetime.datetime.now()
+    return datetime.datetime.now() - datetime.timedelta(days=1)

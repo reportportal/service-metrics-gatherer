@@ -49,19 +49,21 @@ def start_metrics_gathering():
     _es_client = es_client.EsClient(APP_CONFIG)
     if not utils.is_the_time_for_task_starting(APP_CONFIG["allowed_start_time"],
                                                APP_CONFIG["allowed_end_time"]):
-        logger.debug("Starting of tasks is allowed only from %s to %s",
+        logger.debug("Starting of tasks is allowed only from %s to %s. Now is %s",
                      APP_CONFIG["allowed_start_time"],
-                     APP_CONFIG["allowed_end_time"])
+                     APP_CONFIG["allowed_end_time"],
+                     datetime.datetime.now())
         return
-    if not _es_client.is_the_date_metrics_calculated(datetime.datetime.now()):
+    date_to_check = utils.take_the_date_to_check()
+    if not _es_client.is_the_date_metrics_calculated(date_to_check):
         _es_client.bulk_task_done_index([{
-            "gather_date": datetime.datetime.now().date(),
+            "gather_date": date_to_check.date(),
             "started_task_time": datetime.datetime.now()
         }])
         logger.debug("Task started...")
         _metrics = metrics_gatherer.MetricsGatherer(APP_CONFIG)
-        _metrics.gather_metrics(datetime.datetime.now(),
-                                datetime.datetime.now())
+        _metrics.gather_metrics(date_to_check,
+                                date_to_check)
         logger.debug("Task finished...")
     else:
         logger.debug("Task for today was already completed...")

@@ -35,7 +35,7 @@ class MetricsGatherer:
                 "f1-score": 0, "accuracy": 0,
                 "launch_analyzed": 0,
                 "manually_analyzed": 0, "project_id": project_id,
-                "project_name": project_name, "gather_date": cur_date}
+                "project_name": project_name, "gather_date": cur_date.date()}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -146,10 +146,10 @@ class MetricsGatherer:
         sorted_dates = sorted(project_aa_states.items(), key=lambda x: x[0])
         for row in gathered_rows:
             while len(project_aa_states) > cur_state_ind:
-                if row["gather_date"].date() < sorted_dates[cur_state_ind][0]:
+                if row["gather_date"] < sorted_dates[cur_state_ind][0]:
                     row["on"] = 1 - sorted_dates[cur_state_ind][1][0]
                     break
-                elif row["gather_date"].date() == sorted_dates[cur_state_ind][0]:
+                elif row["gather_date"] == sorted_dates[cur_state_ind][0]:
                     row["on"] = sorted_dates[cur_state_ind][1][1]
                     cur_state_ind += 1
                 else:
