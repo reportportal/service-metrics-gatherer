@@ -35,6 +35,7 @@ class EsClient:
             "", "done_tasks_settings.json", to_json=True)
         self.main_index = "rp_stats"
         self.task_done_index = "done_tasks"
+        self.rp_aa_stats_index = "rp_aa_stats"
         self.es_client = elasticsearch.Elasticsearch(self.app_settings["esHost"])
 
     def index_exists(self, index_name, print_error=True):
@@ -128,3 +129,19 @@ class EsClient:
                 }
             }})
         return len(res["hits"]["hits"]) > 0
+
+    def get_activities(self, project_id, week_earlier, cur_tommorow):
+        if not self.index_exists(self.rp_aa_stats_index, print_error=False):
+            return []
+        res = self.es_client.search(self.rp_aa_stats_index, body={
+            "size": 10000,
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"range": {"gather_date": {"gte": week_earlier.strftime("%Y-%m-%d %H:%M:%S"),
+                                                   "lte": cur_tommorow.strftime("%Y-%m-%d %H:%M:%S")}}},
+                        {"term": {"project_id": project_id}}
+                    ]
+                }
+            }})
+        return res["hits"]["hits"]

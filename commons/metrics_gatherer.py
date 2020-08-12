@@ -35,7 +35,10 @@ class MetricsGatherer:
                 "f1-score": 0, "accuracy": 0,
                 "launch_analyzed": 0,
                 "manually_analyzed": 0, "project_id": project_id,
-                "project_name": project_name, "gather_date": cur_date.date()}
+                "project_name": project_name, "gather_date": cur_date.date(),
+                "percent_not_found_aa": 0, "avg_processing_time_only_found_test_item_aa": 0.0,
+                "avg_processing_time_test_item_aa": 0.0, "percent_not_found_suggest": 0,
+                "avg_processing_time_test_item_suggest": 0.0}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -115,12 +118,52 @@ class MetricsGatherer:
                 y_true=real_test_item_types, y_pred=analyzed_test_item_types, average="macro")
         return cur_date_results
 
+    def calculate_rp_stats_metrics(self, cur_date_results, project_id, cur_date):
+        week_earlier = cur_date - datetime.timedelta(days=7)
+        cur_tommorow = cur_date + datetime.timedelta(days=1)
+        all_activities = self.es_client.get_activities(project_id, week_earlier, cur_tommorow)
+        activities_res = {}
+        for res in all_activities:
+            if res["_source"]["method"] not in activities_res:
+                activities_res[res["_source"]["method"]] = {
+                    "percent_not_found": 0.0, "count": 0,
+                    "avg_time_only_found_test_item_processed": 0.0,
+                    "avg_time_test_item_processed": 0.0}
+            if res["_source"]["items_to_process"] == 0:
+                continue
+            method_activity = activities_res[res["_source"]["method"]]
+            percent_not_found = res["_source"]["not_found"] * 100 / res["_source"]["items_to_process"]
+            method_activity["percent_not_found"] += percent_not_found
+            method_activity["count"] += 1
+            processed_fully = res["_source"]["items_to_process"] - res["_source"]["not_found"]
+            if processed_fully == 0:
+                processed_fully = 1
+            avg_time_only_found = res["_source"]["processed_time"] / processed_fully
+            avg_time_all = res["_source"]["processed_time"] / res["_source"]["items_to_process"]
+            method_activity["avg_time_only_found_test_item_processed"] += avg_time_only_found
+            method_activity["avg_time_test_item_processed"] += avg_time_all
+        for action_res, action_val in activities_res.items():
+            if action_val["count"] == 0:
+                continue
+            percent_not_found = action_val["percent_not_found"] / action_val["count"]
+            all_avg_time = action_val["avg_time_test_item_processed"] / action_val["count"]
+            if action_res == "auto_analysis":
+                cur_date_results["percent_not_found_aa"] = percent_not_found
+                avg_time = action_val["avg_time_only_found_test_item_processed"] / action_val["count"]
+                cur_date_results["avg_processing_time_only_found_test_item_aa"] = avg_time
+                cur_date_results["avg_processing_time_test_item_aa"] = all_avg_time
+            if action_res == "suggest":
+                cur_date_results["percent_not_found_suggest"] = percent_not_found
+                cur_date_results["avg_processing_time_test_item_suggest"] = all_avg_time
+        return cur_date_results
+
     def gather_metrics_by_project(self, project_id, project_name, cur_date):
         week_earlier = cur_date - datetime.timedelta(days=7)
         cur_tommorow = cur_date + datetime.timedelta(days=1)
         is_aa_enabled = self.postgres_dao.is_auto_analysis_enabled_for_project(project_id)
         cur_date_results = self.get_current_date_template(project_id, project_name, cur_date)
         cur_date_results["on"] = int(is_aa_enabled)
+        cur_date_results = self.calculate_rp_stats_metrics(cur_date_results, project_id, cur_date)
         activities = self.postgres_dao.get_activities_by_project(project_id, week_earlier, cur_tommorow)
         item_chain = self.derive_item_activity_chain(activities)
         cur_date_results = self.calculate_metrics(item_chain, cur_date_results)

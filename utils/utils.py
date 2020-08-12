@@ -40,8 +40,10 @@ def is_the_time_for_task_starting(allowed_start_time, allowed_end_time):
     start = datetime.time(int(allowed_start_time.split(":")[0]), int(allowed_start_time.split(":")[1]))
     end = datetime.time(int(allowed_end_time.split(":")[0]), int(allowed_end_time.split(":")[1]))
     now_time = datetime.datetime.now().time()
-    return (now_time >= start and now_time <= datetime.time(23, 59)) or\
-        (now_time >= datetime.time(0, 0) and now_time <= end)
+    if start > end:
+        return (now_time >= start and now_time <= datetime.time(23, 59)) or\
+            (now_time >= datetime.time(0, 0) and now_time <= end)
+    return now_time >= start and now_time <= end
 
 
 def take_the_date_to_check():

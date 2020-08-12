@@ -81,7 +81,7 @@ logger = logging.getLogger("metricsGatherer")
 
 application = create_application()
 CORS(application)
-schedule.every().hour.do(start_metrics_gathering)
+schedule.every().minute.do(start_metrics_gathering)
 try:
     while True:
         schedule.run_pending()
