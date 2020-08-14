@@ -16,6 +16,7 @@
 
 import logging
 import datetime
+from time import time
 from sklearn.metrics import f1_score, accuracy_score
 from commons import postgres_dao
 from commons import es_client
@@ -206,7 +207,9 @@ class MetricsGatherer:
 
     def gather_metrics(self, period_start, period_end):
         all_projects = self.postgres_dao.get_all_projects()
+        start_time = time()
         for project_info in all_projects:
+            start_project_time = time()
             try:
                 project_id = project_info["id"]
                 project_name = project_info["name"]
@@ -223,3 +226,6 @@ class MetricsGatherer:
             except Exception as err:
                 logger.error("Error occured for project %s", project_info)
                 logger.error(err)
+            logger.debug("Project info %s gathering took %.2f s.",
+                         project_info["id"], time() - start_project_time)
+        logger.info("Finished gathering metrics for all projects for %.2f s.", time() - start_time)

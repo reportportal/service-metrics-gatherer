@@ -94,8 +94,8 @@ while True:
             APP_CONFIG["kibanaHost"]))
         time.sleep(10)
 
-logger.error("Started scheduling of matrics gathering...")
-schedule.every().minute.do(start_metrics_gathering)
+logger.info("Started scheduling of matrics gathering...")
+schedule.every().hour.do(start_metrics_gathering)
 try:
     while True:
         schedule.run_pending()
