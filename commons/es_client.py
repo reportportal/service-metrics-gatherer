@@ -145,3 +145,20 @@ class EsClient:
                 }
             }})
         return res["hits"]["hits"]
+
+    def import_dashboard(self, dashboard_id):
+        dashboard_json = utils.read_json_file("", "{}.json".format(dashboard_id), to_json=False)
+        try:
+            requests.delete("{}/api/saved_objects/dashboard/{}".format(
+                self.app_settings["kibanaHost"], dashboard_id),
+                headers=self.kibana_headers).raise_for_status()
+        except Exception:
+            pass
+        r = requests.post(
+            "{}/api/kibana/dashboards/import?force=true&exclude=index-pattern".format(
+                self.app_settings["kibanaHost"]
+            ),
+            headers=self.kibana_headers,
+            data=dashboard_json
+        )
+        r.raise_for_status()

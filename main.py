@@ -34,8 +34,9 @@ APP_CONFIG = {
     "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
     "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
-    "allowed_start_time": os.getenv("ALLOWED_START_TIME", "22:00"),
-    "allowed_end_time":   os.getenv("ALLOWED_END_TIME", "08:00"),
+    "allowedStartTime": os.getenv("ALLOWED_START_TIME", "22:00"),
+    "allowedEndTime":   os.getenv("ALLOWED_END_TIME", "08:00"),
+    "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335")
 }
 
 
@@ -47,11 +48,11 @@ def create_application():
 
 def start_metrics_gathering():
     _es_client = es_client.EsClient(APP_CONFIG)
-    if not utils.is_the_time_for_task_starting(APP_CONFIG["allowed_start_time"],
-                                               APP_CONFIG["allowed_end_time"]):
+    if not utils.is_the_time_for_task_starting(APP_CONFIG["allowedStartTime"],
+                                               APP_CONFIG["allowedEndTime"]):
         logger.debug("Starting of tasks is allowed only from %s to %s. Now is %s",
-                     APP_CONFIG["allowed_start_time"],
-                     APP_CONFIG["allowed_end_time"],
+                     APP_CONFIG["allowedStartTime"],
+                     APP_CONFIG["allowedEndTime"],
                      datetime.datetime.now())
         return
     date_to_check = utils.take_the_date_to_check()
@@ -81,6 +82,19 @@ logger = logging.getLogger("metricsGatherer")
 
 application = create_application()
 CORS(application)
+
+while True:
+    try:
+        _es_client = es_client.EsClient(APP_CONFIG)
+        _es_client.import_dashboard(APP_CONFIG["dashboardId"])
+        break
+    except Exception as e:
+        logger.error(e)
+        logger.error("Can't import dashboard into Kibana %s" % utils.remove_credentials_from_url(
+            APP_CONFIG["kibanaHost"]))
+        time.sleep(10)
+
+logger.error("Started scheduling of matrics gathering...")
 schedule.every().minute.do(start_metrics_gathering)
 try:
     while True:

@@ -38,7 +38,9 @@ class MetricsGatherer:
                 "project_name": project_name, "gather_date": cur_date.date(),
                 "percent_not_found_aa": 0, "avg_processing_time_only_found_test_item_aa": 0.0,
                 "avg_processing_time_test_item_aa": 0.0, "percent_not_found_suggest": 0,
-                "avg_processing_time_test_item_suggest": 0.0}
+                "avg_processing_time_test_item_suggest": 0.0,
+                "avg_processing_time_test_item_cluster": 0.0,
+                "percent_not_found_cluster": 0}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -155,6 +157,9 @@ class MetricsGatherer:
             if action_res == "suggest":
                 cur_date_results["percent_not_found_suggest"] = percent_not_found
                 cur_date_results["avg_processing_time_test_item_suggest"] = all_avg_time
+            if action_res == "find_clusters":
+                cur_date_results["percent_not_found_cluster"] = percent_not_found
+                cur_date_results["avg_processing_time_test_item_cluster"] = all_avg_time
         return cur_date_results
 
     def gather_metrics_by_project(self, project_id, project_name, cur_date):
