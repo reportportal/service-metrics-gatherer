@@ -36,7 +36,8 @@ APP_CONFIG = {
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
     "allowedStartTime": os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":   os.getenv("ALLOWED_END_TIME", "08:00"),
-    "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335")
+    "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335"),
+    "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
 
 
@@ -57,14 +58,15 @@ def start_metrics_gathering():
         return
     date_to_check = utils.take_the_date_to_check()
     if not _es_client.is_the_date_metrics_calculated(date_to_check):
-        _es_client.bulk_task_done_index([{
-            "gather_date": date_to_check.date(),
-            "started_task_time": datetime.datetime.now()
-        }])
         logger.debug("Task started...")
         _metrics = metrics_gatherer.MetricsGatherer(APP_CONFIG)
         _metrics.gather_metrics(date_to_check,
                                 date_to_check)
+        _es_client.delete_old_info(APP_CONFIG["maxDaysStore"])
+        _es_client.bulk_task_done_index([{
+            "gather_date": date_to_check.date(),
+            "started_task_time": datetime.datetime.now()
+        }])
         logger.debug("Task finished...")
     else:
         logger.debug("Task for today was already completed...")
@@ -94,7 +96,7 @@ while True:
             APP_CONFIG["kibanaHost"]))
         time.sleep(10)
 
-logger.info("Started scheduling of matrics gathering...")
+logger.info("Started scheduling of metrics gathering...")
 schedule.every().hour.do(start_metrics_gathering)
 try:
     while True:

@@ -20,6 +20,7 @@ import elasticsearch.helpers
 from utils import utils
 import requests
 import json
+import datetime
 
 logger = logging.getLogger("metricsGatherer.es_client")
 
@@ -162,3 +163,47 @@ class EsClient:
             data=dashboard_json
         )
         r.raise_for_status()
+
+    def delete_old_info(self, max_days_store):
+        for index in [self.main_index, self.rp_aa_stats_index, self.task_done_index]:
+            last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
+            last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
+            all_ids = set()
+            try:
+                search_query = {
+                    "size": 10000,
+                    "query": {
+                        "bool": {
+                            "filter": [
+                                {
+                                    "range": {
+                                        "gather_date": {
+                                            "lte": last_allowed_date
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+                for res in elasticsearch.helpers.scan(self.es_client,
+                                                      query=search_query,
+                                                      index=index,
+                                                      scroll="5m"):
+                    all_ids.add(res["_id"])
+                bodies = []
+                for _id in all_ids:
+                    bodies.append({
+                        "_op_type": "delete",
+                        "_id":      _id,
+                        "_index":   index,
+                    })
+                success_count, errors = elasticsearch.helpers.bulk(self.es_client,
+                                                                   bodies,
+                                                                   chunk_size=1000,
+                                                                   request_timeout=30,
+                                                                   refresh=True)
+            except Exception as err:
+                logger.error("Couldn't delete old info in the index %s", index)
+                logger.error(err)
+            logger.debug("Finished deleting old info for index %s", index)
