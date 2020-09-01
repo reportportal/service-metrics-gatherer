@@ -43,6 +43,7 @@ class PostgresDAO:
             return results
 
     def query_db(self, query, query_all=True, derive_scheme=True):
+        connection = None
         try:
             connection = psycopg2.connect(user=self.app_settings["postgresUser"],
                                           password=self.app_settings["postgresPassword"],
@@ -68,9 +69,12 @@ class PostgresDAO:
             information_schema.columns where table_name = '%s';""" % table_name)
 
     def get_auto_analysis_attribute_id(self):
-        return self.query_db(
+        result = self.query_db(
             """select id, name from attribute
-            where name = 'analyzer.isAutoAnalyzerEnabled'""", query_all=False)["id"]
+            where name = 'analyzer.isAutoAnalyzerEnabled'""", query_all=False)
+        if result:
+            return result["id"]
+        return -1
 
     def is_auto_analysis_enabled_for_project(self, project_id):
         return self.query_db(

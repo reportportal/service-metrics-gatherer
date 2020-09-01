@@ -115,10 +115,10 @@ class MetricsGatherer:
             cur_date_results["accuracy"] = 1.0
             cur_date_results["f1-score"] = 1.0
         else:
-            cur_date_results["accuracy"] = accuracy_score(
-                y_true=real_test_item_types, y_pred=analyzed_test_item_types)
-            cur_date_results["f1-score"] = f1_score(
-                y_true=real_test_item_types, y_pred=analyzed_test_item_types, average="macro")
+            cur_date_results["accuracy"] = round(accuracy_score(
+                y_true=real_test_item_types, y_pred=analyzed_test_item_types), 2)
+            cur_date_results["f1-score"] = round(f1_score(
+                y_true=real_test_item_types, y_pred=analyzed_test_item_types, average="macro"), 2)
         return cur_date_results
 
     def calculate_rp_stats_metrics(self, cur_date_results, project_id, cur_date):
@@ -135,24 +135,26 @@ class MetricsGatherer:
             if res["_source"]["items_to_process"] == 0:
                 continue
             method_activity = activities_res[res["_source"]["method"]]
-            percent_not_found = res["_source"]["not_found"] * 100 / res["_source"]["items_to_process"]
+            percent_not_found = round(
+                res["_source"]["not_found"] * 100 / res["_source"]["items_to_process"], 2)
             method_activity["percent_not_found"] += percent_not_found
             method_activity["count"] += 1
             processed_fully = res["_source"]["items_to_process"] - res["_source"]["not_found"]
             if processed_fully == 0:
                 processed_fully = 1
-            avg_time_only_found = res["_source"]["processed_time"] / processed_fully
-            avg_time_all = res["_source"]["processed_time"] / res["_source"]["items_to_process"]
+            avg_time_only_found = round(res["_source"]["processed_time"] / processed_fully, 2)
+            avg_time_all = round(res["_source"]["processed_time"] / res["_source"]["items_to_process"], 2)
             method_activity["avg_time_only_found_test_item_processed"] += avg_time_only_found
             method_activity["avg_time_test_item_processed"] += avg_time_all
         for action_res, action_val in activities_res.items():
             if action_val["count"] == 0:
                 continue
-            percent_not_found = action_val["percent_not_found"] / action_val["count"]
-            all_avg_time = action_val["avg_time_test_item_processed"] / action_val["count"]
+            percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 2)
+            all_avg_time = round(action_val["avg_time_test_item_processed"] / action_val["count"], 2)
             if action_res == "auto_analysis":
                 cur_date_results["percent_not_found_aa"] = percent_not_found
-                avg_time = action_val["avg_time_only_found_test_item_processed"] / action_val["count"]
+                avg_time = round(
+                    action_val["avg_time_only_found_test_item_processed"] / action_val["count"], 2)
                 cur_date_results["avg_processing_time_only_found_test_item_aa"] = avg_time
                 cur_date_results["avg_processing_time_test_item_aa"] = all_avg_time
             if action_res == "suggest":
