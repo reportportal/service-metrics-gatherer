@@ -101,7 +101,7 @@ while True:
         time.sleep(10)
 
 logger.info("Started scheduling of metrics gathering...")
-schedule.every().hour.do(start_metrics_gathering)
+schedule.every().minute.do(start_metrics_gathering)
 try:
     while True:
         schedule.run_pending()
