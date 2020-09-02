@@ -55,7 +55,7 @@ class EsClient:
         try:
             response = self.es_client.indices.create(index=str(index_name), body={
                 'settings': {"number_of_shards": 1},
-                'mappings': {"default": index_properties}
+                'mappings': index_properties
             })
             logger.debug("Created '%s' Elasticsearch index", str(index_name))
             return response
@@ -103,7 +103,6 @@ class EsClient:
         bulk_actions = [{
             '_id': "%s_%s" % (row["project_id"], row["gather_date"]),
             '_index': self.main_index,
-            '_type': "default",
             '_source': row,
         } for row in data]
         self.bulk_index(
@@ -112,7 +111,6 @@ class EsClient:
     def bulk_task_done_index(self, data):
         bulk_actions = [{
             '_index': self.task_done_index,
-            '_type': "default",
             '_source': row,
         } for row in data]
         self.bulk_index(

@@ -91,6 +91,8 @@ while True:
         _es_client.import_dashboard(APP_CONFIG["dashboardId"])
         logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
             APP_CONFIG["kibanaHost"]))
+        _es_client.create_pattern(pattern_id=_es_client.main_index, time_field="gather_date")
+        logger.info("Created pattern %s in the Kibana" % _es_client.main_index)
         break
     except Exception as e:
         logger.error(e)
