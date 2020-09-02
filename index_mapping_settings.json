@@ -9,6 +9,13 @@
         "manually_analyzed": {"type": "integer"},
         "project_id": {"type": "keyword"},
         "project_name": {"type": "keyword"},
-        "gather_date": {"type": "date"}
+        "gather_date": {"type": "date"},
+        "percent_not_found_aa": {"type": "float"},
+        "avg_processing_time_only_found_test_item_aa": {"type": "float"},
+        "avg_processing_time_test_item_aa": {"type": "float"},
+        "percent_not_found_suggest": {"type": "float"},
+        "avg_processing_time_test_item_suggest": {"type": "float"},
+        "avg_processing_time_test_item_cluster": {"type": "float"},
+        "percent_not_found_cluster": {"type": "float"}
     }
 }
