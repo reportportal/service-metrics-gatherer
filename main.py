@@ -88,12 +88,20 @@ CORS(application)
 while True:
     try:
         _es_client = es_client.EsClient(APP_CONFIG)
-        _es_client.import_dashboard(APP_CONFIG["dashboardId"])
-        logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
-            APP_CONFIG["kibanaHost"]))
-        _es_client.create_pattern(pattern_id=_es_client.main_index, time_field="gather_date")
-        logger.info("Created pattern %s in the Kibana" % _es_client.main_index)
-        break
+        index_exists = False
+        if not _es_client.index_exists(_es_client.main_index, print_error=False):
+            response = _es_client.create_index(_es_client.main_index, _es_client.main_index_properties)
+            if len(response):
+                index_exists = True
+        else:
+            index_exists = True
+        if index_exists:
+            _es_client.create_pattern(pattern_id=_es_client.main_index, time_field="gather_date")
+            logger.info("Created pattern %s in the Kibana" % _es_client.main_index)
+            _es_client.import_dashboard(APP_CONFIG["dashboardId"])
+            logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
+                APP_CONFIG["kibanaHost"]))
+            break
     except Exception as e:
         logger.error(e)
         logger.error("Can't import dashboard into Kibana %s" % utils.remove_credentials_from_url(

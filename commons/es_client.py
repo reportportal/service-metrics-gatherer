@@ -83,21 +83,26 @@ class EsClient:
         ).raise_for_status()
 
     def bulk_index(self, index_name, bulk_actions, index_properties, create_pattern=False):
+        exists_index = False
         if not self.index_exists(index_name, print_error=False):
-            self.create_index(index_name, index_properties)
+            response = self.create_index(index_name, index_properties)
+            if len(response):
+                exists_index = True
+        else:
+            exists_index = True
+        if exists_index:
+            logger.debug('Indexing %d docs...' % len(bulk_actions))
+            success_count, errors = elasticsearch.helpers.bulk(self.es_client,
+                                                               bulk_actions,
+                                                               chunk_size=1000,
+                                                               request_timeout=30,
+                                                               refresh=True)
 
-        logger.debug('Indexing %d docs...' % len(bulk_actions))
-        success_count, errors = elasticsearch.helpers.bulk(self.es_client,
-                                                           bulk_actions,
-                                                           chunk_size=1000,
-                                                           request_timeout=30,
-                                                           refresh=True)
-
-        logger.debug("Processed %d logs", success_count)
-        if errors:
-            logger.debug("Occured errors %s", errors)
-        if create_pattern:
-            self.create_pattern(pattern_id=index_name, time_field="gather_date")
+            logger.debug("Processed %d logs", success_count)
+            if errors:
+                logger.debug("Occured errors %s", errors)
+            if create_pattern:
+                self.create_pattern(pattern_id=index_name, time_field="gather_date")
 
     def bulk_main_index(self, data):
         bulk_actions = [{
@@ -154,7 +159,7 @@ class EsClient:
         except Exception:
             pass
         r = requests.post(
-            "{}/api/kibana/dashboards/import?force=true&exclude=index-pattern".format(
+            "{}/api/kibana/dashboards/import?force=true".format(
                 self.app_settings["kibanaHost"]
             ),
             headers=self.kibana_headers,
