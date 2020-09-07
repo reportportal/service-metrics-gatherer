@@ -49,7 +49,8 @@ def create_application():
 
 
 def start_metrics_gathering():
-    _es_client = es_client.EsClient(APP_CONFIG)
+    _es_client = es_client.EsClient(
+        esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
     if not utils.is_the_time_for_task_starting(APP_CONFIG["allowedStartTime"],
                                                APP_CONFIG["allowedEndTime"]):
         logger.debug("Starting of tasks is allowed only from %s to %s. Now is %s",
@@ -88,7 +89,8 @@ CORS(application)
 
 while True:
     try:
-        _es_client = es_client.EsClient(APP_CONFIG)
+        _es_client = es_client.EsClient(
+            esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
         index_exists = False
         if not _es_client.index_exists(_es_client.main_index, print_error=False):
             response = _es_client.create_index(_es_client.main_index, _es_client.main_index_properties)
