@@ -215,6 +215,8 @@ class MetricsGatherer:
             try:
                 project_id = project_info["id"]
                 project_name = project_info["name"]
+                if not self.es_client.index_exists(project_id, print_error=False):
+                    continue
                 gathered_rows = []
                 project_aa_states = {}
                 for st_date_day in range((period_end - period_start).days + 1):
