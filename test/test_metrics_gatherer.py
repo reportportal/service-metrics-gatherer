@@ -31,7 +31,8 @@ class TestMetricsGatherer(unittest.TestCase):
         logging.disable(logging.DEBUG)
 
     def test_derive_item_activity_chain(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer({"esHost": "localhost:9201"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
+            {"esHost": "localhost:9201", "kibanaHost": "localhost:5601", "analyzerEsHost": "localhost:9200"})
         assert _metrics_gatherer.derive_item_activity_chain([
             {
                 "object_id": 1,
@@ -58,7 +59,8 @@ class TestMetricsGatherer(unittest.TestCase):
                 2: [('manual', 'System Issue', 'Automation Bug')]}
 
     def test_calculate_rp_stats_metrics(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer({"esHost": "localhost:9201"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
+            {"esHost": "localhost:9201", "kibanaHost": "localhost:5601", "analyzerEsHost": "localhost:9200"})
         _metrics_gatherer.es_client.get_activities = MagicMock(
             return_value=[
                 {"_source": {
@@ -93,7 +95,8 @@ class TestMetricsGatherer(unittest.TestCase):
             'avg_processing_time_test_item_cluster': 0.13}
 
     def test_calculate_metrics(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer({"esHost": "localhost:9201"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
+            {"esHost": "localhost:9201", "kibanaHost": "localhost:5601", "analyzerEsHost": "localhost:9200"})
         _metrics_gatherer.postgres_dao.get_launch_id = MagicMock(return_value=10)
         assert _metrics_gatherer.calculate_metrics(
             {
@@ -105,7 +108,8 @@ class TestMetricsGatherer(unittest.TestCase):
                 'manually_analyzed': 0, 'accuracy': 0.5, 'f1-score': 0.33}
 
     def test_find_sequence_of_aa_enability(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer({"esHost": "localhost:9201"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
+            {"esHost": "localhost:9201", "kibanaHost": "localhost:5601", "analyzerEsHost": "localhost:9200"})
         _metrics_gatherer.postgres_dao.get_activities_by_project = MagicMock(return_value=[
             {
                 "creation_date": datetime(2020, 10, 11),
@@ -140,7 +144,8 @@ class TestMetricsGatherer(unittest.TestCase):
             date(2020, 10, 15): (1, 1)}
 
     def test_fill_right_aa_enable_states(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer({"esHost": "localhost:9201"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
+            {"esHost": "localhost:9201", "kibanaHost": "localhost:5601", "analyzerEsHost": "localhost:9200"})
         _metrics_gatherer.fill_right_aa_enable_states([
             {"gather_date": date(2020, 10, 10) + timedelta(days=i), "on": 0} for i in range(7)],
             {date(2020, 10, 11): (0, 0), date(2020, 10, 14): (1, 0), date(2020, 10, 15): (1, 1)}) == [

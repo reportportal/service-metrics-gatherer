@@ -27,8 +27,9 @@ logger = logging.getLogger("metricsGatherer.es_client")
 
 class EsClient:
 
-    def __init__(self, app_settings):
-        self.app_settings = app_settings
+    def __init__(self, esHost, kibanaHost):
+        self.esHost = esHost
+        self.kibanaHost = kibanaHost
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
         self.main_index_properties = utils.read_json_file(
             "", "index_mapping_settings.json", to_json=True)
@@ -37,7 +38,7 @@ class EsClient:
         self.main_index = "rp_stats"
         self.task_done_index = "done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
-        self.es_client = elasticsearch.Elasticsearch(self.app_settings["esHost"])
+        self.es_client = elasticsearch.Elasticsearch(self.esHost)
 
     def index_exists(self, index_name, print_error=True):
         try:
@@ -62,7 +63,7 @@ class EsClient:
         except Exception as err:
             logger.error("Couldn't create index")
             logger.error("ES Url %s", utils.remove_credentials_from_url(
-                self.app_settings["esHost"]))
+                self.esHost))
             logger.error(err)
             return {}
 
@@ -73,7 +74,7 @@ class EsClient:
             attribs['timeFieldName'] = time_field
         requests.post(
             '%s/api/saved_objects/index-pattern/%s?overwrite=true' % (
-                self.app_settings["kibanaHost"],
+                self.kibanaHost,
                 pattern_id,
             ),
             headers=self.kibana_headers,
@@ -154,13 +155,13 @@ class EsClient:
         dashboard_json = utils.read_json_file("", "{}.json".format(dashboard_id), to_json=False)
         try:
             requests.delete("{}/api/saved_objects/dashboard/{}".format(
-                self.app_settings["kibanaHost"], dashboard_id),
+                self.kibanaHost, dashboard_id),
                 headers=self.kibana_headers).raise_for_status()
         except Exception:
             pass
         r = requests.post(
             "{}/api/kibana/dashboards/import?force=true".format(
-                self.app_settings["kibanaHost"]
+                self.kibanaHost
             ),
             headers=self.kibana_headers,
             data=dashboard_json

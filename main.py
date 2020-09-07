@@ -26,8 +26,9 @@ from flask_cors import CORS
 from utils import utils
 
 APP_CONFIG = {
-    "esHost":            os.getenv("ES_HOST", "http://localhost:9202"),
+    "esHost":            os.getenv("ES_HOST", "http://localhost:9201"),
     "kibanaHost":        os.getenv("KIBANA_HOST", "http://localhost:5602"),
+    "analyzerEsHost":    os.getenv("ANALYZER_ES_HOST", "http://elasticsearch:9200"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
