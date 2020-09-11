@@ -24,6 +24,7 @@ import datetime
 from flask import Flask
 from flask_cors import CORS
 from utils import utils
+import requests
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9201"),
@@ -40,6 +41,16 @@ APP_CONFIG = {
     "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
+
+
+def update_settings_after_read_only(es_host):
+    requests.put(
+        "{}/_all/_settings".format(
+            es_host
+        ),
+        headers={"Content-Type": "application/json"},
+        data="{\"index.blocks.read_only_allow_delete\": null}"
+    ).raise_for_status()
 
 
 def create_application():
@@ -89,6 +100,7 @@ CORS(application)
 
 while True:
     try:
+        update_settings_after_read_only(APP_CONFIG["esHost"])
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
         index_exists = False
@@ -101,6 +113,8 @@ while True:
         if index_exists:
             _es_client.create_pattern(pattern_id=_es_client.main_index, time_field="gather_date")
             logger.info("Created pattern %s in the Kibana" % _es_client.main_index)
+            _es_client.create_pattern(pattern_id=_es_client.rp_aa_stats_index, time_field="gather_date")
+            logger.info("Created pattern %s in the Kibana" % _es_client.rp_aa_stats_index)
             _es_client.import_dashboard(APP_CONFIG["dashboardId"])
             logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
                 APP_CONFIG["kibanaHost"]))

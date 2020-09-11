@@ -8,7 +8,7 @@
                     "searchSourceJSON": "{\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[]}"
                 },
                 "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false,\"useMargins\":true}",
-                "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":9,\"i\":\"1\",\"w\":14,\"x\":34,\"y\":11},\"panelIndex\":\"1\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":5,\"i\":\"2\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"2\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"3\",\"w\":17,\"x\":17,\"y\":5},\"panelIndex\":\"3\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"4\",\"w\":17,\"x\":0,\"y\":5},\"panelIndex\":\"4\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_3\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"6\",\"w\":20,\"x\":0,\"y\":20},\"panelIndex\":\"6\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_4\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"7\",\"w\":24,\"x\":24,\"y\":31},\"panelIndex\":\"7\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_5\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"8\",\"w\":24,\"x\":0,\"y\":31},\"panelIndex\":\"8\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_6\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":6,\"i\":\"9\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"9\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_7\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"10\",\"w\":28,\"x\":20,\"y\":20},\"panelIndex\":\"10\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_8\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":6,\"i\":\"11\",\"w\":7,\"x\":34,\"y\":5},\"panelIndex\":\"11\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_9\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":0,\"y\":46},\"panelIndex\":\"12\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_10\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":24,\"y\":46},\"panelIndex\":\"13\",\"version\":\"7.8.1\",\"panelRefName\":\"panel_11\"}]",
+                "panelsJSON": "[{\"version\":\"7.8.1\",\"gridData\":{\"h\":9,\"i\":\"1\",\"w\":14,\"x\":34,\"y\":11},\"panelIndex\":\"1\",\"embeddableConfig\":{},\"panelRefName\":\"panel_0\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":5,\"i\":\"2\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"2\",\"embeddableConfig\":{},\"panelRefName\":\"panel_1\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"3\",\"w\":17,\"x\":17,\"y\":5},\"panelIndex\":\"3\",\"embeddableConfig\":{},\"panelRefName\":\"panel_2\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"4\",\"w\":17,\"x\":0,\"y\":5},\"panelIndex\":\"4\",\"embeddableConfig\":{},\"panelRefName\":\"panel_3\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":11,\"i\":\"6\",\"w\":20,\"x\":0,\"y\":20},\"panelIndex\":\"6\",\"embeddableConfig\":{},\"panelRefName\":\"panel_4\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"7\",\"w\":24,\"x\":24,\"y\":31},\"panelIndex\":\"7\",\"embeddableConfig\":{},\"panelRefName\":\"panel_5\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"8\",\"w\":24,\"x\":0,\"y\":31},\"panelIndex\":\"8\",\"embeddableConfig\":{},\"panelRefName\":\"panel_6\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":6,\"i\":\"9\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"9\",\"embeddableConfig\":{},\"panelRefName\":\"panel_7\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":11,\"i\":\"10\",\"w\":28,\"x\":20,\"y\":20},\"panelIndex\":\"10\",\"embeddableConfig\":{},\"panelRefName\":\"panel_8\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":6,\"i\":\"11\",\"w\":7,\"x\":34,\"y\":5},\"panelIndex\":\"11\",\"embeddableConfig\":{},\"panelRefName\":\"panel_9\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":0,\"y\":46},\"panelIndex\":\"12\",\"embeddableConfig\":{},\"panelRefName\":\"panel_10\"},{\"version\":\"7.8.1\",\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":24,\"y\":46},\"panelIndex\":\"13\",\"embeddableConfig\":{},\"panelRefName\":\"panel_11\"},{\"version\":\"7.8.1\",\"gridData\":{\"x\":0,\"y\":61,\"w\":24,\"h\":15,\"i\":\"b18104a9-e8cb-45d8-aff8-96345742217d\"},\"panelIndex\":\"b18104a9-e8cb-45d8-aff8-96345742217d\",\"embeddableConfig\":{},\"panelRefName\":\"panel_12\"},{\"version\":\"7.8.1\",\"gridData\":{\"x\":24,\"y\":61,\"w\":24,\"h\":15,\"i\":\"cf59d234-1f66-49f2-b7a2-1e8ba18bcfc2\"},\"panelIndex\":\"cf59d234-1f66-49f2-b7a2-1e8ba18bcfc2\",\"embeddableConfig\":{},\"panelRefName\":\"panel_13\"}]",
                 "refreshInterval": {
                     "pause": true,
                     "value": 0
@@ -83,11 +83,21 @@
                     "id": "8f438b90-dd42-11ea-9b83-1b06f6e95e9c",
                     "name": "panel_11",
                     "type": "visualization"
+                },
+                {
+                    "id": "d5d244d0-f411-11ea-9e8d-09b951f597bb",
+                    "name": "panel_12",
+                    "type": "visualization"
+                },
+                {
+                    "id": "b5fd8c30-f413-11ea-9e8d-09b951f597bb",
+                    "name": "panel_13",
+                    "type": "visualization"
                 }
             ],
             "type": "dashboard",
-            "updated_at": "2020-09-02T15:31:38.658Z",
-            "version": "WzM1LDFd"
+            "updated_at": "2020-09-11T10:14:40.275Z",
+            "version": "WzQxNywyMF0="
         },
         {
             "attributes": {
@@ -112,8 +122,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzUsMV0="
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwMywyMF0="
         },
         {
             "attributes": {
@@ -148,8 +158,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:30:55.242Z",
-            "version": "WzI4LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwNCwyMF0="
         },
         {
             "attributes": {
@@ -174,8 +184,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzcsMV0="
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwNSwyMF0="
         },
         {
             "attributes": {
@@ -200,8 +210,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzgsMV0="
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwNiwyMF0="
         },
         {
             "attributes": {
@@ -226,8 +236,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzksMV0="
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwNywyMF0="
         },
         {
             "attributes": {
@@ -252,8 +262,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:32:42.020Z",
-            "version": "WzM3LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwOCwyMF0="
         },
         {
             "attributes": {
@@ -278,8 +288,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:32:17.040Z",
-            "version": "WzM2LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQwOSwyMF0="
         },
         {
             "attributes": {
@@ -304,8 +314,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzEyLDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxMCwyMF0="
         },
         {
             "attributes": {
@@ -330,8 +340,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzEzLDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxMSwyMF0="
         },
         {
             "attributes": {
@@ -361,8 +371,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzE0LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxMiwyMF0="
         },
         {
             "attributes": {
@@ -387,8 +397,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzE1LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxMywyMF0="
         },
         {
             "attributes": {
@@ -413,8 +423,60 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-02T15:24:50.361Z",
-            "version": "WzE2LDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxNCwyMF0="
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\",\"filter\":[]}"
+                },
+                "title": "RP_used_number_of_log_lines",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"type\":\"pie\",\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"params\":{},\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"params\":{\"field\":\"number_of_log_lines\",\"orderBy\":\"1\",\"order\":\"desc\",\"size\":50,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"},\"schema\":\"segment\"}],\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"title\":\"RP_used_number_of_log_lines\"}"
+            },
+            "id": "d5d244d0-f411-11ea-9e8d-09b951f597bb",
+            "migrationVersion": {
+                "visualization": "7.8.0"
+            },
+            "references": [
+                {
+                    "id": "rp_aa_stats",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2020-09-11T09:33:22.717Z",
+            "version": "WzM4MywxOF0="
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\",\"filter\":[]}"
+                },
+                "title": "RP_min_should_match",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"type\":\"pie\",\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"params\":{},\"schema\":\"metric\"},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"params\":{\"field\":\"min_should_match\",\"orderBy\":\"1\",\"order\":\"desc\",\"size\":50,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"},\"schema\":\"segment\"}],\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"title\":\"RP_min_should_match\"}"
+            },
+            "id": "b5fd8c30-f413-11ea-9e8d-09b951f597bb",
+            "migrationVersion": {
+                "visualization": "7.8.0"
+            },
+            "references": [
+                {
+                    "id": "rp_aa_stats",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2020-09-11T09:46:48.307Z",
+            "version": "WzM4NiwxOF0="
         },
         {
             "attributes": {
@@ -428,8 +490,23 @@
             },
             "references": [],
             "type": "index-pattern",
-            "updated_at": "2020-09-02T15:26:40.504Z",
-            "version": "WzIzLDFd"
+            "updated_at": "2020-09-11T10:13:17.218Z",
+            "version": "WzQxNSwyMF0="
+        },
+        {
+            "attributes": {
+                "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"esTypes\":[\"_id\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"esTypes\":[\"_index\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"esTypes\":[\"_source\"],\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"esTypes\":[\"_type\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"gather_date\",\"type\":\"date\",\"esTypes\":[\"date\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"gather_datetime\",\"type\":\"string\",\"esTypes\":[\"text\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"gather_datetime.keyword\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true,\"subType\":{\"multi\":{\"parent\":\"gather_datetime\"}}},{\"name\":\"items_to_process\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_id\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_name\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"method\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"min_should_match\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"not_found\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"number_of_log_lines\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"processed_time\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_id\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]",
+                "timeFieldName": "gather_date",
+                "title": "rp_aa_stats"
+            },
+            "id": "rp_aa_stats",
+            "migrationVersion": {
+                "index-pattern": "7.6.0"
+            },
+            "references": [],
+            "type": "index-pattern",
+            "updated_at": "2020-09-11T10:14:31.540Z",
+            "version": "WzQxNiwyMF0="
         }
     ],
     "version": "7.8.1"

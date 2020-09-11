@@ -35,6 +35,8 @@ class EsClient:
             "", "index_mapping_settings.json", to_json=True)
         self.done_task_index_properties = utils.read_json_file(
             "", "done_tasks_settings.json", to_json=True)
+        self.rp_aa_stats_index_properties = utils.read_json_file(
+            "", "rp_aa_stats_mappings.json", to_json=True)
         self.main_index = "rp_stats"
         self.task_done_index = "done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
@@ -92,6 +94,9 @@ class EsClient:
         else:
             exists_index = True
         if exists_index:
+            self.es_client.indices.put_mapping(
+                index=index_name,
+                body=index_properties)
             logger.debug('Indexing %d docs...' % len(bulk_actions))
             success_count, errors = elasticsearch.helpers.bulk(self.es_client,
                                                                bulk_actions,
