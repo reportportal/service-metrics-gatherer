@@ -24,7 +24,6 @@ import datetime
 from flask import Flask
 from flask_cors import CORS
 from utils import utils
-import requests
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9201"),
@@ -41,16 +40,6 @@ APP_CONFIG = {
     "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
-
-
-def update_settings_after_read_only(es_host):
-    requests.put(
-        "{}/_all/_settings".format(
-            es_host
-        ),
-        headers={"Content-Type": "application/json"},
-        data="{\"index.blocks.read_only_allow_delete\": null}"
-    ).raise_for_status()
 
 
 def create_application():
@@ -100,9 +89,9 @@ CORS(application)
 
 while True:
     try:
-        update_settings_after_read_only(APP_CONFIG["esHost"])
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
+        _es_client.update_settings_after_read_only()
         index_exists = False
         if not _es_client.index_exists(_es_client.main_index, print_error=False):
             response = _es_client.create_index(_es_client.main_index, _es_client.main_index_properties)

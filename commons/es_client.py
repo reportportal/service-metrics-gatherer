@@ -42,6 +42,15 @@ class EsClient:
         self.rp_aa_stats_index = "rp_aa_stats"
         self.es_client = elasticsearch.Elasticsearch(self.esHost)
 
+    def update_settings_after_read_only(self):
+        requests.put(
+            "{}/_all/_settings".format(
+                self.esHost
+            ),
+            headers={"Content-Type": "application/json"},
+            data="{\"index.blocks.read_only_allow_delete\": null}"
+        ).raise_for_status()
+
     def index_exists(self, index_name, print_error=True):
         try:
             index = self.es_client.indices.get(index=str(index_name))
@@ -94,21 +103,34 @@ class EsClient:
         else:
             exists_index = True
         if exists_index:
-            self.es_client.indices.put_mapping(
-                index=index_name,
-                body=index_properties)
-            logger.debug('Indexing %d docs...' % len(bulk_actions))
-            success_count, errors = elasticsearch.helpers.bulk(self.es_client,
-                                                               bulk_actions,
-                                                               chunk_size=1000,
-                                                               request_timeout=30,
-                                                               refresh=True)
+            try:
+                self.es_client.indices.put_mapping(
+                    index=index_name,
+                    body=index_properties)
+                logger.debug('Indexing %d docs...' % len(bulk_actions))
+                try:
+                    success_count, errors = elasticsearch.helpers.bulk(self.es_client,
+                                                                       bulk_actions,
+                                                                       chunk_size=1000,
+                                                                       request_timeout=30,
+                                                                       refresh=True)
+                except Exception as err:
+                    logger.error(err)
+                    self.update_settings_after_read_only()
+                    success_count, errors = elasticsearch.helpers.bulk(self.es_client,
+                                                                       bulk_actions,
+                                                                       chunk_size=1000,
+                                                                       request_timeout=30,
+                                                                       refresh=True)
 
-            logger.debug("Processed %d logs", success_count)
-            if errors:
-                logger.debug("Occured errors %s", errors)
-            if create_pattern:
-                self.create_pattern(pattern_id=index_name, time_field="gather_date")
+                logger.debug("Processed %d logs", success_count)
+                if errors:
+                    logger.debug("Occured errors %s", errors)
+                if create_pattern:
+                    self.create_pattern(pattern_id=index_name, time_field="gather_date")
+            except Exception as err:
+                logger.error(err)
+                logger.error("Bulking index for %s index finished with errors", index_name)
 
     def bulk_main_index(self, data):
         bulk_actions = [{
