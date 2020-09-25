@@ -37,7 +37,7 @@ APP_CONFIG = {
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
     "allowedStartTime": os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":   os.getenv("ALLOWED_END_TIME", "08:00"),
-    "dashboardId":       os.getenv("DASHBOARD_ID", "3af14170-d579-11ea-85c2-df02d38fb335"),
+    "dashboardId":       os.getenv("DASHBOARD_ID", "d9d54740-ff19-11ea-99ec-e50c1aa36675"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
 
