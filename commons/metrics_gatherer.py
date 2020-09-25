@@ -32,9 +32,6 @@ class MetricsGatherer:
         self.es_client = es_client.EsClient(
             esHost=app_settings["esHost"],
             kibanaHost=app_settings["kibanaHost"])
-        self.analyzer_es_client = es_client.EsClient(
-            esHost=app_settings["analyzerEsHost"],
-            kibanaHost=app_settings["kibanaHost"])
 
     def get_current_date_template(self, project_id, project_name, cur_date):
         return {"on": 0,  "changed_type": 0, "AA_analyzed": 0,
@@ -220,7 +217,7 @@ class MetricsGatherer:
             try:
                 project_id = project_info["id"]
                 project_name = project_info["name"]
-                if not self.analyzer_es_client.index_exists(project_id, print_error=False):
+                if not self.es_client.index_exists(project_id, print_error=False):
                     continue
                 gathered_rows = []
                 project_aa_states = {}
