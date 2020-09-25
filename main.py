@@ -73,6 +73,20 @@ def start_metrics_gathering():
         logger.debug("Task for today was already completed...")
 
 
+def create_index_with_pattern(_es_client, index_name, index_properties):
+    index_exists = False
+    if not _es_client.index_exists(index_name, print_error=False):
+        response = _es_client.create_index(index_name, index_properties)
+        if len(response):
+            index_exists = True
+    else:
+        index_exists = True
+    if index_exists:
+        _es_client.create_pattern(pattern_id=index_name, time_field="gather_date")
+        logger.info("Created pattern %s in the Kibana" % index_name)
+    return index_exists
+
+
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
 logging.config.fileConfig(log_file_path)
 if APP_CONFIG["logLevel"].lower() == "debug":
@@ -91,18 +105,11 @@ while True:
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
         _es_client.update_settings_after_read_only()
-        index_exists = False
-        if not _es_client.index_exists(_es_client.main_index, print_error=False):
-            response = _es_client.create_index(_es_client.main_index, _es_client.main_index_properties)
-            if len(response):
-                index_exists = True
-        else:
-            index_exists = True
-        if index_exists:
-            _es_client.create_pattern(pattern_id=_es_client.main_index, time_field="gather_date")
-            logger.info("Created pattern %s in the Kibana" % _es_client.main_index)
-            _es_client.create_pattern(pattern_id=_es_client.rp_aa_stats_index, time_field="gather_date")
-            logger.info("Created pattern %s in the Kibana" % _es_client.rp_aa_stats_index)
+        result = create_index_with_pattern(
+            _es_client, _es_client.main_index, _es_client.main_index_properties)
+        result = create_index_with_pattern(
+            _es_client, _es_client.rp_aa_stats_index, _es_client.rp_aa_stats_index_properties)
+        if result:
             _es_client.import_dashboard(APP_CONFIG["dashboardId"])
             logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
                 APP_CONFIG["kibanaHost"]))
