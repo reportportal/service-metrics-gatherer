@@ -50,6 +50,7 @@ def create_application():
 def start_metrics_gathering():
     _es_client = es_client.EsClient(
         esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
+    APP_CONFIG["allowedStartTime"] = "12:01"
     if not utils.is_the_time_for_task_starting(APP_CONFIG["allowedStartTime"],
                                                APP_CONFIG["allowedEndTime"]):
         logger.debug("Starting of tasks is allowed only from %s to %s. Now is %s",
@@ -121,7 +122,7 @@ while True:
         time.sleep(10)
 
 logger.info("Started scheduling of metrics gathering...")
-schedule.every().hour.do(start_metrics_gathering)
+schedule.every().minute.do(start_metrics_gathering)
 try:
     while True:
         schedule.run_pending()
