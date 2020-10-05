@@ -89,9 +89,9 @@ class TestMetricsGatherer(unittest.TestCase):
                 }},
             ])
         assert _metrics_gatherer.calculate_rp_stats_metrics({}, 1, datetime(2020, 10, 13)) == {
-            'percent_not_found_aa': 10.0, 'avg_processing_time_only_found_test_item_aa': 0.09,
-            'avg_processing_time_test_item_aa': 0.08, 'percent_not_found_suggest': 92.5,
-            'avg_processing_time_test_item_suggest': 0.08, 'percent_not_found_cluster': 16.67,
+            'percent_not_found_aa': 10, 'avg_processing_time_only_found_test_item_aa': 0.09,
+            'avg_processing_time_test_item_aa': 0.08, 'percent_not_found_suggest': 92,
+            'avg_processing_time_test_item_suggest': 0.08, 'percent_not_found_cluster': 17,
             'avg_processing_time_test_item_cluster': 0.13}
 
     def test_calculate_metrics(self):
@@ -105,7 +105,7 @@ class TestMetricsGatherer(unittest.TestCase):
             },
             {}) == {
                 'AA_analyzed': 2, 'changed_type': 1, 'launch_analyzed': 1,
-                'manually_analyzed': 0, 'accuracy': 0.5, 'f1-score': 0.33}
+                'manually_analyzed': 0, 'accuracy': 50, 'f1-score': 33}
 
     def test_find_sequence_of_aa_enability(self):
         _metrics_gatherer = metrics_gatherer.MetricsGatherer(

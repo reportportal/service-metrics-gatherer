@@ -43,6 +43,7 @@ class MetricsGatherer:
                 "avg_processing_time_test_item_aa": 0.0, "percent_not_found_suggest": 0,
                 "avg_processing_time_test_item_suggest": 0.0,
                 "avg_processing_time_test_item_cluster": 0.0,
+                "launch_added": 0,
                 "percent_not_found_cluster": 0}
 
     def derive_item_activity_chain(self, activities):
@@ -114,13 +115,14 @@ class MetricsGatherer:
     def calculate_accuracy_f1_score(
             self, real_test_item_types, analyzed_test_item_types, cur_date_results):
         if not analyzed_test_item_types:
-            cur_date_results["accuracy"] = 1.0
-            cur_date_results["f1-score"] = 1.0
+            cur_date_results["accuracy"] = 100
+            cur_date_results["f1-score"] = 100
         else:
             cur_date_results["accuracy"] = round(accuracy_score(
-                y_true=real_test_item_types, y_pred=analyzed_test_item_types), 2)
+                y_true=real_test_item_types, y_pred=analyzed_test_item_types), 2) * 100
             cur_date_results["f1-score"] = round(f1_score(
-                y_true=real_test_item_types, y_pred=analyzed_test_item_types, average="macro"), 2)
+                y_true=real_test_item_types, y_pred=analyzed_test_item_types,
+                average="macro"), 2) * 100
         return cur_date_results
 
     def calculate_rp_stats_metrics(self, cur_date_results, project_id, cur_date):
@@ -131,14 +133,14 @@ class MetricsGatherer:
         for res in all_activities:
             if res["_source"]["method"] not in activities_res:
                 activities_res[res["_source"]["method"]] = {
-                    "percent_not_found": 0.0, "count": 0,
+                    "percent_not_found": 0, "count": 0,
                     "avg_time_only_found_test_item_processed": 0.0,
                     "avg_time_test_item_processed": 0.0}
             if res["_source"]["items_to_process"] == 0:
                 continue
             method_activity = activities_res[res["_source"]["method"]]
             percent_not_found = round(
-                res["_source"]["not_found"] * 100 / res["_source"]["items_to_process"], 2)
+                res["_source"]["not_found"] / res["_source"]["items_to_process"], 2) * 100
             method_activity["percent_not_found"] += percent_not_found
             method_activity["count"] += 1
             processed_fully = res["_source"]["items_to_process"] - res["_source"]["not_found"]
@@ -151,7 +153,7 @@ class MetricsGatherer:
         for action_res, action_val in activities_res.items():
             if action_val["count"] == 0:
                 continue
-            percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 2)
+            percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 0)
             all_avg_time = round(action_val["avg_time_test_item_processed"] / action_val["count"], 2)
             if action_res == "auto_analysis":
                 cur_date_results["percent_not_found_aa"] = percent_not_found
@@ -177,6 +179,9 @@ class MetricsGatherer:
         activities = self.postgres_dao.get_activities_by_project(project_id, week_earlier, cur_tommorow)
         item_chain = self.derive_item_activity_chain(activities)
         cur_date_results = self.calculate_metrics(item_chain, cur_date_results)
+        all_launch_ids = self.postgres_dao.get_all_unique_launch_ids(
+            project_id, week_earlier, cur_tommorow)
+        cur_date_results["launch_added"] = len(all_launch_ids)
         return cur_date_results
 
     def find_sequence_of_aa_enability(self, project_id, cur_date, project_aa_states):

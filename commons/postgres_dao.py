@@ -94,3 +94,11 @@ class PostgresDAO:
 
     def get_all_projects(self):
         return self.query_db("select id, name from project")
+
+    def get_all_unique_launch_ids(self, project_id, start_date, end_date):
+        all_ids = self.query_db(
+            """select id from launch
+            where project_id=%d and start_time >= '%s'::timestamp and
+            start_time <= '%s'::timestamp""" % (
+                project_id, start_date, end_date))
+        return list(set([obj["id"] for obj in all_ids]))

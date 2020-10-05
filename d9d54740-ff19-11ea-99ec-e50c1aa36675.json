@@ -8,7 +8,7 @@
                     "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
                 },
                 "optionsJSON": "{\"hidePanelTitles\":false,\"useMargins\":true}",
-                "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":5,\"i\":\"1\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"1\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"2\",\"w\":16,\"x\":0,\"y\":5},\"panelIndex\":\"2\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"3\",\"w\":17,\"x\":16,\"y\":5},\"panelIndex\":\"3\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"4\",\"w\":8,\"x\":33,\"y\":5},\"panelIndex\":\"4\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_3\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"5\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"5\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_4\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":9,\"i\":\"6\",\"w\":15,\"x\":33,\"y\":12},\"panelIndex\":\"6\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_5\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"7\",\"w\":20,\"x\":0,\"y\":21},\"panelIndex\":\"7\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_6\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"8\",\"w\":28,\"x\":20,\"y\":21},\"panelIndex\":\"8\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_7\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"9\",\"w\":24,\"x\":0,\"y\":32},\"panelIndex\":\"9\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_8\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"10\",\"w\":24,\"x\":24,\"y\":32},\"panelIndex\":\"10\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_9\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"11\",\"w\":24,\"x\":0,\"y\":47},\"panelIndex\":\"11\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_10\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":24,\"y\":47},\"panelIndex\":\"12\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_11\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":0,\"y\":62},\"panelIndex\":\"13\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_12\"},{\"gridData\":{\"w\":24,\"h\":15,\"x\":24,\"y\":62,\"i\":\"14\"},\"version\":\"7.3.2\",\"panelIndex\":\"14\",\"embeddableConfig\":{},\"panelRefName\":\"panel_13\"}]",
+                "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":5,\"i\":\"1\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"1\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"2\",\"w\":16,\"x\":0,\"y\":5},\"panelIndex\":\"2\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"3\",\"w\":17,\"x\":16,\"y\":5},\"panelIndex\":\"3\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"4\",\"w\":8,\"x\":33,\"y\":5},\"panelIndex\":\"4\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_3\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"5\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"5\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_4\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":9,\"i\":\"6\",\"w\":15,\"x\":33,\"y\":12},\"panelIndex\":\"6\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_5\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"7\",\"w\":20,\"x\":0,\"y\":21},\"panelIndex\":\"7\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_6\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"8\",\"w\":28,\"x\":20,\"y\":21},\"panelIndex\":\"8\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_7\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"9\",\"w\":24,\"x\":0,\"y\":32},\"panelIndex\":\"9\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_8\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"10\",\"w\":24,\"x\":24,\"y\":32},\"panelIndex\":\"10\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_9\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"11\",\"w\":24,\"x\":0,\"y\":47},\"panelIndex\":\"11\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_10\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":24,\"y\":47},\"panelIndex\":\"12\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_11\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":0,\"y\":62},\"panelIndex\":\"13\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_12\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"14\",\"w\":24,\"x\":24,\"y\":62},\"panelIndex\":\"14\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_13\"}]",
                 "refreshInterval": {
                     "pause": true,
                     "value": 0
@@ -96,8 +96,8 @@
                 }
             ],
             "type": "dashboard",
-            "updated_at": "2020-09-25T10:42:17.713Z",
-            "version": "WzEyNzQsM10="
+            "updated_at": "2020-10-05T08:27:08.154Z",
+            "version": "WzE4MjksMjdd"
         },
         {
             "attributes": {
@@ -108,7 +108,7 @@
                 "title": "RP_filters",
                 "uiStateJSON": "{}",
                 "version": 1,
-                "visState": "{\"title\":\"RP_filters\",\"type\":\"input_control_vis\",\"params\":{\"controls\":[{\"id\":\"1601029169270\",\"fieldName\":\"project_id\",\"parent\":\"\",\"label\":\"Project ids\",\"type\":\"list\",\"options\":{\"type\":\"terms\",\"multiselect\":true,\"dynamicOptions\":false,\"size\":5000,\"order\":\"desc\"},\"indexPatternRefName\":\"control_0_index_pattern\"},{\"id\":\"1601029222407\",\"fieldName\":\"project_name\",\"parent\":\"\",\"label\":\"Project names\",\"type\":\"list\",\"options\":{\"type\":\"terms\",\"multiselect\":true,\"dynamicOptions\":false,\"size\":5000,\"order\":\"desc\"},\"indexPatternRefName\":\"control_1_index_pattern\"},{\"id\":\"1601029244714\",\"fieldName\":\"on\",\"parent\":\"\",\"label\":\"Auto Analysis ON\",\"type\":\"list\",\"options\":{\"type\":\"terms\",\"multiselect\":true,\"dynamicOptions\":false,\"size\":5,\"order\":\"desc\"},\"indexPatternRefName\":\"control_2_index_pattern\"}],\"updateFiltersOnChange\":true,\"useTimeFilter\":true,\"pinFilters\":true},\"aggs\":[]}"
+                "visState": "{\"title\":\"RP_filters\",\"type\":\"input_control_vis\",\"params\":{\"controls\":[{\"id\":\"1601029169270\",\"fieldName\":\"project_id\",\"parent\":\"\",\"label\":\"Project ids\",\"type\":\"list\",\"options\":{\"type\":\"terms\",\"multiselect\":true,\"dynamicOptions\":false,\"size\":5000,\"order\":\"desc\"},\"indexPatternRefName\":\"control_0_index_pattern\"},{\"id\":\"1601029244714\",\"fieldName\":\"on\",\"parent\":\"\",\"label\":\"Auto Analysis ON\",\"type\":\"list\",\"options\":{\"type\":\"terms\",\"multiselect\":true,\"dynamicOptions\":false,\"size\":5,\"order\":\"desc\"},\"indexPatternRefName\":\"control_1_index_pattern\"},{\"id\":\"1601886025484\",\"fieldName\":\"accuracy\",\"parent\":\"\",\"label\":\"Accuracy\",\"type\":\"range\",\"options\":{\"decimalPlaces\":0,\"step\":1},\"indexPatternRefName\":\"control_2_index_pattern\"},{\"id\":\"1601886086378\",\"fieldName\":\"f1-score\",\"parent\":\"\",\"label\":\"F1 score\",\"type\":\"range\",\"options\":{\"decimalPlaces\":0,\"step\":1},\"indexPatternRefName\":\"control_3_index_pattern\"}],\"updateFiltersOnChange\":true,\"useTimeFilter\":true,\"pinFilters\":true},\"aggs\":[]}"
             },
             "id": "e94b8500-ff18-11ea-99ec-e50c1aa36675",
             "migrationVersion": {
@@ -129,11 +129,16 @@
                     "id": "rp_stats",
                     "name": "control_2_index_pattern",
                     "type": "index-pattern"
+                },
+                {
+                    "id": "rp_stats",
+                    "name": "control_3_index_pattern",
+                    "type": "index-pattern"
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:21:44.656Z",
-            "version": "Wzk4MSwzXQ=="
+            "updated_at": "2020-10-05T08:21:54.516Z",
+            "version": "WzE4MjQsMjdd"
         },
         {
             "attributes": {
@@ -158,8 +163,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:22:59.882Z",
-            "version": "WzEwMDAsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MDUsMjdd"
         },
         {
             "attributes": {
@@ -184,8 +189,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:24:14.889Z",
-            "version": "WzEwMTYsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MDYsMjdd"
         },
         {
             "attributes": {
@@ -215,8 +220,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:25:45.224Z",
-            "version": "WzEwMzksM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MDcsMjdd"
         },
         {
             "attributes": {
@@ -241,8 +246,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:26:53.951Z",
-            "version": "WzEwNTUsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MDgsMjdd"
         },
         {
             "attributes": {
@@ -267,8 +272,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:28:06.599Z",
-            "version": "WzEwNzMsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MDksMjdd"
         },
         {
             "attributes": {
@@ -279,7 +284,7 @@
                 "title": "RP_average_launch_analyzed",
                 "uiStateJSON": "{}",
                 "version": 1,
-                "visState": "{\"title\":\"RP_average_launch_analyzed\",\"type\":\"line\",\"params\":{\"type\":\"line\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"filter\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Average launch_analyzed\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"line\",\"mode\":\"normal\",\"data\":{\"label\":\"Average launch_analyzed\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":null,\"y\":[{\"accessor\":0,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"count\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"launch_analyzed\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"gather_date\",\"useNormalizedEsInterval\":true,\"interval\":\"d\",\"drop_partials\":false,\"min_doc_count\":1,\"extended_bounds\":{}}}]}"
+                "visState": "{\"title\":\"RP_average_launch_analyzed\",\"type\":\"line\",\"params\":{\"type\":\"line\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"filter\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Average launch_analyzed\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"line\",\"mode\":\"normal\",\"data\":{\"label\":\"Average launch_analyzed\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true},{\"show\":true,\"mode\":\"normal\",\"type\":\"line\",\"drawLinesBetweenPoints\":true,\"showCircles\":true,\"data\":{\"id\":\"3\",\"label\":\"Average launch_added\"},\"valueAxis\":\"ValueAxis-1\"}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":{\"accessor\":0,\"format\":{\"id\":\"date\",\"params\":{\"pattern\":\"YYYY-MM-DD\"}},\"params\":{\"date\":true,\"interval\":\"P1D\",\"format\":\"YYYY-MM-DD\",\"bounds\":{\"min\":\"2020-09-05T08:22:10.435Z\",\"max\":\"2020-10-05T08:22:10.435Z\"}},\"aggType\":\"date_histogram\"},\"y\":[{\"accessor\":1,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"launch_analyzed\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"gather_date\",\"timeRange\":{\"from\":\"now-1M\",\"to\":\"now\"},\"useNormalizedEsInterval\":true,\"interval\":\"d\",\"drop_partials\":false,\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"launch_added\"}}]}"
             },
             "id": "070593a0-ff1a-11ea-99ec-e50c1aa36675",
             "migrationVersion": {
@@ -293,8 +298,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:29:44.026Z",
-            "version": "WzEwOTcsM10="
+            "updated_at": "2020-10-05T08:22:50.510Z",
+            "version": "WzE4MjUsMjdd"
         },
         {
             "attributes": {
@@ -319,8 +324,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:31:19.323Z",
-            "version": "WzExMTksM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MTEsMjdd"
         },
         {
             "attributes": {
@@ -331,7 +336,7 @@
                 "title": "RP_average_F1-score_top_worst",
                 "uiStateJSON": "{}",
                 "version": 1,
-                "visState": "{\"title\":\"RP_average_F1-score_top_worst\",\"type\":\"horizontal_bar\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":200},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":75,\"filter\":true,\"truncate\":100},\"title\":{\"text\":\"Average f1-score\"}}],\"seriesParams\":[{\"show\":true,\"type\":\"histogram\",\"mode\":\"normal\",\"data\":{\"label\":\"Average f1-score\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":{\"accessor\":0,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"},\"y\":[{\"accessor\":1,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"f1-score\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"project_name\",\"orderBy\":\"1\",\"order\":\"asc\",\"size\":10,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}"
+                "visState": "{\"title\":\"RP_average_F1-score_top_worst\",\"type\":\"horizontal_bar\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":200},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":75,\"filter\":true,\"truncate\":100},\"title\":{\"text\":\"Average f1-score\"}}],\"seriesParams\":[{\"show\":true,\"type\":\"histogram\",\"mode\":\"normal\",\"data\":{\"label\":\"Average f1-score\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":{\"accessor\":0,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"},\"y\":[{\"accessor\":1,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"f1-score\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"project_id\",\"orderBy\":\"1\",\"order\":\"asc\",\"size\":15,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}"
             },
             "id": "a7bfd120-ff1a-11ea-99ec-e50c1aa36675",
             "migrationVersion": {
@@ -345,8 +350,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:36:57.282Z",
-            "version": "WzExOTcsM10="
+            "updated_at": "2020-10-05T08:23:32.776Z",
+            "version": "WzE4MjYsMjdd"
         },
         {
             "attributes": {
@@ -357,7 +362,7 @@
                 "title": " RP_top_project_with_average_f1",
                 "uiStateJSON": "{}",
                 "version": 1,
-                "visState": "{\"title\":\" RP_top_project_with_average_f1\",\"type\":\"horizontal_bar\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":200},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":75,\"filter\":true,\"truncate\":100},\"title\":{\"text\":\"Average f1-score\"}}],\"seriesParams\":[{\"show\":true,\"type\":\"histogram\",\"mode\":\"normal\",\"data\":{\"label\":\"Average f1-score\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":null,\"y\":[{\"accessor\":0,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"count\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"f1-score\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"project_name\",\"orderBy\":\"1\",\"order\":\"desc\",\"size\":10,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}"
+                "visState": "{\"title\":\" RP_top_project_with_average_f1\",\"type\":\"horizontal_bar\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":200},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":75,\"filter\":true,\"truncate\":100},\"title\":{\"text\":\"Average f1-score\"}}],\"seriesParams\":[{\"show\":true,\"type\":\"histogram\",\"mode\":\"normal\",\"data\":{\"label\":\"Average f1-score\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false,\"dimensions\":{\"x\":{\"accessor\":0,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"},\"y\":[{\"accessor\":1,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"}]}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"f1-score\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"project_id\",\"orderBy\":\"1\",\"order\":\"desc\",\"size\":15,\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}"
             },
             "id": "f6116870-ff1a-11ea-99ec-e50c1aa36675",
             "migrationVersion": {
@@ -371,8 +376,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:36:25.079Z",
-            "version": "WzExOTAsM10="
+            "updated_at": "2020-10-05T08:25:00.839Z",
+            "version": "WzE4MjcsMjdd"
         },
         {
             "attributes": {
@@ -397,8 +402,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:38:24.805Z",
-            "version": "WzEyMTksM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MTQsMjdd"
         },
         {
             "attributes": {
@@ -423,8 +428,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:39:44.376Z",
-            "version": "WzEyMzgsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MTUsMjdd"
         },
         {
             "attributes": {
@@ -449,8 +454,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:41:36.962Z",
-            "version": "WzEyNjMsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MTYsMjdd"
         },
         {
             "attributes": {
@@ -475,11 +480,12 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-09-25T10:42:09.325Z",
-            "version": "WzEyNzMsM10="
+            "updated_at": "2020-10-05T08:16:27.464Z",
+            "version": "WzE4MTcsMjdd"
         },
         {
             "attributes": {
+                "fields": "[{\"name\":\"AA_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"_id\",\"type\":\"string\",\"esTypes\":[\"_id\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"esTypes\":[\"_index\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"esTypes\":[\"_source\"],\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"esTypes\":[\"_type\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"accuracy\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_only_found_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_cluster\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_suggest\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"changed_type\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"f1-score\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"gather_date\",\"type\":\"date\",\"esTypes\":[\"date\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_added\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"manually_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"on\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_aa\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_cluster\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_suggest\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_id\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_name\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]",
                 "timeFieldName": "gather_date",
                 "title": "rp_stats"
             },
@@ -489,11 +495,12 @@
             },
             "references": [],
             "type": "index-pattern",
-            "updated_at": "2020-09-25T10:42:33.789Z",
-            "version": "WzEyNzgsM10="
+            "updated_at": "2020-10-05T08:19:51.162Z",
+            "version": "WzE4MjIsMjdd"
         },
         {
             "attributes": {
+                "fields": "[{\"name\":\"_id\",\"type\":\"string\",\"esTypes\":[\"_id\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"esTypes\":[\"_index\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"esTypes\":[\"_source\"],\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"esTypes\":[\"_type\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"gather_date\",\"type\":\"date\",\"esTypes\":[\"date\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"gather_datetime\",\"type\":\"string\",\"esTypes\":[\"text\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"gather_datetime.keyword\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true,\"parent\":\"gather_datetime\",\"subType\":\"multi\"},{\"name\":\"items_to_process\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_id\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_name\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"method\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"min_should_match\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"not_found\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"number_of_log_lines\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"processed_time\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_id\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]",
                 "timeFieldName": "gather_date",
                 "title": "rp_aa_stats"
             },
@@ -503,8 +510,8 @@
             },
             "references": [],
             "type": "index-pattern",
-            "updated_at": "2020-09-25T10:42:34.765Z",
-            "version": "WzEyNzksM10="
+            "updated_at": "2020-10-05T08:19:51.321Z",
+            "version": "WzE4MjMsMjdd"
         }
     ],
     "version": "7.3.2"
