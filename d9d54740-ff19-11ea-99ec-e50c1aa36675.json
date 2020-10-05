@@ -8,7 +8,7 @@
                     "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
                 },
                 "optionsJSON": "{\"hidePanelTitles\":false,\"useMargins\":true}",
-                "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":5,\"i\":\"1\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"1\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"2\",\"w\":16,\"x\":0,\"y\":5},\"panelIndex\":\"2\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"3\",\"w\":17,\"x\":16,\"y\":5},\"panelIndex\":\"3\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"4\",\"w\":8,\"x\":33,\"y\":5},\"panelIndex\":\"4\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_3\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"5\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"5\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_4\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":9,\"i\":\"6\",\"w\":15,\"x\":33,\"y\":12},\"panelIndex\":\"6\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_5\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"7\",\"w\":20,\"x\":0,\"y\":21},\"panelIndex\":\"7\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_6\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"8\",\"w\":28,\"x\":20,\"y\":21},\"panelIndex\":\"8\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_7\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"9\",\"w\":24,\"x\":0,\"y\":32},\"panelIndex\":\"9\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_8\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"10\",\"w\":24,\"x\":24,\"y\":32},\"panelIndex\":\"10\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_9\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"11\",\"w\":24,\"x\":0,\"y\":47},\"panelIndex\":\"11\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_10\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":24,\"y\":47},\"panelIndex\":\"12\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_11\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":0,\"y\":62},\"panelIndex\":\"13\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_12\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"14\",\"w\":24,\"x\":24,\"y\":62},\"panelIndex\":\"14\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_13\"}]",
+                "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":5,\"i\":\"1\",\"w\":48,\"x\":0,\"y\":0},\"panelIndex\":\"1\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"2\",\"w\":16,\"x\":0,\"y\":5},\"panelIndex\":\"2\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":16,\"i\":\"3\",\"w\":17,\"x\":16,\"y\":5},\"panelIndex\":\"3\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"4\",\"w\":8,\"x\":33,\"y\":5},\"panelIndex\":\"4\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_3\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":7,\"i\":\"5\",\"w\":7,\"x\":41,\"y\":5},\"panelIndex\":\"5\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_4\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":9,\"i\":\"6\",\"w\":15,\"x\":33,\"y\":12},\"panelIndex\":\"6\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_5\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"7\",\"w\":20,\"x\":0,\"y\":21},\"panelIndex\":\"7\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_6\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"8\",\"w\":28,\"x\":20,\"y\":21},\"panelIndex\":\"8\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_7\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"9\",\"w\":24,\"x\":0,\"y\":32},\"panelIndex\":\"9\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_8\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"10\",\"w\":24,\"x\":24,\"y\":32},\"panelIndex\":\"10\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_9\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"11\",\"w\":24,\"x\":0,\"y\":47},\"panelIndex\":\"11\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_10\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"12\",\"w\":24,\"x\":24,\"y\":47},\"panelIndex\":\"12\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_11\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"13\",\"w\":24,\"x\":0,\"y\":62},\"panelIndex\":\"13\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_12\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"14\",\"w\":24,\"x\":24,\"y\":62},\"panelIndex\":\"14\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_13\"},{\"embeddableConfig\":{\"sort\":[\"project_id\",\"desc\"]},\"gridData\":{\"h\":8,\"i\":\"15\",\"w\":48,\"x\":0,\"y\":77},\"panelIndex\":\"15\",\"version\":\"7.3.2\",\"panelRefName\":\"panel_14\"}]",
                 "refreshInterval": {
                     "pause": true,
                     "value": 0
@@ -93,11 +93,16 @@
                     "id": "c3412dd0-ff1b-11ea-99ec-e50c1aa36675",
                     "name": "panel_13",
                     "type": "visualization"
+                },
+                {
+                    "id": "bff818b0-06ef-11eb-8fec-771ec91fa3f0",
+                    "name": "panel_14",
+                    "type": "search"
                 }
             ],
             "type": "dashboard",
-            "updated_at": "2020-10-05T08:27:08.154Z",
-            "version": "WzE4MjksMjdd"
+            "updated_at": "2020-10-05T09:51:15.527Z",
+            "version": "WzEzOCwxOV0="
         },
         {
             "attributes": {
@@ -137,8 +142,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:21:54.516Z",
-            "version": "WzE4MjQsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzExNywxOV0="
         },
         {
             "attributes": {
@@ -163,8 +168,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MDUsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzExOCwxOV0="
         },
         {
             "attributes": {
@@ -189,8 +194,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MDYsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzExOSwxOV0="
         },
         {
             "attributes": {
@@ -220,8 +225,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MDcsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyMCwxOV0="
         },
         {
             "attributes": {
@@ -246,8 +251,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MDgsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyMSwxOV0="
         },
         {
             "attributes": {
@@ -272,8 +277,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MDksMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyMiwxOV0="
         },
         {
             "attributes": {
@@ -298,8 +303,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:22:50.510Z",
-            "version": "WzE4MjUsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyMywxOV0="
         },
         {
             "attributes": {
@@ -324,8 +329,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MTEsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyNCwxOV0="
         },
         {
             "attributes": {
@@ -350,8 +355,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:23:32.776Z",
-            "version": "WzE4MjYsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyNSwxOV0="
         },
         {
             "attributes": {
@@ -376,8 +381,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:25:00.839Z",
-            "version": "WzE4MjcsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyNiwxOV0="
         },
         {
             "attributes": {
@@ -402,8 +407,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MTQsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyNywxOV0="
         },
         {
             "attributes": {
@@ -428,8 +433,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MTUsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyOCwxOV0="
         },
         {
             "attributes": {
@@ -454,8 +459,8 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MTYsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEyOSwxOV0="
         },
         {
             "attributes": {
@@ -480,12 +485,45 @@
                 }
             ],
             "type": "visualization",
-            "updated_at": "2020-10-05T08:16:27.464Z",
-            "version": "WzE4MTcsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEzMCwxOV0="
         },
         {
             "attributes": {
-                "fields": "[{\"name\":\"AA_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"_id\",\"type\":\"string\",\"esTypes\":[\"_id\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"esTypes\":[\"_index\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"esTypes\":[\"_source\"],\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"esTypes\":[\"_type\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"accuracy\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_only_found_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_cluster\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_suggest\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"changed_type\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"f1-score\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"gather_date\",\"type\":\"date\",\"esTypes\":[\"date\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_added\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"manually_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"on\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_aa\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_cluster\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_suggest\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_id\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_name\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]",
+                "columns": [
+                    "project_id",
+                    "project_name"
+                ],
+                "description": "",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"highlightAll\":true,\"version\":true,\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+                },
+                "sort": [
+                    "project_id",
+                    "desc"
+                ],
+                "title": "RP_project_id_mappings",
+                "version": 1
+            },
+            "id": "bff818b0-06ef-11eb-8fec-771ec91fa3f0",
+            "migrationVersion": {
+                "search": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "rp_stats",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "search",
+            "updated_at": "2020-10-05T09:47:15.258Z",
+            "version": "WzEzNSwxOV0="
+        },
+        {
+            "attributes": {
+                "fields": "[{\"name\":\"AA_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"_id\",\"type\":\"string\",\"esTypes\":[\"_id\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_index\",\"type\":\"string\",\"esTypes\":[\"_index\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"_score\",\"type\":\"number\",\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_source\",\"type\":\"_source\",\"esTypes\":[\"_source\"],\"count\":0,\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"name\":\"_type\",\"type\":\"string\",\"esTypes\":[\"_type\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":false},{\"name\":\"accuracy\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_only_found_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_aa\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_cluster\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"avg_processing_time_test_item_suggest\",\"type\":\"number\",\"esTypes\":[\"float\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"changed_type\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"f1-score\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"gather_date\",\"type\":\"date\",\"esTypes\":[\"date\"],\"count\":2,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_added\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"launch_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"manually_analyzed\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"on\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_aa\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_cluster\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"percent_not_found_suggest\",\"type\":\"number\",\"esTypes\":[\"integer\"],\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_id\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":1,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"name\":\"project_name\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"count\":1,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]",
                 "timeFieldName": "gather_date",
                 "title": "rp_stats"
             },
@@ -495,8 +533,8 @@
             },
             "references": [],
             "type": "index-pattern",
-            "updated_at": "2020-10-05T08:19:51.162Z",
-            "version": "WzE4MjIsMjdd"
+            "updated_at": "2020-10-05T09:50:03.275Z",
+            "version": "WzEzNywxOV0="
         },
         {
             "attributes": {
@@ -510,8 +548,8 @@
             },
             "references": [],
             "type": "index-pattern",
-            "updated_at": "2020-10-05T08:19:51.321Z",
-            "version": "WzE4MjMsMjdd"
+            "updated_at": "2020-10-05T09:09:30.528Z",
+            "version": "WzEzMiwxOV0="
         }
     ],
     "version": "7.3.2"
