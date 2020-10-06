@@ -51,6 +51,41 @@ class EsClient:
             data="{\"index.blocks.read_only_allow_delete\": null}"
         ).raise_for_status()
 
+    @staticmethod
+    def send_request(url, method):
+        """Send request with specified url and http method"""
+        try:
+            response = requests.get(url) if method == "GET" else {}
+            data = response._content.decode("utf-8")
+            content = json.loads(data, strict=False)
+            return content
+        except Exception as err:
+            logger.error("Error with loading url: %s", url)
+            logger.error(err)
+        return []
+
+    def is_healthy(self):
+        """Check whether elasticsearch is healthy"""
+        try:
+            url = utils.build_url(self.esHost, ["_cluster/health"])
+            res = EsClient.send_request(url, "GET")
+            return res["status"] in ["green", "yellow"]
+        except Exception as err:
+            logger.error("Elasticsearch is not healthy")
+            logger.error(err)
+            return False
+
+    def is_kibana_healthy(self):
+        """Check whether kibana is healthy"""
+        try:
+            url = utils.build_url(self.kibanaHost, ["api/status"])
+            res = EsClient.send_request(url, "GET")
+            return res["status"]["overall"]["state"].lower() in ["green", "yellow"]
+        except Exception as err:
+            logger.error("Kibana is not healthy")
+            logger.error(err)
+            return False
+
     def index_exists(self, index_name, print_error=True):
         try:
             index = self.es_client.indices.get(index=str(index_name))

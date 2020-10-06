@@ -63,6 +63,28 @@ class PostgresDAO:
                 cursor.close()
                 connection.close()
 
+    def test_query_handling(self):
+        connection = None
+        result = True
+        try:
+            connection = psycopg2.connect(user=self.app_settings["postgresUser"],
+                                          password=self.app_settings["postgresPassword"],
+                                          host=self.app_settings["postgresHost"],
+                                          port=self.app_settings["postgresPort"],
+                                          database=self.app_settings["postgresDatabase"])
+
+            cursor = connection.cursor()
+            cursor.execute("select * from information_schema.columns")
+            result = cursor.fetchone() is not None
+        except (Exception, psycopg2.Error) as error:
+            logger.error("Error while connecting to PostgreSQL %s", error)
+            result = False
+        finally:
+            if(connection):
+                cursor.close()
+                connection.close()
+        return result
+
     def get_column_names_for_table(self, table_name):
         return self.query_db(
             """select column_name, data_type from

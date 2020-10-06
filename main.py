@@ -19,11 +19,13 @@ import logging.config
 import os
 import schedule
 import time
-from commons import metrics_gatherer, es_client
+from commons import metrics_gatherer, es_client, postgres_dao
 import datetime
 from flask import Flask
+from flask import jsonify
 from flask_cors import CORS
 from utils import utils
+import threading
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200"),
@@ -120,15 +122,51 @@ while True:
             APP_CONFIG["kibanaHost"]))
         time.sleep(10)
 
-logger.info("Started scheduling of metrics gathering...")
-schedule.every().hour.do(start_metrics_gathering)
-try:
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-except Exception as e:
-    logger.error(e)
-    logger.error("Metrics gatherer has finished with errors")
+
+@application.route('/', methods=['GET'])
+def get_health_status():
+    _es_client = es_client.EsClient(
+        esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
+    _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
+    if not _es_client.is_healthy() or\
+            not _es_client.is_kibana_healthy() or\
+            not _postgres_dao.test_query_handling():
+        return jsonify({"status": "Unhealthy"})
+    return jsonify({"status": "Healthy"})
+
+
+def create_thread(func, args):
+    """Creates a thread with specified function and arguments"""
+    thread = threading.Thread(target=func, args=args)
+    thread.start()
+    return thread
+
+
+def scheduling_tasks():
+    logger.info("Started scheduling of metrics gathering...")
+    schedule.every().hour.do(start_metrics_gathering)
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    except Exception as e:
+        logger.error(e)
+        logger.error("Metrics gatherer has finished with errors")
+
+
+def start_http_server():
+    application.run(host='0.0.0.0', port=5000)
+
+
+if __name__ == '__main__':
+    logger.info("Program started")
+
+    threads = []
+    threads.append(create_thread(scheduling_tasks, ()))
+    threads.append(create_thread(start_http_server, ()))
+
+    for th in threads:
+        th.join()
+
+    logger.info("The metrics gatherer has finished")
     exit(0)
-logger.info("The metrics gatherer has finished")
-exit(0)

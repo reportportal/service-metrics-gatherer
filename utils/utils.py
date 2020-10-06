@@ -51,3 +51,8 @@ def take_the_date_to_check():
     if (now_time >= datetime.time(12, 0) and now_time <= datetime.time(23, 59)):
         return datetime.datetime.now()
     return datetime.datetime.now() - datetime.timedelta(days=1)
+
+
+def build_url(main_url, url_params):
+    """Build url by concating url and url_params"""
+    return main_url + "/" + "/".join(url_params)
