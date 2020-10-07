@@ -21,11 +21,13 @@ import schedule
 import time
 from commons import metrics_gatherer, es_client, postgres_dao
 import datetime
-from flask import Flask
+from flask import Flask, Response
 from flask import jsonify
 from flask_cors import CORS
 from utils import utils
 import threading
+import json
+
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200"),
@@ -128,6 +130,7 @@ def get_health_status():
     _es_client = es_client.EsClient(
         esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
+
     status = ""
     if not _es_client.is_healthy():
         status += "Elasticsearch is not healthy;"
@@ -136,7 +139,8 @@ def get_health_status():
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"
     if status:
-        return jsonify({"status": status})
+        logger.error("Metrics gatherer health check status failed: %s", status)
+        return Response(json.dumps({"status": status}), status=503, mimetype='application/json')
     return jsonify({"status": "healthy"})
 
 
