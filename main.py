@@ -128,11 +128,16 @@ def get_health_status():
     _es_client = es_client.EsClient(
         esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
-    if not _es_client.is_healthy() or\
-            not _es_client.is_kibana_healthy() or\
-            not _postgres_dao.test_query_handling():
-        return jsonify({"status": "Unhealthy"})
-    return jsonify({"status": "Healthy"})
+    status = ""
+    if not _es_client.is_healthy():
+        status += "Elasticsearch is not healthy;"
+    if not _es_client.is_kibana_healthy():
+        status += "Kibana is not healthy;"
+    if not _postgres_dao.test_query_handling():
+        status += "Postgres is not healthy;"
+    if status:
+        return jsonify({"status": status})
+    return jsonify({"status": "healthy"})
 
 
 def create_thread(func, args):
