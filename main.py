@@ -127,7 +127,6 @@ while True:
 
 @application.route('/', methods=['GET'])
 def get_health_status():
-    global main_thread
     _es_client = es_client.EsClient(
         esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
@@ -139,9 +138,6 @@ def get_health_status():
         status += "Kibana is not healthy;"
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"
-    if not main_thread.is_alive():
-        logger.error("Main thread died, so reloading it")
-        main_thread = create_thread(scheduling_tasks, ())
     if status:
         logger.error("Metrics gatherer health check status failed: %s", status)
         return Response(json.dumps({"status": status}), status=503, mimetype='application/json')
@@ -165,13 +161,14 @@ def scheduling_tasks():
     except Exception as e:
         logger.error(e)
         logger.error("Metrics gatherer has finished with errors")
+        os.kill(os.getpid(), 9)
 
 
 def start_http_server():
     application.run(host='0.0.0.0', port=5000)
 
 
-main_thread = create_thread(scheduling_tasks, ())
+create_thread(scheduling_tasks, ())
 
 if __name__ == '__main__':
     logger.info("Program started")
