@@ -44,6 +44,7 @@ class PostgresDAO:
 
     def query_db(self, query, query_all=True, derive_scheme=True):
         connection = None
+        final_results = None
         try:
             connection = psycopg2.connect(user=self.app_settings["postgresUser"],
                                           password=self.app_settings["postgresPassword"],
@@ -55,13 +56,17 @@ class PostgresDAO:
             cursor.execute(query)
             results = cursor.fetchall()
             results = self.transform_to_objects(query, results) if derive_scheme else results
-            return results if query_all else results[0]
+            if query_all:
+                final_results = results
+            if not query_all and len(results) > 0:
+                final_results = results[0]
         except (Exception, psycopg2.Error) as error:
             logger.error("Error while connecting to PostgreSQL %s", error)
         finally:
             if(connection):
                 cursor.close()
                 connection.close()
+        return final_results
 
     def test_query_handling(self):
         connection = None
@@ -99,13 +104,19 @@ class PostgresDAO:
         return -1
 
     def is_auto_analysis_enabled_for_project(self, project_id):
-        return self.query_db(
+        result = self.query_db(
             "select value from project_attribute where project_id = %d and attribute_id = %d" % (
-                project_id, self.auto_analysis_attribute_id), query_all=False)["value"].lower() == "true"
+                project_id, self.auto_analysis_attribute_id), query_all=False)
+        if result:
+            return result["value"].lower() == "true"
+        return False
 
     def get_launch_id(self, item_id):
-        return self.query_db(
-            "select launch_id from test_item where item_id=%d" % item_id, query_all=False)["launch_id"]
+        result = self.query_db(
+            "select launch_id from test_item where item_id=%d" % item_id, query_all=False)
+        if result:
+            return result["launch_id"]
+        return -1
 
     def get_activities_by_project(self, project_id, start_date, end_date):
         return self.query_db(
