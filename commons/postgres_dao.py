@@ -116,7 +116,7 @@ class PostgresDAO:
             "select launch_id from test_item where item_id=%d" % item_id, query_all=False)
         if result:
             return result["launch_id"]
-        return -1
+        return None
 
     def get_activities_by_project(self, project_id, start_date, end_date):
         return self.query_db(
