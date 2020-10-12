@@ -27,9 +27,9 @@ logger = logging.getLogger("metricsGatherer.es_client")
 
 class EsClient:
 
-    def __init__(self, esHost, kibanaHost):
+    def __init__(self, esHost, grafanaHost):
         self.esHost = esHost
-        self.kibanaHost = kibanaHost
+        self.grafanaHost = grafanaHost
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
         self.main_index_properties = utils.read_json_file(
             "", "index_mapping_settings.json", to_json=True)
@@ -51,6 +51,68 @@ class EsClient:
             data="{\"index.blocks.read_only_allow_delete\": null}"
         ).raise_for_status()
 
+    def delete_grafana_datasource_by_name(self, index_name):
+        try:
+            res = requests.get(
+                "%s/api/datasources/name/%s" % (self.grafanaHost, index_name))
+            res.raise_for_status()
+        except Exception as err:
+            logger.error(err)
+            return
+        try:
+            index_id = json.loads(res.content)["id"]
+            requests.delete("%s/api/datasources/%s" % (self.grafanaHost, index_id)).raise_for_status()
+        except Exception as err:
+            logger.error(err)
+
+    def create_grafana_data_source(self, index_name, time_field, index_properties):
+        index_exists = False
+        if not self.index_exists(index_name, print_error=False, raise_error=True):
+            response = self.create_index(index_name, index_properties)
+            if len(response):
+                index_exists = True
+        else:
+            index_exists = True
+        if index_exists:
+            self.delete_grafana_datasource_by_name(index_name)
+            es_user, es_pass = utils.get_credentials_from_url(self.esHost)
+            try:
+                requests.post(
+                    "%s/api/datasources" % self.grafanaHost,
+                    data=json.dumps({
+                        "name": index_name,
+                        "type": "elasticsearch",
+                        "url": utils.remove_credentials_from_url(self.esHost),
+                        "access": "proxy",
+                        "basicAuth": len(es_user) > 0,
+                        "basicAuthUser": es_user,
+                        "secureJsonData": {
+                            "basicAuthPassword": es_pass
+                        },
+                        "database": index_name,
+                        "jsonData": {
+                            "esVersion": 70,
+                            "maxConcurrentShardRequests": "1",
+                            "timeField": time_field}
+                    }), headers={"content-type": "application/json"}
+                ).raise_for_status()
+                return True
+            except Exception as err:
+                logger.error("Can't create grafana datasource")
+                logger.error(err)
+                return False
+        return False
+
+    def import_dashboard(self, dashboard_id):
+        dashboard_info = utils.read_json_file(
+            "", "{}.json".format(dashboard_id), to_json=True)
+        requests.post("%s/api/dashboards/db" % self.grafanaHost, data=json.dumps({
+            "dashboard": dashboard_info["dashboard"],
+            "folderId": dashboard_info["meta"]["folderId"],
+            "refresh": True,
+            "overwrite": True
+        }), headers={'content-type': 'application/json'}).raise_for_status()
+
     @staticmethod
     def send_request(url, method):
         """Send request with specified url and http method"""
@@ -60,7 +122,7 @@ class EsClient:
             content = json.loads(data, strict=False)
             return content
         except Exception as err:
-            logger.error("Error with loading url: %s", url)
+            logger.error("Error with loading url: %s", utils.remove_credentials_from_url(url))
             logger.error(err)
         return []
 
@@ -75,18 +137,18 @@ class EsClient:
             logger.error(err)
             return False
 
-    def is_kibana_healthy(self):
-        """Check whether kibana is healthy"""
+    def is_grafana_healthy(self):
+        """Check whether grafana is healthy"""
         try:
-            url = utils.build_url(self.kibanaHost, ["api/status"])
+            url = utils.build_url(self.grafanaHost, ["api/health"])
             res = EsClient.send_request(url, "GET")
-            return res["status"]["overall"]["state"].lower() in ["green", "yellow"]
+            return res["database"].lower() == "ok"
         except Exception as err:
-            logger.error("Kibana is not healthy")
+            logger.error("Grafana is not healthy")
             logger.error(err)
             return False
 
-    def index_exists(self, index_name, print_error=True):
+    def index_exists(self, index_name, print_error=True, raise_error=False):
         try:
             index = self.es_client.indices.get(index=str(index_name))
             return index is not None
@@ -95,6 +157,8 @@ class EsClient:
                 logger.error("Index %s was not found", str(index_name))
                 logger.error("ES Url %s", self.host)
                 logger.error(err)
+            if raise_error:
+                raise
             return False
 
     def create_index(self, index_name, index_properties):
@@ -112,22 +176,6 @@ class EsClient:
                 self.esHost))
             logger.error(err)
             return {}
-
-    def create_pattern(self, pattern_id, time_field):
-        logger.debug("Creating '%s' Kibana index pattern object", pattern_id)
-        attribs = {'title': pattern_id}
-        if time_field is not None:
-            attribs['timeFieldName'] = time_field
-        requests.post(
-            '%s/api/saved_objects/index-pattern/%s?overwrite=true' % (
-                self.kibanaHost,
-                pattern_id,
-            ),
-            headers=self.kibana_headers,
-            data=json.dumps({
-                'attributes': attribs
-            })
-        ).raise_for_status()
 
     def bulk_index(self, index_name, bulk_actions, index_properties, create_pattern=False):
         exists_index = False
@@ -212,23 +260,6 @@ class EsClient:
                 }
             }})
         return res["hits"]["hits"]
-
-    def import_dashboard(self, dashboard_id):
-        dashboard_json = utils.read_json_file("", "{}.json".format(dashboard_id), to_json=False)
-        try:
-            requests.delete("{}/api/saved_objects/dashboard/{}".format(
-                self.kibanaHost, dashboard_id),
-                headers=self.kibana_headers).raise_for_status()
-        except Exception:
-            pass
-        r = requests.post(
-            "{}/api/kibana/dashboards/import?force=true".format(
-                self.kibanaHost
-            ),
-            headers=self.kibana_headers,
-            data=dashboard_json
-        )
-        r.raise_for_status()
 
     def delete_old_info(self, max_days_store):
         for index in [self.main_index, self.rp_aa_stats_index, self.task_done_index]:

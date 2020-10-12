@@ -30,17 +30,17 @@ import json
 
 
 APP_CONFIG = {
-    "esHost":            os.getenv("ES_HOST", "http://localhost:9200"),
-    "kibanaHost":        os.getenv("KIBANA_HOST", "http://localhost:5601"),
+    "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
+    "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
     "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
     "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
-    "allowedStartTime": os.getenv("ALLOWED_START_TIME", "22:00"),
-    "allowedEndTime":   os.getenv("ALLOWED_END_TIME", "08:00"),
-    "dashboardId":       os.getenv("DASHBOARD_ID", "d9d54740-ff19-11ea-99ec-e50c1aa36675"),
+    "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
+    "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
+    "dashboardId":       os.getenv("DASHBOARD_ID", "X-WoMD5Mz"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
 
@@ -77,20 +77,6 @@ def start_metrics_gathering():
         logger.debug("Task for today was already completed...")
 
 
-def create_index_with_pattern(_es_client, index_name, index_properties):
-    index_exists = False
-    if not _es_client.index_exists(index_name, print_error=False):
-        response = _es_client.create_index(index_name, index_properties)
-        if len(response):
-            index_exists = True
-    else:
-        index_exists = True
-    if index_exists:
-        _es_client.create_pattern(pattern_id=index_name, time_field="gather_date")
-        logger.info("Created pattern %s in the Kibana" % index_name)
-    return index_exists
-
-
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
 logging.config.fileConfig(log_file_path)
 if APP_CONFIG["logLevel"].lower() == "debug":
@@ -107,35 +93,34 @@ CORS(application)
 while True:
     try:
         _es_client = es_client.EsClient(
-            esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
-        _es_client.update_settings_after_read_only()
-        result = create_index_with_pattern(
-            _es_client, _es_client.main_index, _es_client.main_index_properties)
-        result = create_index_with_pattern(
-            _es_client, _es_client.rp_aa_stats_index, _es_client.rp_aa_stats_index_properties)
-        if result:
+            esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
+        result_main_index = _es_client.create_grafana_data_source(
+            _es_client.main_index, "gather_date", _es_client.main_index_properties)
+        result_aa_stats = _es_client.create_grafana_data_source(
+            _es_client.rp_aa_stats_index, "gather_date", _es_client.rp_aa_stats_index_properties)
+        if result_main_index and result_aa_stats:
             _es_client.import_dashboard(APP_CONFIG["dashboardId"])
-            logger.info("Imported dashboard into Kibana %s" % utils.remove_credentials_from_url(
-                APP_CONFIG["kibanaHost"]))
+            logger.info("Imported dashboard into Grafana %s" % utils.remove_credentials_from_url(
+                APP_CONFIG["grafanaHost"]))
             break
     except Exception as e:
         logger.error(e)
-        logger.error("Can't import dashboard into Kibana %s" % utils.remove_credentials_from_url(
-            APP_CONFIG["kibanaHost"]))
+        logger.error("Can't import dashboard into Grafana %s" % utils.remove_credentials_from_url(
+            APP_CONFIG["grafanaHost"]))
         time.sleep(10)
 
 
 @application.route('/', methods=['GET'])
 def get_health_status():
     _es_client = es_client.EsClient(
-        esHost=APP_CONFIG["esHost"], kibanaHost=APP_CONFIG["kibanaHost"])
+        esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
 
     status = ""
     if not _es_client.is_healthy():
         status += "Elasticsearch is not healthy;"
-    if not _es_client.is_kibana_healthy():
-        status += "Kibana is not healthy;"
+    if not _es_client.is_grafana_healthy():
+        status += "Grafana is not healthy;"
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"
     if status:

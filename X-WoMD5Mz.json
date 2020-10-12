@@ -1,0 +1,1707 @@
+{
+    "dashboard": {
+        "annotations": {
+            "list": [
+                {
+                    "builtIn": 1,
+                    "datasource": "-- Grafana --",
+                    "enable": true,
+                    "hide": true,
+                    "iconColor": "rgba(0, 211, 255, 1)",
+                    "name": "Annotations & Alerts",
+                    "type": "dashboard"
+                }
+            ]
+        },
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "id": null,
+        "iteration": 1602511625930,
+        "links": [],
+        "panels": [
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 9,
+                    "w": 7,
+                    "x": 0,
+                    "y": 0
+                },
+                "hiddenSeries": false,
+                "id": 2,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:96",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:94",
+                                "field": "accuracy",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_accuracy",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "transformations": [],
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 9,
+                    "w": 8,
+                    "x": 7,
+                    "y": 0
+                },
+                "hiddenSeries": false,
+                "id": 4,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:158",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:156",
+                                "field": "f1-score",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Rp_f1_score",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {},
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 4,
+                    "x": 15,
+                    "y": 0
+                },
+                "id": 8,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "mean"
+                        ],
+                        "fields": "",
+                        "values": false
+                    },
+                    "textMode": "auto"
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:47",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:45",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "gather_date: now AND on: 1",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_AA_analysis_enabled",
+                "transformations": [
+                    {
+                        "id": "reduce",
+                        "options": {}
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "datasource": null,
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {},
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 5,
+                    "x": 19,
+                    "y": 0
+                },
+                "id": 6,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "distinctCount"
+                        ],
+                        "fields": "",
+                        "values": false
+                    },
+                    "textMode": "auto"
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:376",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "auto",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:374",
+                                "field": "project_id",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Unique projects",
+                "transformations": [
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "distinctCount"
+                            ]
+                        }
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 5,
+                    "w": 9,
+                    "x": 15,
+                    "y": 4
+                },
+                "hiddenSeries": false,
+                "id": 10,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:285",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:283",
+                                "field": "on",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "sum"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_auto_analyzed_enabled",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 9
+                },
+                "hiddenSeries": false,
+                "id": 12,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:347",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:345",
+                                "field": "launch_analyzed",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:374",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:372",
+                                "field": "launch_added",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_average_launch_analyzed",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 9
+                },
+                "hiddenSeries": false,
+                "id": 14,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:440",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:438",
+                                "field": "AA_analyzed",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:467",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:465",
+                                "field": "changed_type",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:494",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:492",
+                                "field": "manually_analyzed",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "C",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_average_AA_manually_analyzed",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 17
+                },
+                "id": 16,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:525",
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:523",
+                                "field": "f1-score",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_top_f1_score_table",
+                "transformations": [],
+                "type": "table"
+            },
+            {
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 17
+                },
+                "id": 18,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:557",
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "asc",
+                                    "orderBy": "_term",
+                                    "size": "10"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:555",
+                                "field": "f1-score",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_worst_f1_score_table",
+                "type": "table"
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 25
+                },
+                "hiddenSeries": false,
+                "id": 20,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:624",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:622",
+                                "field": "percent_not_found_aa",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:651",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:649",
+                                "field": "percent_not_found_suggest",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:678",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:676",
+                                "field": "percent_not_found_cluster",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "C",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_percent_not_found_AA",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 25
+                },
+                "hiddenSeries": false,
+                "id": 22,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:748",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:746",
+                                "field": "avg_processing_time_test_item_aa",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:775",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:773",
+                                "field": "avg_processing_time_only_found_test_item_aa",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:802",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:800",
+                                "field": "avg_processing_time_test_item_suggest",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "C",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:829",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:827",
+                                "field": "avg_processing_time_test_item_cluster",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "avg"
+                            }
+                        ],
+                        "refId": "D",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "RP_avg_time_per_test_item",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 33
+                },
+                "id": 24,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:2113",
+                                "field": "number_of_log_lines",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:2111",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_used_number_of_log_lines",
+                "transformations": [],
+                "type": "table"
+            },
+            {
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 33
+                },
+                "id": 26,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:2232",
+                                "field": "min_should_match",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:2230",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_min_should_match ",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_stats",
+                "description": "",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 24,
+                    "x": 0,
+                    "y": 41
+                },
+                "id": 28,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:888",
+                                "fake": true,
+                                "field": "project_id",
+                                "id": "3",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            },
+                            {
+                                "$$hashKey": "object:860",
+                                "field": "project_name",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:858",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "RP_project_id_mappings",
+                "type": "table"
+            }
+        ],
+        "schemaVersion": 26,
+        "style": "dark",
+        "tags": [],
+        "templating": {
+            "list": [
+                {
+                    "allValue": null,
+                    "current": {
+                        "selected": true,
+                        "tags": [],
+                        "text": "",
+                        "value": []
+                    },
+                    "datasource": "rp_stats",
+                    "definition": " {\"find\": \"terms\", \"field\": \"project_id\"}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Project Id",
+                    "multi": true,
+                    "name": "projectId",
+                    "options": [],
+                    "query": " {\"find\": \"terms\", \"field\": \"project_id\"}",
+                    "refresh": 1,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
+                    "allValue": null,
+                    "current": {
+                        "selected": true,
+                        "tags": [],
+                        "text": "0",
+                        "value": [
+                            "0"
+                        ]
+                    },
+                    "datasource": "rp_stats",
+                    "definition": "{\"find\": \"terms\", \"field\": \"on\"}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Auto Analysis On",
+                    "multi": true,
+                    "name": "autoAnalysisOn",
+                    "options": [
+                        {
+                            "selected": false,
+                            "text": "All",
+                            "value": "$__all"
+                        },
+                        {
+                            "selected": true,
+                            "text": "0",
+                            "value": "0"
+                        }
+                    ],
+                    "query": "{\"find\": \"terms\", \"field\": \"on\"}",
+                    "refresh": 0,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
+                    "datasource": "rp_stats",
+                    "filters": [],
+                    "hide": 0,
+                    "label": "Custom filters",
+                    "name": "CustomFilters",
+                    "skipUrlSync": false,
+                    "type": "adhoc"
+                }
+            ]
+        },
+        "time": {
+            "from": "now-30d",
+            "to": "now"
+        },
+        "timepicker": {
+            "refresh_intervals": [
+                "10s",
+                "30s",
+                "1m",
+                "5m",
+                "15m",
+                "30m",
+                "1h",
+                "2h",
+                "1d"
+            ]
+        },
+        "timezone": "",
+        "title": "RP Analyzer dashboard",
+        "uid": "X-WoMD5Mz",
+        "version": 6
+    },
+    "meta": {
+        "canAdmin": true,
+        "canEdit": true,
+        "canSave": true,
+        "canStar": true,
+        "created": "2020-10-12T13:20:55Z",
+        "createdBy": "admin",
+        "expires": "0001-01-01T00:00:00Z",
+        "folderId": 0,
+        "folderTitle": "General",
+        "folderUrl": "",
+        "hasAcl": false,
+        "isFolder": false,
+        "provisioned": false,
+        "provisionedExternalId": "",
+        "slug": "rp-analyzer-dashboard",
+        "type": "db",
+        "updated": "2020-10-12T14:20:53Z",
+        "updatedBy": "admin",
+        "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
+        "version": 6
+    }
+}
