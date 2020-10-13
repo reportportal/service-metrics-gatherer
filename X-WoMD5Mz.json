@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1602603495839,
+        "iteration": 1602604602762,
         "links": [],
         "panels": [
             {
@@ -395,14 +395,15 @@
                         "bucketAggs": [
                             {
                                 "$$hashKey": "object:56",
-                                "field": "gather_date",
+                                "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "interval": "auto",
                                     "min_doc_count": 0,
-                                    "trimEdges": 0
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
                                 },
-                                "type": "date_histogram"
+                                "type": "terms"
                             }
                         ],
                         "metrics": [
@@ -422,11 +423,13 @@
                 "title": "Unique projects",
                 "transformations": [
                     {
-                        "id": "reduce",
+                        "id": "organize",
                         "options": {
-                            "reducers": [
-                                "distinctCount"
-                            ]
+                            "excludeByName": {
+                                "Count": true
+                            },
+                            "indexByName": {},
+                            "renameByName": {}
                         }
                     }
                 ],
@@ -897,7 +900,7 @@
                                 "settings": {
                                     "min_doc_count": 0,
                                     "order": "desc",
-                                    "orderBy": "1",
+                                    "orderBy": "_term",
                                     "size": "0"
                                 },
                                 "type": "terms"
@@ -968,8 +971,8 @@
                                 "settings": {
                                     "min_doc_count": 0,
                                     "order": "asc",
-                                    "orderBy": "1",
-                                    "size": "0"
+                                    "orderBy": "_term",
+                                    "size": "10"
                                 },
                                 "type": "terms"
                             }
@@ -1399,7 +1402,7 @@
                                 "settings": {
                                     "min_doc_count": 0,
                                     "order": "desc",
-                                    "orderBy": "_count",
+                                    "orderBy": "_term",
                                     "size": "0"
                                 },
                                 "type": "terms"
@@ -1468,7 +1471,7 @@
                                 "settings": {
                                     "min_doc_count": 0,
                                     "order": "desc",
-                                    "orderBy": "_count",
+                                    "orderBy": "_term",
                                     "size": "0"
                                 },
                                 "type": "terms"
@@ -1529,17 +1532,39 @@
                 "pluginVersion": "7.1.1",
                 "targets": [
                     {
-                        "bucketAggs": [],
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:888",
+                                "fake": true,
+                                "field": "project_id",
+                                "id": "3",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            },
+                            {
+                                "$$hashKey": "object:860",
+                                "field": "project_name",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
                         "metrics": [
                             {
                                 "$$hashKey": "object:858",
                                 "field": "select field",
                                 "id": "1",
-                                "meta": {},
-                                "settings": {
-                                    "size": 500
-                                },
-                                "type": "raw_data"
+                                "type": "count"
                             }
                         ],
                         "refId": "A",
@@ -1549,35 +1574,6 @@
                 "timeFrom": null,
                 "timeShift": null,
                 "title": "RP_project_id_mappings",
-                "transformations": [
-                    {
-                        "id": "organize",
-                        "options": {
-                            "excludeByName": {
-                                "AA_analyzed": true,
-                                "_id": true,
-                                "_index": true,
-                                "_type": true,
-                                "accuracy": true,
-                                "avg_processing_time_only_found_test_item_aa": true,
-                                "avg_processing_time_test_item_aa": true,
-                                "avg_processing_time_test_item_cluster": true,
-                                "avg_processing_time_test_item_suggest": true,
-                                "changed_type": true,
-                                "f1-score": true,
-                                "launch_added": true,
-                                "launch_analyzed": true,
-                                "manually_analyzed": true,
-                                "on": true,
-                                "percent_not_found_aa": true,
-                                "percent_not_found_cluster": true,
-                                "percent_not_found_suggest": true
-                            },
-                            "indexByName": {},
-                            "renameByName": {}
-                        }
-                    }
-                ],
                 "type": "table"
             }
         ],
@@ -1684,7 +1680,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 35
+        "version": 37
     },
     "meta": {
         "canAdmin": true,
@@ -1703,9 +1699,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2020-10-13T15:42:06Z",
+        "updated": "2020-10-13T16:05:35Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 35
+        "version": 37
     }
 }
