@@ -31,7 +31,7 @@ class MetricsGatherer:
         self.postgres_dao = postgres_dao.PostgresDAO(app_settings)
         self.es_client = es_client.EsClient(
             esHost=app_settings["esHost"],
-            kibanaHost=app_settings["kibanaHost"])
+            grafanaHost=app_settings["grafanaHost"])
 
     def get_current_date_template(self, project_id, project_name, cur_date):
         return {"on": 0,  "changed_type": 0, "AA_analyzed": 0,

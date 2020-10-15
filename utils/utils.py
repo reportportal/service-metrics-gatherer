@@ -30,6 +30,17 @@ def remove_credentials_from_url(url):
     return url.replace(parsed_url.netloc, new_netloc)
 
 
+def get_credentials_from_url(url):
+    parsed_url = urlparse(url)
+    new_netloc = re.search("^(.+?):(.+?)@", parsed_url.netloc)
+    try:
+        username = new_netloc.group(1).strip()
+        password = new_netloc.group(2).strip()
+        return username, password
+    except: # noqa
+        return "", ""
+
+
 def read_json_file(folder, filename, to_json=False):
     """Read fixture from file"""
     with open(os.path.join(folder, filename), "r") as file:
