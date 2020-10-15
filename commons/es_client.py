@@ -177,7 +177,7 @@ class EsClient:
             logger.error(err)
             return {}
 
-    def bulk_index(self, index_name, bulk_actions, index_properties, create_pattern=False):
+    def bulk_index(self, index_name, bulk_actions, index_properties):
         exists_index = False
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
@@ -209,8 +209,6 @@ class EsClient:
                 logger.debug("Processed %d logs", success_count)
                 if errors:
                     logger.debug("Occured errors %s", errors)
-                if create_pattern:
-                    self.create_pattern(pattern_id=index_name, time_field="gather_date")
             except Exception as err:
                 logger.error(err)
                 logger.error("Bulking index for %s index finished with errors", index_name)
@@ -222,7 +220,7 @@ class EsClient:
             '_source': row,
         } for row in data]
         self.bulk_index(
-            self.main_index, bulk_actions, self.main_index_properties, create_pattern=True)
+            self.main_index, bulk_actions, self.main_index_properties)
 
     def bulk_task_done_index(self, data):
         bulk_actions = [{
@@ -230,7 +228,7 @@ class EsClient:
             '_source': row,
         } for row in data]
         self.bulk_index(
-            self.task_done_index, bulk_actions, self.done_task_index_properties, create_pattern=False)
+            self.task_done_index, bulk_actions, self.done_task_index_properties)
 
     def is_the_date_metrics_calculated(self, date):
         if not self.index_exists(self.task_done_index, print_error=False):
