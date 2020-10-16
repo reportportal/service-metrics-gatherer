@@ -67,7 +67,7 @@ class EsClient:
 
     def create_grafana_data_source(self, index_name, time_field, index_properties):
         index_exists = False
-        if not self.index_exists(index_name, print_error=False, raise_error=True):
+        if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
                 index_exists = True
@@ -148,7 +148,7 @@ class EsClient:
             logger.error(err)
             return False
 
-    def index_exists(self, index_name, print_error=True, raise_error=False):
+    def index_exists(self, index_name, print_error=True):
         try:
             index = self.es_client.indices.get(index=str(index_name))
             return index is not None
@@ -157,8 +157,6 @@ class EsClient:
                 logger.error("Index %s was not found", str(index_name))
                 logger.error("ES Url %s", self.host)
                 logger.error(err)
-            if raise_error:
-                raise
             return False
 
     def create_index(self, index_name, index_properties):
