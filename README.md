@@ -24,6 +24,8 @@
 
 **MAX_DAYS_STORE** - max days to store metrics, the metrics gatherer will delete data points which earlier than max days to store from today, default 500
 
+**TZ** - time zone, it will let better understand allowed start and end time. default "Europe/Minsk"
+
 
 # Instructions for analyzer setup without Docker
 
