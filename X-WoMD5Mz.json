@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1602662746082,
+        "iteration": 1603181394661,
         "links": [],
         "panels": [
             {
@@ -330,7 +330,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "gather_date: now AND on: 1",
+                        "query": "gather_date: now and on: 1",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1688,14 +1688,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 59
+        "version": 5
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2020-10-12T13:20:55Z",
+        "created": "2020-10-16T14:47:26Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1707,9 +1707,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2020-10-14T08:11:04Z",
+        "updated": "2020-10-20T08:10:10Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 59
+        "version": 5
     }
 }
