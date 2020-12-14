@@ -247,7 +247,12 @@ class MetricsGatherer:
                     gathered_row = self.gather_metrics_by_project(project_id, project_name, cur_date)
                     gathered_rows.append(gathered_row)
                 gathered_rows = self.fill_right_aa_enable_states(gathered_rows, project_aa_states)
-                self.es_client.bulk_main_index(gathered_rows)
+                bulk_actions = [{
+                    '_id': "%s_%s" % (row["project_id"], row["gather_date"]),
+                    '_index': self.es_client.main_index,
+                    '_source': row,
+                } for row in gathered_rows]
+                self.es_client.bulk_index(self.es_client.main_index, bulk_actions)
             except Exception as err:
                 logger.error("Error occured for project %s", project_info)
                 logger.error(err)

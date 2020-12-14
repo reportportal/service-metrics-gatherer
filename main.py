@@ -40,7 +40,6 @@ APP_CONFIG = {
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
     "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
-    "dashboardId":       os.getenv("DASHBOARD_ID", "X-WoMD5Mz"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
 }
 
@@ -68,9 +67,12 @@ def start_metrics_gathering():
         _metrics.gather_metrics(date_to_check,
                                 date_to_check)
         _es_client.delete_old_info(APP_CONFIG["maxDaysStore"])
-        _es_client.bulk_task_done_index([{
-            "gather_date": date_to_check.date(),
-            "started_task_time": datetime.datetime.now()
+        _es_client.bulk_index(_es_client.task_done_index, [{
+            '_index': _es_client.task_done_index,
+            '_source': {
+                "gather_date": date_to_check.date(),
+                "started_task_time": datetime.datetime.now()
+            }
         }])
         logger.debug("Task finished...")
     else:
@@ -95,13 +97,17 @@ while True:
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
         result_main_index = _es_client.create_grafana_data_source(
-            _es_client.main_index, "gather_date", _es_client.main_index_properties)
+            _es_client.main_index, "gather_date")
         result_aa_stats = _es_client.create_grafana_data_source(
-            _es_client.rp_aa_stats_index, "gather_date", _es_client.rp_aa_stats_index_properties)
-        if result_main_index and result_aa_stats:
-            _es_client.import_dashboard(APP_CONFIG["dashboardId"])
-            logger.info("Imported dashboard into Grafana %s" % utils.remove_credentials_from_url(
-                APP_CONFIG["grafanaHost"]))
+            _es_client.rp_aa_stats_index, "gather_date")
+        result_model_train_stats = _es_client.create_grafana_data_source(
+            _es_client.rp_model_train_stats_index, "gather_date")
+        if result_main_index and result_aa_stats and result_model_train_stats:
+            for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz"]:
+                _es_client.import_dashboard(dashboard_id)
+                logger.info("Imported dashboard '%s' into Grafana %s" % (
+                    dashboard_id, utils.remove_credentials_from_url(
+                        APP_CONFIG["grafanaHost"])))
             break
     except Exception as e:
         logger.error(e)
