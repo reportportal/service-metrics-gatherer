@@ -144,7 +144,7 @@ def create_thread(func, args):
 
 def scheduling_tasks():
     logger.info("Started scheduling of metrics gathering...")
-    schedule.every().minute.do(start_metrics_gathering)
+    schedule.every().hour.do(start_metrics_gathering)
     try:
         while True:
             schedule.run_pending()
