@@ -44,7 +44,9 @@ class MetricsGatherer:
                 "avg_processing_time_test_item_suggest": 0.0,
                 "avg_processing_time_test_item_cluster": 0.0,
                 "launch_added": 0,
-                "percent_not_found_cluster": 0}
+                "percent_not_found_cluster": 0,
+                "module_version": [],
+                "model_info": []}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -135,7 +137,9 @@ class MetricsGatherer:
                 activities_res[res["_source"]["method"]] = {
                     "percent_not_found": 0, "count": 0,
                     "avg_time_only_found_test_item_processed": 0.0,
-                    "avg_time_test_item_processed": 0.0}
+                    "avg_time_test_item_processed": 0.0,
+                    "model_info": [],
+                    "module_version": []}
             if res["_source"]["items_to_process"] == 0:
                 continue
             method_activity = activities_res[res["_source"]["method"]]
@@ -150,7 +154,15 @@ class MetricsGatherer:
             avg_time_all = round(res["_source"]["processed_time"] / res["_source"]["items_to_process"], 2)
             method_activity["avg_time_only_found_test_item_processed"] += avg_time_only_found
             method_activity["avg_time_test_item_processed"] += avg_time_all
+            if "model_info" in res["_source"]:
+                method_activity["model_info"].extend(res["_source"]["model_info"])
+            if "module_version" in res["_source"]:
+                method_activity["module_version"].extend(res["_source"]["module_version"])
         for action_res, action_val in activities_res.items():
+            for column in ["model_info", "module_version"]:
+                if column not in cur_date_results:
+                    cur_date_results[column] = []
+                cur_date_results[column].extend(action_val[column])
             if action_val["count"] == 0:
                 continue
             percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 0)
@@ -167,6 +179,8 @@ class MetricsGatherer:
             if action_res == "find_clusters":
                 cur_date_results["percent_not_found_cluster"] = percent_not_found
                 cur_date_results["avg_processing_time_test_item_cluster"] = all_avg_time
+        for column in ["model_info", "module_version"]:
+            cur_date_results[column] = list(set(cur_date_results[column]))
         return cur_date_results
 
     def gather_metrics_by_project(self, project_id, project_name, cur_date):
