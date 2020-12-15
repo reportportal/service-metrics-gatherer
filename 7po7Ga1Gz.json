@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1607968299470,
+        "iteration": 1608021839370,
         "links": [],
         "panels": [
             {
@@ -1270,9 +1270,10 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "text": "1",
+                        "tags": [],
+                        "text": "All",
                         "value": [
-                            "1"
+                            "$__all"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1297,9 +1298,12 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": false,
-                        "text": "defect_type",
-                        "value": "defect_type"
+                        "selected": true,
+                        "tags": [],
+                        "text": "All",
+                        "value": [
+                            "$__all"
+                        ]
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"model_type\"}",
@@ -1310,12 +1314,12 @@
                     "name": "model_type",
                     "options": [
                         {
-                            "selected": false,
+                            "selected": true,
                             "text": "All",
                             "value": "$__all"
                         },
                         {
-                            "selected": true,
+                            "selected": false,
                             "text": "defect_type",
                             "value": "defect_type"
                         }
@@ -1335,9 +1339,13 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "text": "ab",
+                        "tags": [],
+                        "text": "ab + all + pb + si",
                         "value": [
-                            "ab"
+                            "ab",
+                            "all",
+                            "pb",
+                            "si"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1385,9 +1393,9 @@
                     "current": {
                         "selected": true,
                         "tags": [],
-                        "text": "defect_type_model_14.12.20",
+                        "text": "All",
                         "value": [
-                            "defect_type_model_14.12.20"
+                            "$__all"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1399,14 +1407,19 @@
                     "name": "new_model",
                     "options": [
                         {
-                            "selected": false,
+                            "selected": true,
                             "text": "All",
                             "value": "$__all"
                         },
                         {
-                            "selected": true,
+                            "selected": false,
                             "text": "defect_type_model_14.12.20",
                             "value": "defect_type_model_14.12.20"
+                        },
+                        {
+                            "selected": false,
+                            "text": "defect_type_model_15.12.20",
+                            "value": "defect_type_model_15.12.20"
                         }
                     ],
                     "query": " {\"find\": \"terms\", \"field\": \"new_model\"}",
@@ -1423,9 +1436,12 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": false,
-                        "text": "global_defect_type_model_24.11.20",
-                        "value": "global_defect_type_model_24.11.20"
+                        "selected": true,
+                        "tags": [],
+                        "text": "All",
+                        "value": [
+                            "$__all"
+                        ]
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": "{\"find\": \"terms\", \"field\": \"baseline_model\"}",
@@ -1436,12 +1452,12 @@
                     "name": "baseline_model",
                     "options": [
                         {
-                            "selected": false,
+                            "selected": true,
                             "text": "All",
                             "value": "$__all"
                         },
                         {
-                            "selected": true,
+                            "selected": false,
                             "text": "global_defect_type_model_24.11.20",
                             "value": "global_defect_type_model_24.11.20"
                         }
@@ -1461,9 +1477,10 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "text": "5.3.0-TR-1",
+                        "tags": [],
+                        "text": "All",
                         "value": [
-                            "5.3.0-TR-1"
+                            "$__all"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1475,12 +1492,12 @@
                     "name": "module_version",
                     "options": [
                         {
-                            "selected": false,
+                            "selected": true,
                             "text": "All",
                             "value": "$__all"
                         },
                         {
-                            "selected": true,
+                            "selected": false,
                             "text": "5.3.0-TR-1",
                             "value": "5.3.0-TR-1"
                         }
@@ -1500,9 +1517,10 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "text": "0",
+                        "tags": [],
+                        "text": "All",
                         "value": [
-                            "0"
+                            "$__all"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1514,7 +1532,7 @@
                     "name": "model_saved",
                     "options": [
                         {
-                            "selected": false,
+                            "selected": true,
                             "text": "All",
                             "value": "$__all"
                         },
@@ -1524,7 +1542,7 @@
                             "value": "0"
                         },
                         {
-                            "selected": true,
+                            "selected": false,
                             "text": "1",
                             "value": "1"
                         }
@@ -1571,7 +1589,7 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 11
+        "version": 13
     },
     "meta": {
         "canAdmin": true,
@@ -1590,9 +1608,9 @@
         "provisionedExternalId": "",
         "slug": "rp_model_training_dashboard",
         "type": "db",
-        "updated": "2020-12-14T17:54:35Z",
+        "updated": "2020-12-15T08:46:44Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp_model_training_dashboard",
-        "version": 11
+        "version": 13
     }
 }

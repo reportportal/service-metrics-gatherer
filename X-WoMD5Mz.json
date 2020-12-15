@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1607953019562,
+        "iteration": 1608022008328,
         "links": [],
         "panels": [
             {
@@ -1631,7 +1631,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1732,7 +1731,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 16
+        "version": 17
     },
     "meta": {
         "canAdmin": true,
@@ -1751,9 +1750,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2020-12-14T17:55:40Z",
+        "updated": "2020-12-15T08:46:53Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 16
+        "version": 17
     }
 }
