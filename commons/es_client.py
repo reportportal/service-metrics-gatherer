@@ -60,8 +60,10 @@ class EsClient:
         except Exception as err:
             logger.error(err)
 
-    def create_grafana_data_source(self, index_name, time_field, index_properties):
+    def create_grafana_data_source(self, index_name, time_field):
         index_exists = False
+        index_properties = utils.read_json_file(
+            "", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
