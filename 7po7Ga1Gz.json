@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1608121928523,
+        "iteration": 1608124363806,
         "links": [],
         "panels": [
             {
@@ -1282,7 +1282,7 @@
                     "useTags": false
                 },
                 {
-                    "allValue": null,
+                    "allValue": "",
                     "current": {
                         "selected": true,
                         "tags": [],
@@ -1297,7 +1297,7 @@
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"sub_model_type\"}",
                     "hide": 0,
-                    "includeAll": false,
+                    "includeAll": true,
                     "label": "Sub model type",
                     "multi": true,
                     "name": "sub_model_type",
@@ -1460,7 +1460,7 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 28
+        "version": 30
     },
     "meta": {
         "canAdmin": true,
@@ -1479,9 +1479,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2020-12-16T12:52:59Z",
+        "updated": "2020-12-16T13:13:57Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 28
+        "version": 30
     }
 }
