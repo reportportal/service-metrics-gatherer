@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1608021839370,
+        "iteration": 1608121928523,
         "links": [],
         "panels": [
             {
@@ -68,7 +68,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:170",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -81,7 +80,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:168",
                                 "field": "new_model_mean_f1",
                                 "id": "1",
                                 "meta": {},
@@ -96,7 +94,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:196",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -109,7 +106,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:194",
                                 "field": "baseline_mean_f1",
                                 "id": "1",
                                 "meta": {},
@@ -142,7 +138,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:219",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -151,7 +146,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:220",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -215,7 +209,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:672",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -228,7 +221,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:670",
                                 "field": "select field",
                                 "id": "1",
                                 "type": "count"
@@ -245,7 +237,11 @@
                 "transformations": [
                     {
                         "id": "reduce",
-                        "options": {}
+                        "options": {
+                            "reducers": [
+                                "sum"
+                            ]
+                        }
                     }
                 ],
                 "type": "stat"
@@ -298,7 +294,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:359",
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
@@ -312,7 +307,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:357",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -391,7 +385,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1014",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -404,7 +397,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1012",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -475,7 +467,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:3407",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -488,7 +479,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:490",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -501,7 +491,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:488",
                                 "field": "new_model_mean_f1",
                                 "id": "1",
                                 "meta": {},
@@ -517,7 +506,6 @@
                         "alias": "baseline_{{sub_model_type}}",
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:3424",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -530,7 +518,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:554",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -543,7 +530,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:552",
                                 "field": "baseline_mean_f1",
                                 "id": "1",
                                 "meta": {},
@@ -576,7 +562,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:466",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -585,7 +570,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:467",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -646,7 +630,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1266",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -659,7 +642,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1264",
                                 "field": "select field",
                                 "id": "1",
                                 "type": "count"
@@ -672,7 +654,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1284",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -685,7 +666,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1282",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -718,7 +698,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:1242",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -727,7 +706,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:1243",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -788,7 +766,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1192",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -801,7 +778,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:1168",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -814,7 +790,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1166",
                                 "field": "time_spent",
                                 "id": "1",
                                 "meta": {},
@@ -847,7 +822,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:1144",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -856,7 +830,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:1145",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -917,7 +890,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1381",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -930,7 +902,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:1365",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -943,7 +914,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1363",
                                 "field": "bad_data_proportion",
                                 "id": "1",
                                 "meta": {},
@@ -976,7 +946,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:1341",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -985,7 +954,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:1342",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1046,7 +1014,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:1549",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -1059,7 +1026,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:1533",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -1072,7 +1038,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1531",
                                 "field": "data_size",
                                 "id": "1",
                                 "meta": {},
@@ -1105,7 +1070,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:1509",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1114,7 +1078,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:1510",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1177,7 +1140,6 @@
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:3248",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -1190,7 +1152,6 @@
                                 "type": "terms"
                             },
                             {
-                                "$$hashKey": "object:1959",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -1203,7 +1164,6 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:1957",
                                 "field": "data_proportion",
                                 "id": "1",
                                 "meta": {},
@@ -1236,7 +1196,6 @@
                 },
                 "yaxes": [
                     {
-                        "$$hashKey": "object:1935",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1245,7 +1204,6 @@
                         "show": true
                     },
                     {
-                        "$$hashKey": "object:1936",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1270,7 +1228,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1312,20 +1269,9 @@
                     "label": "Model type",
                     "multi": true,
                     "name": "model_type",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "All",
-                            "value": "$__all"
-                        },
-                        {
-                            "selected": false,
-                            "text": "defect_type",
-                            "value": "defect_type"
-                        }
-                    ],
+                    "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"model_type\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1355,30 +1301,9 @@
                     "label": "Sub model type",
                     "multi": true,
                     "name": "sub_model_type",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "ab",
-                            "value": "ab"
-                        },
-                        {
-                            "selected": true,
-                            "text": "all",
-                            "value": "all"
-                        },
-                        {
-                            "selected": true,
-                            "text": "pb",
-                            "value": "pb"
-                        },
-                        {
-                            "selected": true,
-                            "text": "si",
-                            "value": "si"
-                        }
-                    ],
+                    "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"sub_model_type\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1405,25 +1330,9 @@
                     "label": "New model name",
                     "multi": true,
                     "name": "new_model",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "All",
-                            "value": "$__all"
-                        },
-                        {
-                            "selected": false,
-                            "text": "defect_type_model_14.12.20",
-                            "value": "defect_type_model_14.12.20"
-                        },
-                        {
-                            "selected": false,
-                            "text": "defect_type_model_15.12.20",
-                            "value": "defect_type_model_15.12.20"
-                        }
-                    ],
+                    "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"new_model\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1450,20 +1359,9 @@
                     "label": "Baseline model name",
                     "multi": true,
                     "name": "baseline_model",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "All",
-                            "value": "$__all"
-                        },
-                        {
-                            "selected": false,
-                            "text": "global_defect_type_model_24.11.20",
-                            "value": "global_defect_type_model_24.11.20"
-                        }
-                    ],
+                    "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"baseline_model\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1490,20 +1388,9 @@
                     "label": "Module version",
                     "multi": true,
                     "name": "module_version",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "All",
-                            "value": "$__all"
-                        },
-                        {
-                            "selected": false,
-                            "text": "5.3.0-TR-1",
-                            "value": "5.3.0-TR-1"
-                        }
-                    ],
+                    "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"module_version\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1530,25 +1417,9 @@
                     "label": "Model saved",
                     "multi": true,
                     "name": "model_saved",
-                    "options": [
-                        {
-                            "selected": true,
-                            "text": "All",
-                            "value": "$__all"
-                        },
-                        {
-                            "selected": false,
-                            "text": "0",
-                            "value": "0"
-                        },
-                        {
-                            "selected": false,
-                            "text": "1",
-                            "value": "1"
-                        }
-                    ],
+                    "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"model_saved\"}",
-                    "refresh": 0,
+                    "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1589,7 +1460,7 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 13
+        "version": 28
     },
     "meta": {
         "canAdmin": true,
@@ -1606,11 +1477,11 @@
         "isFolder": false,
         "provisioned": false,
         "provisionedExternalId": "",
-        "slug": "rp_model_training_dashboard",
+        "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2020-12-15T08:46:44Z",
+        "updated": "2020-12-16T12:52:59Z",
         "updatedBy": "admin",
-        "url": "/d/7po7Ga1Gz/rp_model_training_dashboard",
-        "version": 13
+        "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
+        "version": 28
     }
 }
