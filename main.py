@@ -32,6 +32,8 @@ import json
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
     "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
+    "esHostGrafanaDataSource": os.getenv(
+        "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
@@ -41,6 +43,7 @@ APP_CONFIG = {
     "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
+    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower()
 }
 
 
@@ -97,11 +100,11 @@ while True:
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
         result_main_index = _es_client.create_grafana_data_source(
-            _es_client.main_index, "gather_date")
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.main_index, "gather_date")
         result_aa_stats = _es_client.create_grafana_data_source(
-            _es_client.rp_aa_stats_index, "gather_date")
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_aa_stats_index, "gather_date")
         result_model_train_stats = _es_client.create_grafana_data_source(
-            _es_client.rp_model_train_stats_index, "gather_date")
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_model_train_stats_index, "gather_date")
         if result_main_index and result_aa_stats and result_model_train_stats:
             for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz"]:
                 _es_client.import_dashboard(dashboard_id)
@@ -144,7 +147,15 @@ def create_thread(func, args):
 
 def scheduling_tasks():
     logger.info("Started scheduling of metrics gathering...")
-    schedule.every().hour.do(start_metrics_gathering)
+    allowed_intervals = {
+        "hour": schedule.every().hour.do,
+        "minute": schedule.every().minute.do,
+        "day": schedule.every().day.at(APP_CONFIG["allowedStartTime"]).do
+    }
+    time_interval = "hour"
+    if APP_CONFIG["timeInterval"] in allowed_intervals:
+        time_interval = APP_CONFIG["timeInterval"]
+    allowed_intervals[time_interval](start_metrics_gathering)
     try:
         while True:
             schedule.run_pending()

@@ -60,7 +60,7 @@ class EsClient:
         except Exception as err:
             logger.error(err)
 
-    def create_grafana_data_source(self, index_name, time_field):
+    def create_grafana_data_source(self, esHostGrafanaDatasource, index_name, time_field):
         index_exists = False
         index_properties = utils.read_json_file(
             "", "%s_mappings.json" % index_name, to_json=True)
@@ -72,14 +72,14 @@ class EsClient:
             index_exists = True
         if index_exists:
             self.delete_grafana_datasource_by_name(index_name)
-            es_user, es_pass = utils.get_credentials_from_url(self.esHost)
+            es_user, es_pass = utils.get_credentials_from_url(esHostGrafanaDatasource)
             try:
                 requests.post(
                     "%s/api/datasources" % self.grafanaHost,
                     data=json.dumps({
                         "name": index_name,
                         "type": "elasticsearch",
-                        "url": utils.remove_credentials_from_url(self.esHost),
+                        "url": utils.remove_credentials_from_url(esHostGrafanaDatasource),
                         "access": "proxy",
                         "basicAuth": len(es_user) > 0,
                         "basicAuthUser": es_user,
