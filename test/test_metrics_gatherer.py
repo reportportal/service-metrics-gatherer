@@ -68,31 +68,40 @@ class TestMetricsGatherer(unittest.TestCase):
                     "items_to_process": 10,
                     "not_found": 1,
                     "processed_time": 0.8,
+                    "model_info": ["global_model"],
+                    "module_version": ["1.1.1"]
                 }},
                 {"_source": {
                     "method": "suggest",
                     "items_to_process": 12,
                     "not_found": 3,
                     "processed_time": 0.9,
+                    "model_info": ["global_model"],
+                    "module_version": ["1.1.1"]
                 }},
                 {"_source": {
                     "method": "suggest",
                     "items_to_process": 5,
                     "not_found": 8,
                     "processed_time": 0.4,
+                    "model_info": ["global_model"],
+                    "module_version": ["1.1.1"]
                 }},
                 {"_source": {
                     "method": "find_clusters",
                     "items_to_process": 6,
                     "not_found": 1,
                     "processed_time": 0.8,
+                    "model_info": ["global_model"],
+                    "module_version": ["1.1.1"]
                 }},
             ])
         assert _metrics_gatherer.calculate_rp_stats_metrics({}, 1, datetime(2020, 10, 13)) == {
             'percent_not_found_aa': 10, 'avg_processing_time_only_found_test_item_aa': 0.09,
             'avg_processing_time_test_item_aa': 0.08, 'percent_not_found_suggest': 92,
             'avg_processing_time_test_item_suggest': 0.08, 'percent_not_found_cluster': 17,
-            'avg_processing_time_test_item_cluster': 0.13}
+            'avg_processing_time_test_item_cluster': 0.13, 'model_info': ['global_model'],
+            'module_version': ['1.1.1']}
 
     def test_calculate_metrics(self):
         _metrics_gatherer = metrics_gatherer.MetricsGatherer(

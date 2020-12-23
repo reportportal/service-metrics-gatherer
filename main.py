@@ -32,6 +32,8 @@ import json
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
     "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
+    "esHostGrafanaDataSource": os.getenv(
+        "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
     "postgresUser":      os.getenv("POSTGRES_USER", ""),
     "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
@@ -40,8 +42,8 @@ APP_CONFIG = {
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
     "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
-    "dashboardId":       os.getenv("DASHBOARD_ID", "X-WoMD5Mz"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
+    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower()
 }
 
 
@@ -68,9 +70,12 @@ def start_metrics_gathering():
         _metrics.gather_metrics(date_to_check,
                                 date_to_check)
         _es_client.delete_old_info(APP_CONFIG["maxDaysStore"])
-        _es_client.bulk_task_done_index([{
-            "gather_date": date_to_check.date(),
-            "started_task_time": datetime.datetime.now()
+        _es_client.bulk_index(_es_client.task_done_index, [{
+            '_index': _es_client.task_done_index,
+            '_source': {
+                "gather_date": date_to_check.date(),
+                "started_task_time": datetime.datetime.now()
+            }
         }])
         logger.debug("Task finished...")
     else:
@@ -95,13 +100,17 @@ while True:
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
         result_main_index = _es_client.create_grafana_data_source(
-            _es_client.main_index, "gather_date", _es_client.main_index_properties)
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.main_index, "gather_date")
         result_aa_stats = _es_client.create_grafana_data_source(
-            _es_client.rp_aa_stats_index, "gather_date", _es_client.rp_aa_stats_index_properties)
-        if result_main_index and result_aa_stats:
-            _es_client.import_dashboard(APP_CONFIG["dashboardId"])
-            logger.info("Imported dashboard into Grafana %s" % utils.remove_credentials_from_url(
-                APP_CONFIG["grafanaHost"]))
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_aa_stats_index, "gather_date")
+        result_model_train_stats = _es_client.create_grafana_data_source(
+            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_model_train_stats_index, "gather_date")
+        if result_main_index and result_aa_stats and result_model_train_stats:
+            for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz"]:
+                _es_client.import_dashboard(dashboard_id)
+                logger.info("Imported dashboard '%s' into Grafana %s" % (
+                    dashboard_id, utils.remove_credentials_from_url(
+                        APP_CONFIG["grafanaHost"])))
             break
     except Exception as e:
         logger.error(e)
@@ -138,7 +147,15 @@ def create_thread(func, args):
 
 def scheduling_tasks():
     logger.info("Started scheduling of metrics gathering...")
-    schedule.every().hour.do(start_metrics_gathering)
+    allowed_intervals = {
+        "hour": schedule.every().hour.do,
+        "minute": schedule.every().minute.do,
+        "day": schedule.every().day.at(APP_CONFIG["allowedStartTime"]).do
+    }
+    time_interval = "hour"
+    if APP_CONFIG["timeInterval"] in allowed_intervals:
+        time_interval = APP_CONFIG["timeInterval"]
+    allowed_intervals[time_interval](start_metrics_gathering)
     try:
         while True:
             schedule.run_pending()

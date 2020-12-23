@@ -31,15 +31,10 @@ class EsClient:
         self.esHost = esHost
         self.grafanaHost = grafanaHost
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
-        self.main_index_properties = utils.read_json_file(
-            "", "index_mapping_settings.json", to_json=True)
-        self.done_task_index_properties = utils.read_json_file(
-            "", "done_tasks_settings.json", to_json=True)
-        self.rp_aa_stats_index_properties = utils.read_json_file(
-            "", "rp_aa_stats_mappings.json", to_json=True)
         self.main_index = "rp_stats"
         self.task_done_index = "done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
+        self.rp_model_train_stats_index = "rp_model_train_stats"
         self.es_client = elasticsearch.Elasticsearch(self.esHost)
 
     def update_settings_after_read_only(self):
@@ -65,8 +60,10 @@ class EsClient:
         except Exception as err:
             logger.error(err)
 
-    def create_grafana_data_source(self, index_name, time_field, index_properties):
+    def create_grafana_data_source(self, esHostGrafanaDatasource, index_name, time_field):
         index_exists = False
+        index_properties = utils.read_json_file(
+            "", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
@@ -75,14 +72,14 @@ class EsClient:
             index_exists = True
         if index_exists:
             self.delete_grafana_datasource_by_name(index_name)
-            es_user, es_pass = utils.get_credentials_from_url(self.esHost)
+            es_user, es_pass = utils.get_credentials_from_url(esHostGrafanaDatasource)
             try:
                 requests.post(
                     "%s/api/datasources" % self.grafanaHost,
                     data=json.dumps({
                         "name": index_name,
                         "type": "elasticsearch",
-                        "url": utils.remove_credentials_from_url(self.esHost),
+                        "url": utils.remove_credentials_from_url(esHostGrafanaDatasource),
                         "access": "proxy",
                         "basicAuth": len(es_user) > 0,
                         "basicAuthUser": es_user,
@@ -175,8 +172,10 @@ class EsClient:
             logger.error(err)
             return {}
 
-    def bulk_index(self, index_name, bulk_actions, index_properties):
+    def bulk_index(self, index_name, bulk_actions):
         exists_index = False
+        index_properties = utils.read_json_file(
+            "", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
@@ -210,23 +209,6 @@ class EsClient:
             except Exception as err:
                 logger.error(err)
                 logger.error("Bulking index for %s index finished with errors", index_name)
-
-    def bulk_main_index(self, data):
-        bulk_actions = [{
-            '_id': "%s_%s" % (row["project_id"], row["gather_date"]),
-            '_index': self.main_index,
-            '_source': row,
-        } for row in data]
-        self.bulk_index(
-            self.main_index, bulk_actions, self.main_index_properties)
-
-    def bulk_task_done_index(self, data):
-        bulk_actions = [{
-            '_index': self.task_done_index,
-            '_source': row,
-        } for row in data]
-        self.bulk_index(
-            self.task_done_index, bulk_actions, self.done_task_index_properties)
 
     def is_the_date_metrics_calculated(self, date):
         if not self.index_exists(self.task_done_index, print_error=False):

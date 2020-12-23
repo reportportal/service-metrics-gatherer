@@ -17,6 +17,8 @@
         "percent_not_found_suggest": {"type": "integer"},
         "avg_processing_time_test_item_suggest": {"type": "float"},
         "avg_processing_time_test_item_cluster": {"type": "float"},
-        "percent_not_found_cluster": {"type": "integer"}
+        "percent_not_found_cluster": {"type": "integer"},
+        "module_version": {"type": "keyword"},
+        "model_info": {"type": "keyword"}
     }
 }
