@@ -8,6 +8,8 @@
 
 **GRAFANA_HOST** - an url to the Grafana instance
 
+**ES_HOST_GRAFANA_DATASOURCE** - an url to the Elasticsearch instance, which is accessible from Grafana image, and this url will be used for creating datasources for Grafana
+
 **POSTGRES_USER** - postgres username to access the postgres database
 
 **POSTGRES_PASSWORD**  - postgres password to access the postgres database
@@ -25,6 +27,8 @@
 **MAX_DAYS_STORE** - max days to store metrics, the metrics gatherer will delete data points which earlier than max days to store from today, default 500
 
 **TZ** - time zone, it will let better understand allowed start and end time. default "Europe/Minsk"
+
+**TIME_INTERVAL** - time intervsl for calculating metrics, available options "hour", "minute", "day"
 
 
 # Instructions for analyzer setup without Docker
