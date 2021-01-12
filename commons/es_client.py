@@ -231,8 +231,8 @@ class EsClient:
             "query": {
                 "bool": {
                     "filter": [
-                        {"range": {"gather_date": {"gte": week_earlier.strftime("%Y-%m-%d %H:%M:%S"),
-                                                   "lte": cur_tommorow.strftime("%Y-%m-%d %H:%M:%S")}}},
+                        {"range": {"gather_datetime": {"gte": week_earlier.strftime("%Y-%m-%d %H:%M:%S"),
+                                                       "lte": cur_tommorow.strftime("%Y-%m-%d %H:%M:%S")}}},
                         {"term": {"project_id": project_id}}
                     ]
                 }
