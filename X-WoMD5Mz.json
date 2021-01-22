@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1610438605877,
+        "iteration": 1611312673650,
         "links": [],
         "panels": [
             {
@@ -919,7 +919,7 @@
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "1",
                                     "size": "0"
@@ -991,7 +991,7 @@
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "asc",
                                     "orderBy": "1",
                                     "size": "0"
@@ -1434,7 +1434,7 @@
                                 "field": "number_of_log_lines",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1504,7 +1504,7 @@
                                 "field": "min_should_match",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1715,14 +1715,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 20
+        "version": 8
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2020-12-28T09:40:04Z",
+        "created": "2021-01-16T11:03:03Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1734,9 +1734,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-01-12T08:03:45Z",
+        "updated": "2021-01-22T10:51:58Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 20
+        "version": 8
     }
 }

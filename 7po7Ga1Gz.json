@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1608124363806,
+        "iteration": 1611314121871,
         "links": [],
         "panels": [
             {
@@ -68,6 +68,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:197",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -80,7 +81,8 @@
                         ],
                         "metrics": [
                             {
-                                "field": "new_model_mean_f1",
+                                "$$hashKey": "object:195",
+                                "field": "new_model_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
@@ -94,6 +96,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:201",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -106,7 +109,8 @@
                         ],
                         "metrics": [
                             {
-                                "field": "baseline_mean_f1",
+                                "$$hashKey": "object:199",
+                                "field": "baseline_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
@@ -138,6 +142,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:274",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -146,6 +151,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:275",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -467,6 +473,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:62",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -479,6 +486,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:63",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -491,7 +499,8 @@
                         ],
                         "metrics": [
                             {
-                                "field": "new_model_mean_f1",
+                                "$$hashKey": "object:60",
+                                "field": "new_model_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
@@ -506,6 +515,7 @@
                         "alias": "baseline_{{sub_model_type}}",
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:68",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -518,6 +528,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:69",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -530,7 +541,8 @@
                         ],
                         "metrics": [
                             {
-                                "field": "baseline_mean_f1",
+                                "$$hashKey": "object:66",
+                                "field": "baseline_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
@@ -546,7 +558,7 @@
                 "timeFrom": null,
                 "timeRegions": [],
                 "timeShift": null,
-                "title": "New model F1 and baseline F1",
+                "title": "New model metric and baseline metric",
                 "tooltip": {
                     "shared": true,
                     "sort": 0,
@@ -562,6 +574,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:155",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -570,6 +583,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:156",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1256,7 +1270,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1285,7 +1298,6 @@
                     "allValue": "",
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "ab + all + pb + si",
                         "value": [
                             "ab",
@@ -1317,7 +1329,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1346,7 +1357,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1375,7 +1385,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1404,7 +1413,6 @@
                     "allValue": null,
                     "current": {
                         "selected": true,
-                        "tags": [],
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1419,6 +1427,34 @@
                     "name": "model_saved",
                     "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"model_saved\"}",
+                    "refresh": 1,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
+                    "allValue": null,
+                    "current": {
+                        "selected": true,
+                        "text": "F1",
+                        "value": [
+                            "F1"
+                        ]
+                    },
+                    "datasource": "rp_model_train_stats",
+                    "definition": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Metric name",
+                    "multi": true,
+                    "name": "metric_name",
+                    "options": [],
+                    "query": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
                     "refresh": 1,
                     "regex": "",
                     "skipUrlSync": false,
@@ -1460,14 +1496,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 30
+        "version": 12
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2020-12-14T10:14:32Z",
+        "created": "2021-01-16T11:03:03Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1479,9 +1515,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2020-12-16T13:13:57Z",
+        "updated": "2021-01-22T11:17:57Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 30
+        "version": 12
     }
 }
