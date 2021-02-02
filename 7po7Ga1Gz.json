@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1611314121871,
+        "iteration": 1612263068376,
         "links": [],
         "panels": [
             {
@@ -256,7 +256,9 @@
                 "datasource": "rp_model_train_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
+                        "custom": {
+                            "align": null
+                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -300,6 +302,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:37",
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
@@ -313,6 +316,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:35",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -334,10 +338,19 @@
                         "options": {
                             "excludeByName": {
                                 "Count": false,
-                                "project_id": true
+                                "Unique Count": true,
+                                "project_id": false
                             },
                             "indexByName": {},
                             "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
                         }
                     }
                 ],
@@ -391,6 +404,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:149",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -403,6 +417,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:147",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -1496,14 +1511,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 12
+        "version": 2
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-01-16T11:03:03Z",
+        "created": "2021-02-02T08:45:57Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1515,9 +1530,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2021-01-22T11:17:57Z",
+        "updated": "2021-02-02T10:53:59Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 12
+        "version": 2
     }
 }
