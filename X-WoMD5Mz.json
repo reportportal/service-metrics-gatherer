@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1613043587729,
+        "iteration": 1613548279668,
         "links": [],
         "panels": [
             {
@@ -358,7 +358,9 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
+                        "custom": {
+                            "align": null
+                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -390,7 +392,7 @@
                     "orientation": "auto",
                     "reduceOptions": {
                         "calcs": [
-                            "distinctCount"
+                            "mean"
                         ],
                         "fields": "",
                         "values": false
@@ -417,9 +419,11 @@
                         "metrics": [
                             {
                                 "$$hashKey": "object:54",
-                                "field": "select field",
+                                "field": "project_id",
                                 "id": "1",
-                                "type": "count"
+                                "meta": {},
+                                "settings": {},
+                                "type": "cardinality"
                             }
                         ],
                         "query": "project_id: $project_id AND on: $on",
@@ -435,10 +439,19 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
-                                "Count": true
+                                "Count": true,
+                                "Unique Count": true
                             },
                             "indexByName": {},
                             "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
                         }
                     }
                 ],
@@ -1853,7 +1866,7 @@
         },
         "time": {
             "from": "now-30d",
-            "to": "now"
+            "to": "now+1d"
         },
         "timepicker": {
             "refresh_intervals": [
@@ -1871,7 +1884,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 4
+        "version": 6
     },
     "meta": {
         "canAdmin": true,
@@ -1890,9 +1903,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-02-11T12:05:34Z",
+        "updated": "2021-02-17T08:00:51Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 4
+        "version": 6
     }
 }
