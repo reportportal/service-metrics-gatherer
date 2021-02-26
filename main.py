@@ -99,14 +99,16 @@ while True:
     try:
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
-        result_main_index = _es_client.create_grafana_data_source(
-            APP_CONFIG["esHostGrafanaDataSource"], _es_client.main_index, "gather_date")
-        result_aa_stats = _es_client.create_grafana_data_source(
-            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_aa_stats_index, "gather_date")
-        result_model_train_stats = _es_client.create_grafana_data_source(
-            APP_CONFIG["esHostGrafanaDataSource"], _es_client.rp_model_train_stats_index, "gather_date")
-        if result_main_index and result_aa_stats and result_model_train_stats:
-            for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz"]:
+        data_source_created = []
+        for index in [_es_client.main_index, _es_client.rp_aa_stats_index,
+                      _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index]:
+            date_field = "gather_date"
+            if index == _es_client.rp_suggest_metrics_index:
+                date_field = "savedDate"
+            data_source_created.append(int(_es_client.create_grafana_data_source(
+                APP_CONFIG["esHostGrafanaDataSource"], index, date_field)))
+        if sum(data_source_created) == len(data_source_created):
+            for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz", "OM3Zn8EMz"]:
                 _es_client.import_dashboard(dashboard_id)
                 logger.info("Imported dashboard '%s' into Grafana %s" % (
                     dashboard_id, utils.remove_credentials_from_url(

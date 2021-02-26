@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1608124363806,
+        "iteration": 1613548860650,
         "links": [],
         "panels": [
             {
@@ -68,6 +68,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:197",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -80,20 +81,22 @@
                         ],
                         "metrics": [
                             {
-                                "field": "new_model_mean_f1",
+                                "$$hashKey": "object:195",
+                                "field": "new_model_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
                                 "type": "avg"
                             }
                         ],
-                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:201",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -106,14 +109,15 @@
                         ],
                         "metrics": [
                             {
-                                "field": "baseline_mean_f1",
+                                "$$hashKey": "object:199",
+                                "field": "baseline_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
                                 "type": "avg"
                             }
                         ],
-                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved  AND metric_name: $metric_name",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -138,6 +142,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:274",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -146,6 +151,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:275",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -209,6 +215,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:37",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -221,12 +228,13 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:35",
                                 "field": "select field",
                                 "id": "1",
                                 "type": "count"
                             }
                         ],
-                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version",
+                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -250,7 +258,9 @@
                 "datasource": "rp_model_train_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
+                        "custom": {
+                            "align": null
+                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -294,6 +304,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:37",
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
@@ -307,6 +318,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:35",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -314,7 +326,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -328,10 +340,19 @@
                         "options": {
                             "excludeByName": {
                                 "Count": false,
-                                "project_id": true
+                                "Unique Count": true,
+                                "project_id": false
                             },
                             "indexByName": {},
                             "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
                         }
                     }
                 ],
@@ -385,6 +406,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:149",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -397,6 +419,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:147",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -404,7 +427,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version",
+                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -467,6 +490,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:62",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -479,6 +503,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:63",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -491,14 +516,15 @@
                         ],
                         "metrics": [
                             {
-                                "field": "new_model_mean_f1",
+                                "$$hashKey": "object:60",
+                                "field": "new_model_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -506,6 +532,7 @@
                         "alias": "baseline_{{sub_model_type}}",
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:68",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -518,6 +545,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:69",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -530,14 +558,15 @@
                         ],
                         "metrics": [
                             {
-                                "field": "baseline_mean_f1",
+                                "$$hashKey": "object:66",
+                                "field": "baseline_mean_metric",
                                 "id": "1",
                                 "meta": {},
                                 "settings": {},
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -546,7 +575,7 @@
                 "timeFrom": null,
                 "timeRegions": [],
                 "timeShift": null,
-                "title": "New model F1 and baseline F1",
+                "title": "New model metric and baseline metric",
                 "tooltip": {
                     "shared": true,
                     "sort": 0,
@@ -562,6 +591,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:155",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -570,6 +600,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:156",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -630,6 +661,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:343",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -642,18 +674,20 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:341",
                                 "field": "select field",
                                 "id": "1",
                                 "type": "count"
                             }
                         ],
-                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version",
+                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:347",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -666,6 +700,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:345",
                                 "field": "project_id",
                                 "id": "1",
                                 "meta": {},
@@ -673,7 +708,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version",
+                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -698,6 +733,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:416",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -706,6 +742,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:417",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -766,6 +803,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:581",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -778,6 +816,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:582",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -790,6 +829,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:579",
                                 "field": "time_spent",
                                 "id": "1",
                                 "meta": {},
@@ -797,7 +837,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -822,6 +862,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:648",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -830,6 +871,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:649",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -890,6 +932,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:686",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -902,6 +945,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:687",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -914,6 +958,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:684",
                                 "field": "bad_data_proportion",
                                 "id": "1",
                                 "meta": {},
@@ -921,7 +966,7 @@
                                 "type": "sum"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -946,6 +991,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:753",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -954,6 +1000,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:754",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1014,6 +1061,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:791",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -1026,6 +1074,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:792",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -1038,6 +1087,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:789",
                                 "field": "data_size",
                                 "id": "1",
                                 "meta": {},
@@ -1045,7 +1095,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1070,6 +1120,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:858",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1078,6 +1129,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:859",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1140,6 +1192,7 @@
                     {
                         "bucketAggs": [
                             {
+                                "$$hashKey": "object:896",
                                 "fake": true,
                                 "field": "sub_model_type",
                                 "id": "3",
@@ -1152,6 +1205,7 @@
                                 "type": "terms"
                             },
                             {
+                                "$$hashKey": "object:897",
                                 "field": "gather_date",
                                 "id": "2",
                                 "settings": {
@@ -1164,6 +1218,7 @@
                         ],
                         "metrics": [
                             {
+                                "$$hashKey": "object:894",
                                 "field": "data_proportion",
                                 "id": "1",
                                 "meta": {},
@@ -1171,7 +1226,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved",
+                        "query": "project_id: $project_id AND model_type: $model_type AND sub_model_type: $sub_model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1196,6 +1251,7 @@
                 },
                 "yaxes": [
                     {
+                        "$$hashKey": "object:963",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1204,6 +1260,7 @@
                         "show": true
                     },
                     {
+                        "$$hashKey": "object:964",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1227,7 +1284,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1255,8 +1312,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
-                        "tags": [],
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1286,12 +1342,9 @@
                     "current": {
                         "selected": true,
                         "tags": [],
-                        "text": "ab + all + pb + si",
+                        "text": "All",
                         "value": [
-                            "ab",
-                            "all",
-                            "pb",
-                            "si"
+                            "$__all"
                         ]
                     },
                     "datasource": "rp_model_train_stats",
@@ -1316,8 +1369,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
-                        "tags": [],
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1345,8 +1397,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
-                        "tags": [],
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1374,8 +1425,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
-                        "tags": [],
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1403,8 +1453,7 @@
                 {
                     "allValue": null,
                     "current": {
-                        "selected": true,
-                        "tags": [],
+                        "selected": false,
                         "text": "All",
                         "value": [
                             "$__all"
@@ -1430,6 +1479,35 @@
                     "useTags": false
                 },
                 {
+                    "allValue": null,
+                    "current": {
+                        "selected": true,
+                        "tags": [],
+                        "text": "All",
+                        "value": [
+                            "$__all"
+                        ]
+                    },
+                    "datasource": "rp_model_train_stats",
+                    "definition": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
+                    "hide": 0,
+                    "includeAll": true,
+                    "label": "Metric name",
+                    "multi": true,
+                    "name": "metric_name",
+                    "options": [],
+                    "query": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
+                    "refresh": 1,
+                    "regex": "",
+                    "skipUrlSync": false,
+                    "sort": 0,
+                    "tagValuesQuery": "",
+                    "tags": [],
+                    "tagsQuery": "",
+                    "type": "query",
+                    "useTags": false
+                },
+                {
                     "datasource": "rp_model_train_stats",
                     "filters": [],
                     "hide": 0,
@@ -1442,7 +1520,7 @@
         },
         "time": {
             "from": "now-30d",
-            "to": "now"
+            "to": "now+1d"
         },
         "timepicker": {
             "refresh_intervals": [
@@ -1460,14 +1538,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 30
+        "version": 7
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2020-12-14T10:14:32Z",
+        "created": "2021-02-03T06:40:00Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1479,9 +1557,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2020-12-16T13:13:57Z",
+        "updated": "2021-02-17T08:01:33Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 30
+        "version": 7
     }
 }

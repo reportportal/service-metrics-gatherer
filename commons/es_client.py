@@ -35,6 +35,7 @@ class EsClient:
         self.task_done_index = "done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
         self.rp_model_train_stats_index = "rp_model_train_stats"
+        self.rp_suggest_metrics_index = "suggestions_info_metrics"
         self.es_client = elasticsearch.Elasticsearch(self.esHost)
 
     def update_settings_after_read_only(self):
@@ -240,7 +241,9 @@ class EsClient:
         return res["hits"]["hits"]
 
     def delete_old_info(self, max_days_store):
-        for index in [self.main_index, self.rp_aa_stats_index, self.task_done_index]:
+        for index in [
+                self.main_index, self.rp_aa_stats_index,
+                self.task_done_index, self.rp_model_train_stats_index]:
             last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
             last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
             all_ids = set()

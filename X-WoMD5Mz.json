@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1610438605877,
+        "iteration": 1613548279668,
         "links": [],
         "panels": [
             {
@@ -358,7 +358,9 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
+                        "custom": {
+                            "align": null
+                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -390,7 +392,7 @@
                     "orientation": "auto",
                     "reduceOptions": {
                         "calcs": [
-                            "distinctCount"
+                            "mean"
                         ],
                         "fields": "",
                         "values": false
@@ -417,9 +419,11 @@
                         "metrics": [
                             {
                                 "$$hashKey": "object:54",
-                                "field": "select field",
+                                "field": "project_id",
                                 "id": "1",
-                                "type": "count"
+                                "meta": {},
+                                "settings": {},
+                                "type": "cardinality"
                             }
                         ],
                         "query": "project_id: $project_id AND on: $on",
@@ -435,10 +439,19 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
-                                "Count": true
+                                "Count": true,
+                                "Unique Count": true
                             },
                             "indexByName": {},
                             "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
                         }
                     }
                 ],
@@ -919,7 +932,7 @@
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "1",
                                     "size": "0"
@@ -991,7 +1004,7 @@
                                 "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "asc",
                                     "orderBy": "1",
                                     "size": "0"
@@ -1434,7 +1447,7 @@
                                 "field": "number_of_log_lines",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1504,7 +1517,7 @@
                                 "field": "min_should_match",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1532,7 +1545,6 @@
             },
             {
                 "datasource": "rp_stats",
-                "description": "",
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
@@ -1556,14 +1568,171 @@
                     "overrides": []
                 },
                 "gridPos": {
-                    "h": 4,
-                    "w": 24,
+                    "h": 8,
+                    "w": 12,
                     "x": 0,
                     "y": 41
                 },
-                "id": 28,
+                "id": 30,
                 "options": {
                     "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:196",
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "1",
+                                    "size": "10"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:194",
+                                "field": "launch_analyzed",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "sum"
+                            }
+                        ],
+                        "query": "project_id: $project_id AND on: $on",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Projects which use analysis most",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 41
+                },
+                "id": 32,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:326",
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "asc",
+                                    "orderBy": "1",
+                                    "size": "10"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:324",
+                                "field": "launch_analyzed",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "sum"
+                            }
+                        ],
+                        "query": "project_id: $project_id AND on: $on",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Projects which use analysis less",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_stats",
+                "description": "",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": [
+                        {
+                            "matcher": {
+                                "id": "byName",
+                                "options": "gather_date"
+                            },
+                            "properties": [
+                                {
+                                    "id": "custom.width",
+                                    "value": null
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 24,
+                    "x": 0,
+                    "y": 49
+                },
+                "id": 28,
+                "options": {
+                    "showHeader": true,
+                    "sortBy": []
                 },
                 "pluginVersion": "7.1.1",
                 "targets": [
@@ -1697,7 +1866,7 @@
         },
         "time": {
             "from": "now-30d",
-            "to": "now"
+            "to": "now+1d"
         },
         "timepicker": {
             "refresh_intervals": [
@@ -1715,14 +1884,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 20
+        "version": 6
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2020-12-28T09:40:04Z",
+        "created": "2021-02-03T06:40:00Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1734,9 +1903,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-01-12T08:03:45Z",
+        "updated": "2021-02-17T08:00:51Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 20
+        "version": 6
     }
 }
