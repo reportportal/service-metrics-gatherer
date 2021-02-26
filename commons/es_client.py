@@ -32,10 +32,10 @@ class EsClient:
         self.grafanaHost = grafanaHost
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
         self.main_index = "rp_stats"
-        self.task_done_index = "done_tasks"
+        self.task_done_index = "rp_done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
         self.rp_model_train_stats_index = "rp_model_train_stats"
-        self.rp_suggest_metrics_index = "suggestions_info_metrics"
+        self.rp_suggest_metrics_index = "rp_suggestions_info_metrics"
         self.es_client = elasticsearch.Elasticsearch(self.esHost)
 
     def update_settings_after_read_only(self):
