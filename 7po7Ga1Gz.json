@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1613548860650,
+        "iteration": 1615269719855,
         "links": [],
         "panels": [
             {
@@ -279,7 +279,7 @@
                     "overrides": []
                 },
                 "gridPos": {
-                    "h": 8,
+                    "h": 4,
                     "w": 5,
                     "x": 19,
                     "y": 0
@@ -384,6 +384,93 @@
                     "h": 4,
                     "w": 5,
                     "x": 14,
+                    "y": 4
+                },
+                "id": 22,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "mean"
+                        ],
+                        "fields": "",
+                        "values": false
+                    },
+                    "textMode": "auto"
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:140",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "auto",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:138",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Number of training runs(sub_model_type: all)",
+                "transformations": [
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "sum"
+                            ]
+                        }
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "datasource": "rp_model_train_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {},
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 5,
+                    "x": 19,
                     "y": 4
                 },
                 "id": 10,
@@ -1538,14 +1625,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 7
+        "version": 3
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-02-03T06:40:00Z",
+        "created": "2021-03-05T11:38:14Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1557,9 +1644,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2021-02-17T08:01:33Z",
+        "updated": "2021-03-09T06:04:37Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 7
+        "version": 3
     }
 }
