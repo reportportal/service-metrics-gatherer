@@ -109,7 +109,8 @@ class MetricsGatherer:
                 real_test_item_types.append(analyzed_test_item_type)
         cur_date_results["AA_analyzed"] = cnt_all_analyzed
         cur_date_results["changed_type"] = cnt_changed
-        cur_date_results["launch_analyzed"] = len(unique_launch_ids)
+        cur_date_results["launch_analyzed"] = max(
+            len(unique_launch_ids), cur_date_results["launch_analyzed"])
         cur_date_results["manually_analyzed"] = manually_analyzed_cnt
         cur_date_results = self.calculate_accuracy_f1_score(
             real_test_item_types, analyzed_test_item_types, cur_date_results)
@@ -133,6 +134,7 @@ class MetricsGatherer:
         cur_tommorow = cur_date + datetime.timedelta(days=1)
         all_activities = self.es_client.get_activities(project_id, week_earlier, cur_tommorow)
         activities_res = {}
+        unique_analyzed_launch_ids = set()
         for res in all_activities:
             if res["_source"]["method"] not in activities_res:
                 activities_res[res["_source"]["method"]] = {
@@ -143,6 +145,8 @@ class MetricsGatherer:
                     "module_version": []}
             if res["_source"]["items_to_process"] == 0:
                 continue
+            if res["_source"]["method"] == "auto_analysis":
+                unique_analyzed_launch_ids.add(res["_source"]["launch_id"])
             method_activity = activities_res[res["_source"]["method"]]
             percent_not_found = round(
                 res["_source"]["not_found"] / res["_source"]["items_to_process"], 2) * 100
@@ -182,6 +186,7 @@ class MetricsGatherer:
                 cur_date_results["avg_processing_time_test_item_cluster"] = all_avg_time
         for column in ["model_info", "module_version"]:
             cur_date_results[column] = list(set(cur_date_results[column]))
+        cur_date_results["launch_analyzed"] = len(unique_analyzed_launch_ids)
         return cur_date_results
 
     def gather_metrics_by_project(self, project_id, project_name, cur_date):

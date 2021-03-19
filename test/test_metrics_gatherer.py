@@ -67,6 +67,7 @@ class TestMetricsGatherer(unittest.TestCase):
                     "method": "auto_analysis",
                     "items_to_process": 10,
                     "not_found": 1,
+                    "launch_id": 123,
                     "processed_time": 0.8,
                     "model_info": ["global_model"],
                     "module_version": ["1.1.1"]
@@ -75,6 +76,7 @@ class TestMetricsGatherer(unittest.TestCase):
                     "method": "suggest",
                     "items_to_process": 12,
                     "not_found": 3,
+                    "launch_id": 123,
                     "processed_time": 0.9,
                     "model_info": ["global_model"],
                     "module_version": ["1.1.1"]
@@ -83,6 +85,7 @@ class TestMetricsGatherer(unittest.TestCase):
                     "method": "suggest",
                     "items_to_process": 5,
                     "not_found": 8,
+                    "launch_id": 125,
                     "processed_time": 0.4,
                     "model_info": ["global_model"],
                     "module_version": ["1.1.1"]
@@ -91,6 +94,7 @@ class TestMetricsGatherer(unittest.TestCase):
                     "method": "find_clusters",
                     "items_to_process": 6,
                     "not_found": 1,
+                    "launch_id": 126,
                     "processed_time": 0.8,
                     "model_info": ["global_model"],
                     "module_version": ["1.1.1"]
@@ -101,7 +105,7 @@ class TestMetricsGatherer(unittest.TestCase):
             'avg_processing_time_test_item_aa': 0.08, 'percent_not_found_suggest': 92,
             'avg_processing_time_test_item_suggest': 0.08, 'percent_not_found_cluster': 17,
             'avg_processing_time_test_item_cluster': 0.13, 'model_info': ['global_model'],
-            'module_version': ['1.1.1']}
+            'module_version': ['1.1.1'], "launch_analyzed": 1}
 
     def test_calculate_metrics(self):
         _metrics_gatherer = metrics_gatherer.MetricsGatherer(
@@ -112,8 +116,16 @@ class TestMetricsGatherer(unittest.TestCase):
                 1: [('analyze', 'Product Bug'), ('manual', 'Automation Bug', 'Product Bug')],
                 2: [('manual', 'System Issue', 'Automation Bug'), ('analyze', 'Product Bug')]
             },
-            {}) == {
+            {'launch_analyzed': 0}) == {
                 'AA_analyzed': 2, 'changed_type': 1, 'launch_analyzed': 1,
+                'manually_analyzed': 0, 'accuracy': 50, 'f1-score': 33}
+        assert _metrics_gatherer.calculate_metrics(
+            {
+                1: [('analyze', 'Product Bug'), ('manual', 'Automation Bug', 'Product Bug')],
+                2: [('manual', 'System Issue', 'Automation Bug'), ('analyze', 'Product Bug')]
+            },
+            {'launch_analyzed': 5}) == {
+                'AA_analyzed': 2, 'changed_type': 1, 'launch_analyzed': 5,
                 'manually_analyzed': 0, 'accuracy': 50, 'f1-score': 33}
 
     def test_find_sequence_of_aa_enability(self):
