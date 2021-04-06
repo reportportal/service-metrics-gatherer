@@ -47,7 +47,9 @@ class MetricsGatherer:
                 "launch_added": 0,
                 "percent_not_found_cluster": 0,
                 "module_version": [],
-                "model_info": []}
+                "model_info": [],
+                "errors": [],
+                "errors_count": 0}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -142,7 +144,9 @@ class MetricsGatherer:
                     "avg_time_only_found_test_item_processed": 0.0,
                     "avg_time_test_item_processed": 0.0,
                     "model_info": [],
-                    "module_version": []}
+                    "module_version": [],
+                    "errors": [],
+                    "errors_count": 0}
             if res["_source"]["items_to_process"] == 0:
                 continue
             if res["_source"]["method"] == "auto_analysis":
@@ -163,11 +167,21 @@ class MetricsGatherer:
                 method_activity["model_info"].extend(res["_source"]["model_info"])
             if "module_version" in res["_source"]:
                 method_activity["module_version"].extend(res["_source"]["module_version"])
+            if "errors" in res["_source"]:
+                method_activity["errors"].extend(res["_source"]["errors"])
+            if "errors_count" in res["_source"]:
+                method_activity["errors_count"] += res["_source"]["errors_count"]
         for action_res, action_val in activities_res.items():
-            for column in ["model_info", "module_version"]:
+            for column in ["model_info", "module_version", "errors", "errors_count"]:
+                default_obj = 0
+                if type(action_val[column]) == list:
+                    default_obj = []
                 if column not in cur_date_results:
-                    cur_date_results[column] = []
-                cur_date_results[column].extend(action_val[column])
+                    cur_date_results[column] = default_obj
+                if type(action_val[column]) == list:
+                    cur_date_results[column].extend(action_val[column])
+                if type(action_val[column]) == int:
+                    cur_date_results[column] += action_val[column]
             if action_val["count"] == 0:
                 continue
             percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 0)
