@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1615269719855,
+        "iteration": 1617708392805,
         "links": [],
         "panels": [
             {
@@ -1117,7 +1117,7 @@
                 "fillGradient": 0,
                 "gridPos": {
                     "h": 6,
-                    "w": 14,
+                    "w": 8,
                     "x": 0,
                     "y": 21
                 },
@@ -1246,8 +1246,8 @@
                 "fillGradient": 0,
                 "gridPos": {
                     "h": 6,
-                    "w": 10,
-                    "x": 14,
+                    "w": 9,
+                    "x": 8,
                     "y": 21
                 },
                 "hiddenSeries": false,
@@ -1348,6 +1348,134 @@
                     },
                     {
                         "$$hashKey": "object:964",
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_model_train_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 6,
+                    "w": 7,
+                    "x": 17,
+                    "y": 21
+                },
+                "hiddenSeries": false,
+                "id": 24,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:396",
+                                "fake": true,
+                                "field": "sub_model_type",
+                                "id": "3",
+                                "settings": {
+                                    "min_doc_count": 0,
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "10"
+                                },
+                                "type": "terms"
+                            },
+                            {
+                                "$$hashKey": "object:374",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:372",
+                                "field": "errors_count",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "sum"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Errors count",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "$$hashKey": "object:340",
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "$$hashKey": "object:341",
                         "format": "short",
                         "label": null,
                         "logBase": 1,
@@ -1625,14 +1753,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 3
+        "version": 10
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-03-05T11:38:14Z",
+        "created": "2021-04-01T09:30:12Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1644,9 +1772,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2021-03-09T06:04:37Z",
+        "updated": "2021-04-06T11:32:00Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 3
+        "version": 10
     }
 }
