@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1613548279668,
+        "iteration": 1617703356126,
         "links": [],
         "panels": [
             {
@@ -28,23 +28,7 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
+                        "custom": {}
                     },
                     "overrides": []
                 },
@@ -70,6 +54,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -104,7 +91,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -187,6 +174,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -221,7 +211,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -273,9 +263,7 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
+                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -295,7 +283,7 @@
                 },
                 "gridPos": {
                     "h": 4,
-                    "w": 4,
+                    "w": 3,
                     "x": 15,
                     "y": 0
                 },
@@ -312,6 +300,7 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
                 "pluginVersion": "7.1.1",
@@ -338,7 +327,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "on: 1 AND gather_date: [\"now-1d\" TO \"now+1d\"] AND project_id: $project_id",
+                        "query": "on: 1 AND gather_date: [\"now-2d\" TO \"now+1d\"]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -358,9 +347,10 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
+                        "color": {
+                            "mode": "thresholds"
                         },
+                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -380,8 +370,8 @@
                 },
                 "gridPos": {
                     "h": 4,
-                    "w": 5,
-                    "x": 19,
+                    "w": 3,
+                    "x": 18,
                     "y": 0
                 },
                 "id": 6,
@@ -392,11 +382,12 @@
                     "orientation": "auto",
                     "reduceOptions": {
                         "calcs": [
-                            "mean"
+                            "distinctCount"
                         ],
                         "fields": "",
-                        "values": false
+                        "values": true
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
                 "pluginVersion": "7.1.1",
@@ -418,15 +409,12 @@
                         ],
                         "metrics": [
                             {
-                                "$$hashKey": "object:54",
                                 "field": "project_id",
                                 "id": "1",
-                                "meta": {},
-                                "settings": {},
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -442,6 +430,108 @@
                                 "Count": true,
                                 "Unique Count": true
                             },
+                            "indexByName": {
+                                "Unique Count": 0,
+                                "project_id": 1
+                            },
+                            "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
+                        }
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
+                        "custom": {},
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 4,
+                    "w": 3,
+                    "x": 21,
+                    "y": 0
+                },
+                "id": 30,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "lastNotNull"
+                        ],
+                        "fields": "",
+                        "values": true
+                    },
+                    "text": {},
+                    "textMode": "auto"
+                },
+                "pluginVersion": "7.1.1",
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project_id",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "title": "Unique projects which used analysis at least once",
+                "transformations": [
+                    {
+                        "id": "organize",
+                        "options": {
+                            "excludeByName": {
+                                "Unique Count": true
+                            },
                             "indexByName": {},
                             "renameByName": {}
                         }
@@ -449,6 +539,8 @@
                     {
                         "id": "reduce",
                         "options": {
+                            "includeTimeField": false,
+                            "mode": "seriesToRows",
                             "reducers": [
                                 "count"
                             ]
@@ -491,6 +583,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -509,7 +604,7 @@
                                 "id": "2",
                                 "settings": {
                                     "interval": "1d",
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "trimEdges": 0
                                 },
                                 "type": "date_histogram"
@@ -525,8 +620,34 @@
                                 "type": "sum"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "1",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "project_id",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "B",
                         "timeField": "gather_date"
                     }
                 ],
@@ -589,7 +710,7 @@
                 "fillGradient": 0,
                 "gridPos": {
                     "h": 8,
-                    "w": 12,
+                    "w": 8,
                     "x": 0,
                     "y": 9
                 },
@@ -607,6 +728,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -641,7 +765,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -669,7 +793,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -733,8 +857,8 @@
                 "fillGradient": 0,
                 "gridPos": {
                     "h": 8,
-                    "w": 12,
-                    "x": 12,
+                    "w": 8,
+                    "x": 8,
                     "y": 9
                 },
                 "hiddenSeries": false,
@@ -751,6 +875,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -785,7 +912,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -813,7 +940,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -841,7 +968,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "C",
                         "timeField": "gather_date"
                     }
@@ -890,11 +1017,125 @@
                 }
             },
             {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 16,
+                    "y": 9
+                },
+                "hiddenSeries": false,
+                "id": 32,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "1"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project_id",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Projects number used Analysis at least once in a day",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -950,7 +1191,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -966,7 +1207,8 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1022,7 +1264,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1066,6 +1308,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -1100,7 +1345,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -1128,7 +1373,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -1156,7 +1401,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "C",
                         "timeField": "gather_date"
                     }
@@ -1238,6 +1483,9 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
                 "pluginVersion": "7.1.1",
                 "pointradius": 2,
@@ -1272,7 +1520,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -1300,7 +1548,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -1328,7 +1576,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "C",
                         "timeField": "gather_date"
                     },
@@ -1356,7 +1604,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "D",
                         "timeField": "gather_date"
                     }
@@ -1409,7 +1657,8 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1447,7 +1696,7 @@
                                 "field": "number_of_log_lines",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": "1",
+                                    "min_doc_count": 0,
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1463,7 +1712,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "project_id: $project_id",
+                        "query": "",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1479,7 +1728,8 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1517,7 +1767,7 @@
                                 "field": "min_should_match",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": "1",
+                                    "min_doc_count": 0,
                                     "order": "desc",
                                     "orderBy": "_count",
                                     "size": "0"
@@ -1533,7 +1783,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "project_id: $project_id",
+                        "query": "",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1545,153 +1795,12 @@
             },
             {
                 "datasource": "rp_stats",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": []
-                },
-                "gridPos": {
-                    "h": 8,
-                    "w": 12,
-                    "x": 0,
-                    "y": 41
-                },
-                "id": 30,
-                "options": {
-                    "showHeader": true
-                },
-                "pluginVersion": "7.1.1",
-                "targets": [
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:196",
-                                "field": "project_id",
-                                "id": "2",
-                                "settings": {
-                                    "min_doc_count": "1",
-                                    "order": "desc",
-                                    "orderBy": "1",
-                                    "size": "10"
-                                },
-                                "type": "terms"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:194",
-                                "field": "launch_analyzed",
-                                "id": "1",
-                                "meta": {},
-                                "settings": {},
-                                "type": "sum"
-                            }
-                        ],
-                        "query": "project_id: $project_id AND on: $on",
-                        "refId": "A",
-                        "timeField": "gather_date"
-                    }
-                ],
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Projects which use analysis most",
-                "type": "table"
-            },
-            {
-                "datasource": "rp_stats",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": []
-                },
-                "gridPos": {
-                    "h": 8,
-                    "w": 12,
-                    "x": 12,
-                    "y": 41
-                },
-                "id": 32,
-                "options": {
-                    "showHeader": true
-                },
-                "pluginVersion": "7.1.1",
-                "targets": [
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:326",
-                                "field": "project_id",
-                                "id": "2",
-                                "settings": {
-                                    "min_doc_count": "1",
-                                    "order": "asc",
-                                    "orderBy": "1",
-                                    "size": "10"
-                                },
-                                "type": "terms"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:324",
-                                "field": "launch_analyzed",
-                                "id": "1",
-                                "meta": {},
-                                "settings": {},
-                                "type": "sum"
-                            }
-                        ],
-                        "query": "project_id: $project_id AND on: $on",
-                        "refId": "A",
-                        "timeField": "gather_date"
-                    }
-                ],
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Projects which use analysis less",
-                "type": "table"
-            },
-            {
-                "datasource": "rp_stats",
                 "description": "",
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1708,31 +1817,17 @@
                             ]
                         }
                     },
-                    "overrides": [
-                        {
-                            "matcher": {
-                                "id": "byName",
-                                "options": "gather_date"
-                            },
-                            "properties": [
-                                {
-                                    "id": "custom.width",
-                                    "value": null
-                                }
-                            ]
-                        }
-                    ]
+                    "overrides": []
                 },
                 "gridPos": {
-                    "h": 4,
-                    "w": 24,
+                    "h": 6,
+                    "w": 17,
                     "x": 0,
-                    "y": 49
+                    "y": 41
                 },
                 "id": 28,
                 "options": {
-                    "showHeader": true,
-                    "sortBy": []
+                    "showHeader": true
                 },
                 "pluginVersion": "7.1.1",
                 "targets": [
@@ -1750,7 +1845,7 @@
                                 "type": "raw_data"
                             }
                         ],
-                        "query": "project_id: $project_id AND on: $on",
+                        "query": "",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1789,6 +1884,149 @@
                     }
                 ],
                 "type": "table"
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 6,
+                    "w": 7,
+                    "x": 17,
+                    "y": 41
+                },
+                "hiddenSeries": false,
+                "id": 34,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "percentage": false,
+                "pluginVersion": "7.1.1",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:364",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:362",
+                                "field": "errors_count",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "sum"
+                            }
+                        ],
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:407",
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": 0,
+                                    "trimEdges": 0
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:405",
+                                "field": "project_id",
+                                "id": "1",
+                                "meta": {},
+                                "settings": {},
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "errors_count: [1 TO 200000]",
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Errors count",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "$$hashKey": "object:330",
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "$$hashKey": "object:331",
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
             }
         ],
         "schemaVersion": 26,
@@ -1807,6 +2045,8 @@
                     },
                     "datasource": "rp_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"project_id\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Project Id",
@@ -1836,6 +2076,8 @@
                     },
                     "datasource": "rp_stats",
                     "definition": "{\"find\": \"terms\", \"field\": \"on\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Auto Analysis On",
@@ -1855,6 +2097,8 @@
                 },
                 {
                     "datasource": "rp_stats",
+                    "description": null,
+                    "error": null,
                     "filters": [],
                     "hide": 0,
                     "label": "Custom filters",
@@ -1866,7 +2110,7 @@
         },
         "time": {
             "from": "now-30d",
-            "to": "now+1d"
+            "to": "now"
         },
         "timepicker": {
             "refresh_intervals": [
@@ -1884,14 +2128,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 6
+        "version": 10
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-02-03T06:40:00Z",
+        "created": "2021-04-01T09:30:12Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1903,9 +2147,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-02-17T08:00:51Z",
+        "updated": "2021-04-06T10:06:05Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 6
+        "version": 10
     }
 }
