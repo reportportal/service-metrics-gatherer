@@ -47,7 +47,9 @@ class MetricsGatherer:
                 "launch_added": 0,
                 "percent_not_found_cluster": 0,
                 "module_version": [],
-                "model_info": []}
+                "model_info": [],
+                "errors": [],
+                "errors_count": 0}
 
     def derive_item_activity_chain(self, activities):
         item_chain = {}
@@ -109,7 +111,8 @@ class MetricsGatherer:
                 real_test_item_types.append(analyzed_test_item_type)
         cur_date_results["AA_analyzed"] = cnt_all_analyzed
         cur_date_results["changed_type"] = cnt_changed
-        cur_date_results["launch_analyzed"] = len(unique_launch_ids)
+        cur_date_results["launch_analyzed"] = max(
+            len(unique_launch_ids), cur_date_results["launch_analyzed"])
         cur_date_results["manually_analyzed"] = manually_analyzed_cnt
         cur_date_results = self.calculate_accuracy_f1_score(
             real_test_item_types, analyzed_test_item_types, cur_date_results)
@@ -133,6 +136,7 @@ class MetricsGatherer:
         cur_tommorow = cur_date + datetime.timedelta(days=1)
         all_activities = self.es_client.get_activities(project_id, week_earlier, cur_tommorow)
         activities_res = {}
+        unique_analyzed_launch_ids = set()
         for res in all_activities:
             if res["_source"]["method"] not in activities_res:
                 activities_res[res["_source"]["method"]] = {
@@ -140,9 +144,13 @@ class MetricsGatherer:
                     "avg_time_only_found_test_item_processed": 0.0,
                     "avg_time_test_item_processed": 0.0,
                     "model_info": [],
-                    "module_version": []}
+                    "module_version": [],
+                    "errors": [],
+                    "errors_count": 0}
             if res["_source"]["items_to_process"] == 0:
                 continue
+            if res["_source"]["method"] == "auto_analysis":
+                unique_analyzed_launch_ids.add(res["_source"]["launch_id"])
             method_activity = activities_res[res["_source"]["method"]]
             percent_not_found = round(
                 res["_source"]["not_found"] / res["_source"]["items_to_process"], 2) * 100
@@ -159,11 +167,21 @@ class MetricsGatherer:
                 method_activity["model_info"].extend(res["_source"]["model_info"])
             if "module_version" in res["_source"]:
                 method_activity["module_version"].extend(res["_source"]["module_version"])
+            if "errors" in res["_source"]:
+                method_activity["errors"].extend(res["_source"]["errors"])
+            if "errors_count" in res["_source"]:
+                method_activity["errors_count"] += res["_source"]["errors_count"]
         for action_res, action_val in activities_res.items():
-            for column in ["model_info", "module_version"]:
+            for column in ["model_info", "module_version", "errors", "errors_count"]:
+                default_obj = 0
+                if type(action_val[column]) == list:
+                    default_obj = []
                 if column not in cur_date_results:
-                    cur_date_results[column] = []
-                cur_date_results[column].extend(action_val[column])
+                    cur_date_results[column] = default_obj
+                if type(action_val[column]) == list:
+                    cur_date_results[column].extend(action_val[column])
+                if type(action_val[column]) == int:
+                    cur_date_results[column] += action_val[column]
             if action_val["count"] == 0:
                 continue
             percent_not_found = round(action_val["percent_not_found"] / action_val["count"], 0)
@@ -182,6 +200,7 @@ class MetricsGatherer:
                 cur_date_results["avg_processing_time_test_item_cluster"] = all_avg_time
         for column in ["model_info", "module_version"]:
             cur_date_results[column] = list(set(cur_date_results[column]))
+        cur_date_results["launch_analyzed"] = len(unique_analyzed_launch_ids)
         return cur_date_results
 
     def gather_metrics_by_project(self, project_id, project_name, cur_date):
