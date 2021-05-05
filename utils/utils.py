@@ -67,3 +67,7 @@ def take_the_date_to_check():
 def build_url(main_url, url_params):
     """Build url by concating url and url_params"""
     return main_url + "/" + "/".join(url_params)
+
+
+def unite_project_name(project_id, prefix):
+    return prefix + project_id

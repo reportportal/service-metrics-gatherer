@@ -20,6 +20,7 @@ from time import time
 from sklearn.metrics import f1_score, accuracy_score
 from commons import postgres_dao
 from commons import es_client
+from utils import utils
 
 logger = logging.getLogger("metricsGatherer.metrics_gatherer")
 
@@ -31,7 +32,8 @@ class MetricsGatherer:
         self.postgres_dao = postgres_dao.PostgresDAO(app_settings)
         self.es_client = es_client.EsClient(
             esHost=app_settings["esHost"],
-            grafanaHost=app_settings["grafanaHost"])
+            grafanaHost=app_settings["grafanaHost"],
+            app_config=app_settings)
 
     def get_current_date_template(self, project_id, project_name, cur_date):
         return {"on": 0,  "changed_type": 0, "AA_analyzed": 0,
@@ -256,7 +258,9 @@ class MetricsGatherer:
             try:
                 project_id = project_info["id"]
                 project_name = project_info["name"]
-                if not self.es_client.index_exists(project_id, print_error=False):
+                project_with_prefix = utils.unite_project_name(
+                    str(project_id), self.app_settings["esProjectIndexPrefix"])
+                if not self.es_client.index_exists(project_with_prefix, print_error=False):
                     continue
                 gathered_rows = []
                 project_aa_states = {}
