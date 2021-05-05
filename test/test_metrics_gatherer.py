@@ -43,7 +43,9 @@ class TestMetricsGatherer(unittest.TestCase):
             "esCAcert": "",
             "esClientCert": "",
             "esClientKey": "",
-            "esProjectIndexPrefix": ""
+            "esProjectIndexPrefix": "",
+            "esUser": "",
+            "esPassword": ""
         }
 
     def test_derive_item_activity_chain(self):
