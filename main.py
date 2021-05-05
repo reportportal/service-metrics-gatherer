@@ -31,8 +31,8 @@ import json
 
 APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
-    "esUser":            os.getenv("ES_USER", "").strip("/").strip("\\"),
-    "esPassword":        os.getenv("ES_PASSWORD", "").strip("/").strip("\\"),
+    "esUser":            os.getenv("ES_USER", "").strip(),
+    "esPassword":        os.getenv("ES_PASSWORD", "").strip(),
     "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
     "esHostGrafanaDataSource": os.getenv(
         "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
