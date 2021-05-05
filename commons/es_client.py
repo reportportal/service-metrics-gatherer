@@ -141,10 +141,13 @@ class EsClient:
         }), headers={'content-type': 'application/json'}).raise_for_status()
 
     @staticmethod
-    def send_request(url, method):
+    def send_request(url, method, username, password):
         """Send request with specified url and http method"""
         try:
-            response = requests.get(url) if method == "GET" else {}
+            if username.strip() and password.strip():
+                response = requests.get(url, auth=(username, password)) if method == "GET" else {}
+            else:
+                response = requests.get(url) if method == "GET" else {}
             data = response._content.decode("utf-8")
             content = json.loads(data, strict=False)
             return content
@@ -157,7 +160,7 @@ class EsClient:
         """Check whether elasticsearch is healthy"""
         try:
             url = utils.build_url(self.esHost, ["_cluster/health"])
-            res = EsClient.send_request(url, "GET")
+            res = EsClient.send_request(url, "GET", self.app_config["esUser"], self.app_config["esPassword"])
             return res["status"] in ["green", "yellow"]
         except Exception as err:
             logger.error("Elasticsearch is not healthy")
@@ -168,7 +171,7 @@ class EsClient:
         """Check whether grafana is healthy"""
         try:
             url = utils.build_url(self.grafanaHost, ["api/health"])
-            res = EsClient.send_request(url, "GET")
+            res = EsClient.send_request(url, "GET", "", "")
             return res["database"].lower() == "ok"
         except Exception as err:
             logger.error("Grafana is not healthy")
