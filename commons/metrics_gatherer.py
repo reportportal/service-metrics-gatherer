@@ -53,7 +53,13 @@ class MetricsGatherer:
                 "errors": [],
                 "errors_count": 0}
 
-    def derive_item_activity_chain(self, activities):
+    def replace_issue_type_with_code(self, val, issue_types_dict):
+        new_issue_value = val
+        if new_issue_value in issue_types_dict:
+            new_issue_value = issue_types_dict[new_issue_value]
+        return new_issue_value
+
+    def derive_item_activity_chain(self, activities, issue_types_dict):
         item_chain = {}
         for record in activities:
             if record["action"] == "analyzeItem":
@@ -61,13 +67,17 @@ class MetricsGatherer:
                     item_chain[record["object_id"]] = []
                 for r in record["details"]["history"]:
                     if r["field"] == 'issueType':
-                        item_chain[record["object_id"]].append(("analyze", r["newValue"]))
+                        item_chain[record["object_id"]].append(
+                            ("analyze", self.replace_issue_type_with_code(r["newValue"], issue_types_dict)))
             if record["action"] == "updateItem":
                 if record["object_id"] not in item_chain:
                     item_chain[record["object_id"]] = []
                 for r in record["details"]["history"]:
                     if r["field"] == 'issueType':
-                        item_chain[record["object_id"]].append(("manual", r["newValue"], r["oldValue"]))
+                        item_chain[record["object_id"]].append(
+                            ("manual",
+                             self.replace_issue_type_with_code(r["newValue"], issue_types_dict),
+                             self.replace_issue_type_with_code(r["oldValue"], issue_types_dict)))
         return item_chain
 
     def calculate_metrics(self, item_chain, cur_date_results):
@@ -83,9 +93,9 @@ class MetricsGatherer:
             real_test_item_type = None
             for idx in range(len(item_chain[item])):
                 action = item_chain[item][idx]
-                if action[0] == "manual" and action[2] == "To Investigate":
+                if action[0] == "manual" and action[2][:2].lower() == "ti":
                     manually_analyzed_cnt += 1
-                if action[0] == "manual" and (action[1] == "To Investigate" or action[2] == "To Investigate"):
+                if action[0] == "manual" and (action[1][:2].lower() == "ti" or action[2][:2].lower() == "ti"):
                     continue
                 if action[0] == "analyze":
                     was_analyzed = True
@@ -105,6 +115,8 @@ class MetricsGatherer:
                 if launch_id:
                     unique_launch_ids.add(launch_id)
             if analyzed_test_item_type is None:
+                continue
+            if real_test_item_type is not None and real_test_item_type[:2].lower() in ["ti", "nd"]:
                 continue
             analyzed_test_item_types.append(analyzed_test_item_type)
             if real_test_item_type is not None:
@@ -213,7 +225,8 @@ class MetricsGatherer:
         cur_date_results["on"] = int(is_aa_enabled)
         cur_date_results = self.calculate_rp_stats_metrics(cur_date_results, project_id, cur_date)
         activities = self.postgres_dao.get_activities_by_project(project_id, week_earlier, cur_tommorow)
-        item_chain = self.derive_item_activity_chain(activities)
+        issue_types_dict = self.postgres_dao.get_issue_type_dict(project_id)
+        item_chain = self.derive_item_activity_chain(activities, issue_types_dict)
         cur_date_results = self.calculate_metrics(item_chain, cur_date_results)
         all_launch_ids = self.postgres_dao.get_all_unique_launch_ids(
             project_id, week_earlier, cur_tommorow)

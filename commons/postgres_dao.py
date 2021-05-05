@@ -135,3 +135,12 @@ class PostgresDAO:
             start_time <= '%s'::timestamp""" % (
                 project_id, start_date, end_date))
         return list(set([obj["id"] for obj in all_ids]))
+
+    def get_issue_type_dict(self, project_id):
+        issue_type_dict = {}
+        for issue_type_val in self.query_db(
+                """select it.locator, it.issue_name from issue_type_project as itp
+                inner join issue_type it on it.id = itp.issue_type_id where project_id=%s""" % project_id,
+                derive_scheme=True):
+            issue_type_dict[issue_type_val["it.issue_name"]] = issue_type_val["it.locator"]
+        return issue_type_dict

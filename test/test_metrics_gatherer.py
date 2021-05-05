@@ -69,9 +69,9 @@ class TestMetricsGatherer(unittest.TestCase):
                 "details": {
                     "history": [
                         {"field": "issueType", "oldValue": "Automation Bug", "newValue": "System Issue"}]}
-            }]) == {
+            }], {"System Issue": "si001"}) == {
                 1: [('analyze', 'Product Bug'), ('manual', 'Automation Bug', 'Product Bug')],
-                2: [('manual', 'System Issue', 'Automation Bug')]}
+                2: [('manual', 'si001', 'Automation Bug')]}
 
     def test_calculate_rp_stats_metrics(self):
         _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())

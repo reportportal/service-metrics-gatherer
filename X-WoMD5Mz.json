@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1617703356126,
+        "iteration": 1619077880447,
         "links": [],
         "panels": [
             {
@@ -28,7 +28,12 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {}
+                        "color": {},
+                        "custom": {},
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": []
+                        }
                     },
                     "overrides": []
                 },
@@ -58,7 +63,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -148,7 +153,12 @@
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {}
+                        "color": {},
+                        "custom": {},
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": []
+                        }
                     },
                     "overrides": []
                 },
@@ -178,7 +188,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -226,6 +236,7 @@
                     "sort": 0,
                     "value_type": "individual"
                 },
+                "transformations": [],
                 "type": "graph",
                 "xaxis": {
                     "buckets": null,
@@ -303,7 +314,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -327,7 +338,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "on: 1 AND gather_date: [\"now-2d\" TO \"now+1d\"]",
+                        "query": "on: 1 AND gather_date: [\"now-2d\" TO \"now+1d\"] AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -354,16 +365,7 @@
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
+                            "steps": []
                         }
                     },
                     "overrides": []
@@ -390,7 +392,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -414,7 +416,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "",
+                        "query": "launch_added: [1 TO 20000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -427,13 +429,9 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
-                                "Count": true,
-                                "Unique Count": true
+                                "project_id": true
                             },
-                            "indexByName": {
-                                "Unique Count": 0,
-                                "project_id": 1
-                            },
+                            "indexByName": {},
                             "renameByName": {}
                         }
                     },
@@ -441,7 +439,7 @@
                         "id": "reduce",
                         "options": {
                             "reducers": [
-                                "count"
+                                "sum"
                             ]
                         }
                     }
@@ -495,7 +493,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "alias": "",
@@ -530,7 +528,8 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
-                                "Unique Count": true
+                                "Unique Count": false,
+                                "project_id": true
                             },
                             "indexByName": {},
                             "renameByName": {}
@@ -542,7 +541,7 @@
                             "includeTimeField": false,
                             "mode": "seriesToRows",
                             "reducers": [
-                                "count"
+                                "sum"
                             ]
                         }
                     }
@@ -587,7 +586,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -620,7 +619,7 @@
                                 "type": "sum"
                             }
                         ],
-                        "query": "",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -646,7 +645,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "",
+                        "query": "launch_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -732,7 +731,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -879,7 +878,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -940,7 +939,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "AA_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -1054,7 +1053,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1164,7 +1163,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1237,7 +1236,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1312,7 +1311,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1487,7 +1486,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1687,7 +1686,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1758,7 +1757,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1820,8 +1819,8 @@
                     "overrides": []
                 },
                 "gridPos": {
-                    "h": 6,
-                    "w": 17,
+                    "h": 4,
+                    "w": 24,
                     "x": 0,
                     "y": 41
                 },
@@ -1829,7 +1828,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [],
@@ -1884,152 +1883,9 @@
                     }
                 ],
                 "type": "table"
-            },
-            {
-                "aliasColors": {},
-                "bars": false,
-                "dashLength": 10,
-                "dashes": false,
-                "datasource": "rp_aa_stats",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
-                "fill": 1,
-                "fillGradient": 0,
-                "gridPos": {
-                    "h": 6,
-                    "w": 7,
-                    "x": 17,
-                    "y": 41
-                },
-                "hiddenSeries": false,
-                "id": 34,
-                "legend": {
-                    "avg": false,
-                    "current": false,
-                    "max": false,
-                    "min": false,
-                    "show": true,
-                    "total": false,
-                    "values": false
-                },
-                "lines": true,
-                "linewidth": 1,
-                "nullPointMode": "null",
-                "percentage": false,
-                "pluginVersion": "7.1.1",
-                "pointradius": 2,
-                "points": false,
-                "renderer": "flot",
-                "seriesOverrides": [],
-                "spaceLength": 10,
-                "stack": false,
-                "steppedLine": false,
-                "targets": [
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:364",
-                                "field": "gather_date",
-                                "id": "2",
-                                "settings": {
-                                    "interval": "1d",
-                                    "min_doc_count": 0,
-                                    "trimEdges": 0
-                                },
-                                "type": "date_histogram"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:362",
-                                "field": "errors_count",
-                                "id": "1",
-                                "meta": {},
-                                "settings": {},
-                                "type": "sum"
-                            }
-                        ],
-                        "refId": "A",
-                        "timeField": "gather_date"
-                    },
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:407",
-                                "field": "gather_date",
-                                "id": "2",
-                                "settings": {
-                                    "interval": "1d",
-                                    "min_doc_count": 0,
-                                    "trimEdges": 0
-                                },
-                                "type": "date_histogram"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:405",
-                                "field": "project_id",
-                                "id": "1",
-                                "meta": {},
-                                "settings": {},
-                                "type": "cardinality"
-                            }
-                        ],
-                        "query": "errors_count: [1 TO 200000]",
-                        "refId": "B",
-                        "timeField": "gather_date"
-                    }
-                ],
-                "thresholds": [],
-                "timeFrom": null,
-                "timeRegions": [],
-                "timeShift": null,
-                "title": "Errors count",
-                "tooltip": {
-                    "shared": true,
-                    "sort": 0,
-                    "value_type": "individual"
-                },
-                "type": "graph",
-                "xaxis": {
-                    "buckets": null,
-                    "mode": "time",
-                    "name": null,
-                    "show": true,
-                    "values": []
-                },
-                "yaxes": [
-                    {
-                        "$$hashKey": "object:330",
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                    },
-                    {
-                        "$$hashKey": "object:331",
-                        "format": "short",
-                        "label": null,
-                        "logBase": 1,
-                        "max": null,
-                        "min": null,
-                        "show": true
-                    }
-                ],
-                "yaxis": {
-                    "align": false,
-                    "alignLevel": null
-                }
             }
         ],
-        "schemaVersion": 26,
+        "schemaVersion": 27,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -2128,14 +1984,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 10
+        "version": 11
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-04-01T09:30:12Z",
+        "created": "2021-03-17T14:17:56Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -2147,9 +2003,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-04-06T10:06:05Z",
+        "updated": "2021-04-22T09:28:10Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 10
+        "version": 11
     }
 }
