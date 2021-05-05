@@ -43,7 +43,15 @@ APP_CONFIG = {
     "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
     "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
-    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower()
+    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower(),
+    "turnOffSslVerification": json.loads(os.getenv("ES_TURN_OFF_SSL_VERIFICATION", "false").lower()),
+    "esVerifyCerts":     json.loads(os.getenv("ES_VERIFY_CERTS", "false").lower()),
+    "esUseSsl":          json.loads(os.getenv("ES_USE_SSL", "false").lower()),
+    "esSslShowWarn":     json.loads(os.getenv("ES_SSL_SHOW_WARN", "false").lower()),
+    "esCAcert":          os.getenv("ES_CA_CERT", ""),
+    "esClientCert":      os.getenv("ES_CLIENT_CERT", ""),
+    "esClientKey":       os.getenv("ES_CLIENT_KEY", ""),
+    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip()
 }
 
 
@@ -55,7 +63,7 @@ def create_application():
 
 def start_metrics_gathering():
     _es_client = es_client.EsClient(
-        esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
+        esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
     if not utils.is_the_time_for_task_starting(APP_CONFIG["allowedStartTime"],
                                                APP_CONFIG["allowedEndTime"]):
         logger.debug("Starting of tasks is allowed only from %s to %s. Now is %s",
@@ -98,7 +106,7 @@ CORS(application)
 while True:
     try:
         _es_client = es_client.EsClient(
-            esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
+            esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
         data_source_created = []
         for index in [_es_client.main_index, _es_client.rp_aa_stats_index,
                       _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index]:
@@ -124,7 +132,7 @@ while True:
 @application.route('/', methods=['GET'])
 def get_health_status():
     _es_client = es_client.EsClient(
-        esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"])
+        esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
     _postgres_dao = postgres_dao.PostgresDAO(APP_CONFIG)
 
     status = ""

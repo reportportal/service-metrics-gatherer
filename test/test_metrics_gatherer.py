@@ -30,9 +30,24 @@ class TestMetricsGatherer(unittest.TestCase):
     def tearDown(self):
         logging.disable(logging.DEBUG)
 
+    def get_app_config(self):
+        return {
+            "esHost": "http://localhost:9200",
+            "grafanaHost": "http://localhost:3000",
+            "esHostGrafanaDataSource": "",
+            "logLevel": "DEBUG",
+            "turnOffSslVerification": "false",
+            "esVerifyCerts": "false",
+            "esUseSsl": "false",
+            "esSslShowWarn": "false",
+            "esCAcert": "",
+            "esClientCert": "",
+            "esClientKey": "",
+            "esProjectIndexPrefix": ""
+        }
+
     def test_derive_item_activity_chain(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
-            {"esHost": "localhost:9200", "grafanaHost": "localhost:3000"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         assert _metrics_gatherer.derive_item_activity_chain([
             {
                 "object_id": 1,
@@ -54,13 +69,12 @@ class TestMetricsGatherer(unittest.TestCase):
                 "details": {
                     "history": [
                         {"field": "issueType", "oldValue": "Automation Bug", "newValue": "System Issue"}]}
-            }]) == {
+            }], {"System Issue": "si001"}) == {
                 1: [('analyze', 'Product Bug'), ('manual', 'Automation Bug', 'Product Bug')],
-                2: [('manual', 'System Issue', 'Automation Bug')]}
+                2: [('manual', 'si001', 'Automation Bug')]}
 
     def test_calculate_rp_stats_metrics(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
-            {"esHost": "localhost:9200", "grafanaHost": "localhost:3000"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         _metrics_gatherer.es_client.get_activities = MagicMock(
             return_value=[
                 {"_source": {
@@ -116,8 +130,7 @@ class TestMetricsGatherer(unittest.TestCase):
             'module_version': ['1.1.1'], "launch_analyzed": 1, "errors": ["error 1"], "errors_count": 1}
 
     def test_calculate_metrics(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
-            {"esHost": "localhost:9200", "grafanaHost": "localhost:3000"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         _metrics_gatherer.postgres_dao.get_launch_id = MagicMock(return_value=10)
         assert _metrics_gatherer.calculate_metrics(
             {
@@ -137,8 +150,7 @@ class TestMetricsGatherer(unittest.TestCase):
                 'manually_analyzed': 0, 'accuracy': 50, 'f1-score': 33}
 
     def test_find_sequence_of_aa_enability(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
-            {"esHost": "localhost:9200", "grafanaHost": "localhost:3000"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         _metrics_gatherer.postgres_dao.get_activities_by_project = MagicMock(return_value=[
             {
                 "creation_date": datetime(2020, 10, 11),
@@ -173,8 +185,7 @@ class TestMetricsGatherer(unittest.TestCase):
             date(2020, 10, 15): (1, 1)}
 
     def test_fill_right_aa_enable_states(self):
-        _metrics_gatherer = metrics_gatherer.MetricsGatherer(
-            {"esHost": "localhost:9200", "grafanaHost": "localhost:3000"})
+        _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         _metrics_gatherer.fill_right_aa_enable_states([
             {"gather_date": date(2020, 10, 10) + timedelta(days=i), "on": 0} for i in range(7)],
             {date(2020, 10, 11): (0, 0), date(2020, 10, 14): (1, 0), date(2020, 10, 15): (1, 1)}) == [

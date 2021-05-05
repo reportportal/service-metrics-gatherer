@@ -17,26 +17,53 @@
 import logging
 import elasticsearch
 import elasticsearch.helpers
+from elasticsearch import RequestsHttpConnection
 from utils import utils
 import requests
 import json
 import datetime
+import urllib3
 
 logger = logging.getLogger("metricsGatherer.es_client")
 
 
 class EsClient:
 
-    def __init__(self, esHost, grafanaHost):
+    def __init__(self, esHost, grafanaHost, app_config):
         self.esHost = esHost
         self.grafanaHost = grafanaHost
+        self.app_config = app_config
         self.kibana_headers = {'kbn-xsrf': 'commons.elastic'}
         self.main_index = "rp_stats"
         self.task_done_index = "rp_done_tasks"
         self.rp_aa_stats_index = "rp_aa_stats"
         self.rp_model_train_stats_index = "rp_model_train_stats"
         self.rp_suggest_metrics_index = "rp_suggestions_info_metrics"
-        self.es_client = elasticsearch.Elasticsearch(self.esHost)
+        self.es_client = self.create_es_client(self.esHost, app_config)
+
+    def create_es_client(self, es_host, app_config):
+        if not app_config["esVerifyCerts"]:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        if app_config["turnOffSslVerification"]:
+            return elasticsearch.Elasticsearch(
+                [es_host], timeout=30,
+                max_retries=5, retry_on_timeout=True,
+                use_ssl=app_config["esUseSsl"],
+                verify_certs=app_config["esVerifyCerts"],
+                ssl_show_warn=app_config["esSslShowWarn"],
+                ca_certs=app_config["esCAcert"],
+                client_cert=app_config["esClientCert"],
+                client_key=app_config["esClientKey"],
+                connection_class=RequestsHttpConnection)
+        return elasticsearch.Elasticsearch(
+            [es_host], timeout=30,
+            max_retries=5, retry_on_timeout=True,
+            use_ssl=app_config["esUseSsl"],
+            verify_certs=app_config["esVerifyCerts"],
+            ssl_show_warn=app_config["esSslShowWarn"],
+            ca_certs=app_config["esCAcert"],
+            client_cert=app_config["esClientCert"],
+            client_key=app_config["esClientKey"])
 
     def update_settings_after_read_only(self):
         requests.put(

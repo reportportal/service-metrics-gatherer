@@ -30,6 +30,22 @@
 
 **TIME_INTERVAL** - time intervsl for calculating metrics, available options "hour", "minute", "day"
 
+**ES_VERIFY_CERTS** - turn on SSL certificates verification, by default "false"
+
+**ES_USE_SSL** - turn on SSL, by default "false"
+
+**ES_SSL_SHOW_WARN** - show warning on SSL certificates verification, by default "false"
+
+**ES_CA_CERT** - provide a path to CA certs on disk, by default ""
+
+**ES_CLIENT_CERT** - PEM formatted SSL client certificate, by default ""
+
+**ES_CLIENT_KEY** - PEM formatted SSL client key, by default ""
+
+**ES_TURN_OFF_SSL_VERIFICATION** - by default "false". Turn off ssl verification via using RequestsHttpConnection class instead of Urllib3HttpConnection class.
+
+**ES_PROJECT_INDEX_PREFIX** - by default "", the prefix which is added to the created for each project indices. Our index name is the project id, so if it is 34, then the index "34" will be created. If you set ES_PROJECT_INDEX_PREFIX="rp_", then "rp_34" index will be created. We create several other indices which are sharable between projects, and this perfix won't influence them: rp_aa_stats, rp_stats, rp_model_train_stats, rp_done_tasks, rp_suggestions_info_metrics. **NOTE**: This prefix should be the same as for service-auto-analyzer image, this will ensure we check the same indices.
+
 
 # Instructions for analyzer setup without Docker
 
