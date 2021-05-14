@@ -1,0 +1,29 @@
+{
+    "properties": {
+        "model_type": {
+            "type": "keyword"
+        },
+        "model_folder": {
+            "type": "keyword"
+        },
+        "project_id": {
+            "type": "keyword"
+        },
+        "metric_conditions": {
+            "type": "text"
+        },
+        "metric_values": {
+            "type": "text"
+        },
+        "model_removed": {
+            "type": "integer"
+        },
+        "gather_date": {
+            "type":   "date",
+            "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd"
+        },
+        "module_version": {
+            "type": "keyword"
+        }
+    }
+}

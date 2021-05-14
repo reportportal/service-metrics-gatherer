@@ -53,7 +53,16 @@ APP_CONFIG = {
     "esCAcert":          os.getenv("ES_CA_CERT", ""),
     "esClientCert":      os.getenv("ES_CLIENT_CERT", ""),
     "esClientKey":       os.getenv("ES_CLIENT_KEY", ""),
-    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip()
+    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip(),
+    "amqpUrl":           os.getenv("AMQP_URL", "").strip("/").strip("\\"),
+    "exchangeName":      os.getenv("AMQP_EXCHANGE_NAME", "analyzer"),
+    "analyzerPriority":  int(os.getenv("ANALYZER_PRIORITY", "1")),
+    "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
+    "analyzerLogSearch": json.loads(os.getenv("ANALYZER_LOG_SEARCH", "true").lower()),
+    "autoAnalysisModelRemovePolicy": json.loads(os.getenv("AUTO_ANALYSIS_MODEL_REMOVE_POLICY",
+        "").lower()),
+    "suggestModelRemovePolicy": json.loads(os.getenv("SUGGEST_MODEL_REMOVE_POLICY",
+        "").lower())
 }
 
 
@@ -111,7 +120,8 @@ while True:
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
         data_source_created = []
         for index in [_es_client.main_index, _es_client.rp_aa_stats_index,
-                      _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index]:
+                      _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index,
+                      _es_client.rp_model_remove_stats_index]:
             date_field = "gather_date"
             if index == _es_client.rp_suggest_metrics_index:
                 date_field = "savedDate"

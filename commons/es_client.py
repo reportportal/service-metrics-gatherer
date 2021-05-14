@@ -39,6 +39,7 @@ class EsClient:
         self.rp_aa_stats_index = "rp_aa_stats"
         self.rp_model_train_stats_index = "rp_model_train_stats"
         self.rp_suggest_metrics_index = "rp_suggestions_info_metrics"
+        self.rp_model_remove_stats_index = "rp_model_remove_stats"
         self.es_client = self.create_es_client(self.esHost, app_config)
 
     def create_es_client(self, es_host, app_config):
@@ -275,13 +276,14 @@ class EsClient:
     def delete_old_info(self, max_days_store):
         for index in [
                 self.main_index, self.rp_aa_stats_index,
-                self.task_done_index, self.rp_model_train_stats_index]:
+                self.task_done_index, self.rp_model_train_stats_index,
+                self.rp_suggest_metrics_index, self.rp_model_remove_stats_index]:
             last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
             last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
             all_ids = set()
             try:
                 search_query = {
-                    "size": 10000,
+                    "size": 1000,
                     "query": {
                         "bool": {
                             "filter": [

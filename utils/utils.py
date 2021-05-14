@@ -71,3 +71,37 @@ def build_url(main_url, url_params):
 
 def unite_project_name(project_id, prefix):
     return prefix + project_id
+
+
+def parse_conditions(conditions):
+    parsed_conditions = []
+    for condition in conditions.split("|"):
+        if not condition.strip():
+            continue
+        chosen_operator = ""
+        for operator in [">=", "<=", "==", "=", "<", ">"]:
+            if operator in condition:
+                chosen_operator = operator
+                break
+        condition_changed = condition.replace(chosen_operator, " ").split()
+        if len(condition_changed) == 2:
+            try:
+                parsed_conditions.append(
+                    (condition_changed[0].strip(), chosen_operator, int(condition_changed[0].strip())))
+            except: # noqa
+                pass
+    return parsed_conditions
+
+
+def compare_metrics(cur_metric, metric_threshold, operator):
+    if operator == ">=":
+        return cur_metric >= metric_threshold
+    if operator == ">":
+        return cur_metric > metric_threshold
+    if operator == "<=":
+        return cur_metric <= metric_threshold
+    if operator == "<":
+        return cur_metric < metric_threshold
+    if operator in ["==", "="]:
+        return cur_metric == metric_threshold
+    return False
