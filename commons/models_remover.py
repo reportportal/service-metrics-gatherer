@@ -45,11 +45,12 @@ class ModelsRemover:
             _amqp_client = amqp.AmqpClient(self.app_config)
             bulk_actions = []
             for model_type in self.model_policies:
-                model_folder = _amqp_client.call(json.dumps(
+                model_info = _amqp_client.call(json.dumps(
                     {
                         "project": project_id,
                         "model_type": model_type
-                    }), "get_models")
+                    }), "get_model_info")
+                model_folder = model_info["model_folder"]
                 if not model_folder.strip():
                     continue
                 logger.debug("Model folder %s", model_folder)

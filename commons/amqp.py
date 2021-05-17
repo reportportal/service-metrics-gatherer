@@ -63,7 +63,7 @@ class AmqpClient:
             if (start_time + timeout) < time.time():
                 raise Exception("Rabbitmq timeout exception")
             self.connection.process_data_events()
-        return json.loads(self.response)
+        return json.loads(self.response, strict=False)
 
     def close_connections(self):
         try:

@@ -44,16 +44,13 @@ class ModelRemovePolicy:
         cur_metrics = []
         should_be_deleted = False
         module_version = set()
-        print(self.conditions)
         for field, operator, score in self.conditions:
-            print(field, " % ", operator, " % ", score)
             scores = []
             for r in metrics["hits"]["hits"]:
                 if field in r["_source"]:
                     scores.append(r["_source"][field])
                 if "module_version" in r["_source"]:
                     module_version.update(r["_source"]["module_version"])
-            print(scores)
             if scores:
                 metrics_mean = np.round(np.mean(scores), 2)
                 cur_metrics.append((field, metrics_mean))
