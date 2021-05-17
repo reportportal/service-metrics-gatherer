@@ -45,7 +45,9 @@ class TestMetricsGatherer(unittest.TestCase):
             "esClientKey": "",
             "esProjectIndexPrefix": "",
             "esUser": "",
-            "esPassword": ""
+            "esPassword": "",
+            "autoAnalysisModelRemovePolicy": "",
+            "suggestModelRemovePolicy": ""
         }
 
     def test_derive_item_activity_chain(self):

@@ -85,11 +85,17 @@ def parse_conditions(conditions):
                 break
         condition_changed = condition.replace(chosen_operator, " ").split()
         if len(condition_changed) == 2:
+            metric_score = None
             try:
-                parsed_conditions.append(
-                    (condition_changed[0].strip(), chosen_operator, int(condition_changed[0].strip())))
+                metric_score = int(condition_changed[1].strip())
             except: # noqa
-                pass
+                try:
+                    metric_score = float(condition_changed[1].strip())
+                except: # noqa
+                    pass
+            if metric_score is not None:
+                parsed_conditions.append(
+                    (condition_changed[0].strip(), chosen_operator, metric_score))
     return parsed_conditions
 
 
@@ -105,3 +111,7 @@ def compare_metrics(cur_metric, metric_threshold, operator):
     if operator in ["==", "="]:
         return cur_metric == metric_threshold
     return False
+
+
+def convert_metrics_to_string(cur_metrics):
+    return ";".join(["%s:%s" % (metric[0], metric[1]) for metric in cur_metrics])

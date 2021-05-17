@@ -42,10 +42,10 @@ APP_CONFIG = {
     "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
     "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
     "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
-    "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
-    "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
+    "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "12:01"),
+    "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "12:00"),
     "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
-    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower(),
+    "timeInterval":      os.getenv("TIME_INTERVAL", "minute").lower(),
     "turnOffSslVerification": json.loads(os.getenv("ES_TURN_OFF_SSL_VERIFICATION", "false").lower()),
     "esVerifyCerts":     json.loads(os.getenv("ES_VERIFY_CERTS", "false").lower()),
     "esUseSsl":          json.loads(os.getenv("ES_USE_SSL", "false").lower()),
@@ -59,10 +59,10 @@ APP_CONFIG = {
     "analyzerPriority":  int(os.getenv("ANALYZER_PRIORITY", "1")),
     "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
     "analyzerLogSearch": json.loads(os.getenv("ANALYZER_LOG_SEARCH", "true").lower()),
-    "autoAnalysisModelRemovePolicy": json.loads(os.getenv("AUTO_ANALYSIS_MODEL_REMOVE_POLICY",
-        "").lower()),
-    "suggestModelRemovePolicy": json.loads(os.getenv("SUGGEST_MODEL_REMOVE_POLICY",
-        "").lower())
+    "autoAnalysisModelRemovePolicy": os.getenv(
+        "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=90|percent_not_found_aa>10").lower(),
+    "suggestModelRemovePolicy": os.getenv(
+        "SUGGEST_MODEL_REMOVE_POLICY", "f1-score<=90|percent_not_found_aa>10").lower()
 }
 
 
