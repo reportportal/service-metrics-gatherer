@@ -60,9 +60,9 @@ APP_CONFIG = {
     "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
     "analyzerLogSearch": json.loads(os.getenv("ANALYZER_LOG_SEARCH", "true").lower()),
     "autoAnalysisModelRemovePolicy": os.getenv(
-        "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=90|percent_not_found_aa>10").lower(),
+        "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=90|percent_not_found_aa>10"),
     "suggestModelRemovePolicy": os.getenv(
-        "SUGGEST_MODEL_REMOVE_POLICY", "f1-score<=90|percent_not_found_aa>10").lower()
+        "SUGGEST_MODEL_REMOVE_POLICY", "reciprocalRank<=90|notFoundResults>10")
 }
 
 

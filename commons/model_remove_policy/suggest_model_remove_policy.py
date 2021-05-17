@@ -26,18 +26,19 @@ class SuggestModelRemovePolicy(ModelRemovePolicy):
             self, app_config, conditions_field=conditions_field, model_name=model_name)
 
     def get_gathered_metrics(self, week_earlier, cur_tommorow, project_id):
-        if not self.es_client.index_exists(self.es_client.main_index, print_error=False):
+        if not self.es_client.index_exists(
+                self.es_client.rp_suggest_metrics_index, print_error=False):
             return []
         else:
-            res = self.es_client.es_client.search(self.es_client.main_index, body={
-                "size": 1000,
+            res = self.es_client.es_client.search(self.es_client.rp_suggest_metrics_index, body={
+                "size": 10000,
                 "query": {
                     "bool": {
                         "filter": [
-                            {"range": {"gather_datetime": {
+                            {"range": {"savedDate": {
                                 "gte": week_earlier.strftime("%Y-%m-%d %H:%M:%S"),
                                 "lte": cur_tommorow.strftime("%Y-%m-%d %H:%M:%S")}}},
-                            {"term": {"project_id": project_id}}
+                            {"term": {"project": project_id}}
                         ]
                     }
                 }})

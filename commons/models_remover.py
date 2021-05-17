@@ -56,7 +56,7 @@ class ModelsRemover:
                 logger.debug("Model folder %s", model_folder)
                 should_be_deleted, cur_metrics, module_version = self.should_model_be_deleted(
                     model_type, project_id)
-                is_deleted = False
+                is_deleted = 0
                 if should_be_deleted:
                     is_deleted = _amqp_client.call(json.dumps(
                         {
@@ -69,7 +69,7 @@ class ModelsRemover:
                     "project_id": project_id,
                     "metric_conditions": self.model_policies[model_type].get_conditions(),
                     "metric_values": utils.convert_metrics_to_string(cur_metrics),
-                    "model_removed": int(is_deleted),
+                    "model_removed": is_deleted,
                     "gather_date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     "module_version": module_version
                 }
