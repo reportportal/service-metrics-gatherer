@@ -8,9 +8,13 @@
 
 **ES_PASSWORD** - Elasticsearch host password, set up here the password for elasticsearch, if you choose setup the password here, in the **ES_HOST** you should leave only url without login and password
 
+**AMQP_URL** - an url to the rabbitmq instance
+
+**AMQP_EXCHANGE_NAME** - Exchange name for the module communication for this module, by default "analyzer"
+
 **LOGGING_LEVEL** - logging level for the whole module, can be DEBUG, INFO, ERROR
 
-**GRAFANA_HOST** - an url to the Grafana instance
+**GRAFANA_HOST** - an url to the Grafana instance. **NOTE** if you don't want to see dashboards in Grafana, leave this environment variable empty.
 
 **ES_HOST_GRAFANA_DATASOURCE** - an url to the Elasticsearch instance, which is accessible from Grafana image, and this url will be used for creating datasources for Grafana
 
