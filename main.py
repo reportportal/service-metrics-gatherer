@@ -33,7 +33,7 @@ APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
     "esUser":            os.getenv("ES_USER", "").strip(),
     "esPassword":        os.getenv("ES_PASSWORD", "").strip(),
-    "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
+    "grafanaHost":       os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
     "esHostGrafanaDataSource": os.getenv(
         "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
@@ -116,6 +116,8 @@ CORS(application)
 
 while True:
     try:
+        if not APP_CONFIG["grafanaHost"].strip():
+            break
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
         data_source_created = []
@@ -150,7 +152,7 @@ def get_health_status():
     status = ""
     if not _es_client.is_healthy():
         status += "Elasticsearch is not healthy;"
-    if not _es_client.is_grafana_healthy():
+    if APP_CONFIG["grafanaHost"].strip() and not _es_client.is_grafana_healthy():
         status += "Grafana is not healthy;"
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"
