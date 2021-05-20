@@ -14,7 +14,7 @@
 
 **LOGGING_LEVEL** - logging level for the whole module, can be DEBUG, INFO, ERROR
 
-**GRAFANA_HOST** - an url to the Grafana instance
+**GRAFANA_HOST** - an url to the Grafana instance. **NOTE** if you don't want to see dashboards in Grafana, leave this environment variable empty.
 
 **ES_HOST_GRAFANA_DATASOURCE** - an url to the Elasticsearch instance, which is accessible from Grafana image, and this url will be used for creating datasources for Grafana
 
