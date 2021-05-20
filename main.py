@@ -33,7 +33,7 @@ APP_CONFIG = {
     "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
     "esUser":            os.getenv("ES_USER", "").strip(),
     "esPassword":        os.getenv("ES_PASSWORD", "").strip(),
-    "grafanaHost":       os.getenv("GRAFANA_HOST", "http://localhost:3000").strip("/").strip("\\"),
+    "grafanaHost":       os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
     "esHostGrafanaDataSource": os.getenv(
         "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
     "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
@@ -53,7 +53,16 @@ APP_CONFIG = {
     "esCAcert":          os.getenv("ES_CA_CERT", ""),
     "esClientCert":      os.getenv("ES_CLIENT_CERT", ""),
     "esClientKey":       os.getenv("ES_CLIENT_KEY", ""),
-    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip()
+    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip(),
+    "amqpUrl":           os.getenv("AMQP_URL", "").strip("/").strip("\\"),
+    "exchangeName":      os.getenv("AMQP_EXCHANGE_NAME", "analyzer"),
+    "analyzerPriority":  int(os.getenv("ANALYZER_PRIORITY", "1")),
+    "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
+    "analyzerLogSearch": json.loads(os.getenv("ANALYZER_LOG_SEARCH", "true").lower()),
+    "autoAnalysisModelRemovePolicy": os.getenv(
+        "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=80|percent_not_found_aa>70"),
+    "suggestModelRemovePolicy": os.getenv(
+        "SUGGEST_MODEL_REMOVE_POLICY", "reciprocalRank<=80|notFoundResults>70")
 }
 
 
@@ -107,11 +116,14 @@ CORS(application)
 
 while True:
     try:
+        if not APP_CONFIG["grafanaHost"].strip():
+            break
         _es_client = es_client.EsClient(
             esHost=APP_CONFIG["esHost"], grafanaHost=APP_CONFIG["grafanaHost"], app_config=APP_CONFIG)
         data_source_created = []
         for index in [_es_client.main_index, _es_client.rp_aa_stats_index,
-                      _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index]:
+                      _es_client.rp_model_train_stats_index, _es_client.rp_suggest_metrics_index,
+                      _es_client.rp_model_remove_stats_index]:
             date_field = "gather_date"
             if index == _es_client.rp_suggest_metrics_index:
                 date_field = "savedDate"
@@ -140,7 +152,7 @@ def get_health_status():
     status = ""
     if not _es_client.is_healthy():
         status += "Elasticsearch is not healthy;"
-    if not _es_client.is_grafana_healthy():
+    if APP_CONFIG["grafanaHost"].strip() and not _es_client.is_grafana_healthy():
         status += "Grafana is not healthy;"
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"

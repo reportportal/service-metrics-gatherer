@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1613483496930,
+        "iteration": 1621514205334,
         "links": [],
         "panels": [
             {
@@ -308,7 +308,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: true AND project: $project",
+                        "query": "isUserChoice: 1 AND project: $project",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -523,7 +523,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: true AND project: $project",
+                        "query": "isUserChoice: 1 AND project: $project",
                         "refId": "B",
                         "timeField": "savedDate"
                     },
@@ -550,7 +550,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "notFoundResults: true AND project: $project",
+                        "query": "notFoundResults: 100 AND project: $project",
                         "refId": "C",
                         "timeField": "savedDate"
                     },
@@ -577,7 +577,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: false AND notFoundResults: false AND project: $project",
+                        "query": "isUserChoice: 0 AND notFoundResults: 0 AND project: $project",
                         "refId": "D",
                         "timeField": "savedDate"
                     }
@@ -782,7 +782,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: true",
+                        "query": "isUserChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     },
@@ -1042,7 +1042,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "notFoundResults: true AND project: $project",
+                        "query": "notFoundResults: 100 AND project: $project",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1571,14 +1571,14 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 10
+        "version": 21
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-02-16T12:25:52Z",
+        "created": "2021-05-17T12:33:52Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1590,9 +1590,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-02-17T07:50:55Z",
+        "updated": "2021-05-20T12:40:19Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 10
+        "version": 21
     }
 }

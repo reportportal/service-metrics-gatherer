@@ -15,6 +15,7 @@
 """
 
 import logging
+import traceback
 import elasticsearch
 import elasticsearch.helpers
 from elasticsearch import RequestsHttpConnection
@@ -39,6 +40,9 @@ class EsClient:
         self.rp_aa_stats_index = "rp_aa_stats"
         self.rp_model_train_stats_index = "rp_model_train_stats"
         self.rp_suggest_metrics_index = "rp_suggestions_info_metrics"
+        self.rp_model_remove_stats_index = "rp_model_remove_stats"
+        self.tables_to_recreate = [self.rp_aa_stats_index, self.rp_model_train_stats_index,
+                                   self.rp_suggest_metrics_index, self.rp_model_remove_stats_index]
         self.es_client = self.create_es_client(self.esHost, app_config)
 
     def create_es_client(self, es_host, app_config):
@@ -205,6 +209,33 @@ class EsClient:
             logger.error(err)
             return {}
 
+    def delete_index(self, index_name):
+        """Delete the whole index"""
+        try:
+            self.es_client.indices.delete(index=str(index_name))
+            logger.info("ES Url %s", utils.remove_credentials_from_url(self.esHost))
+            logger.debug("Deleted index %s", str(index_name))
+            return True
+        except Exception as err:
+            logger.error("Not found %s for deleting", str(index_name))
+            logger.error("ES Url %s", utils.remove_credentials_from_url(self.esHost))
+            logger.error(err)
+            return False
+
+    def _recreate_index_if_needed(self, bodies, formatted_exception):
+        index_name = ""
+        if bodies:
+            index_name = bodies[0]["_index"]
+        if not index_name.strip():
+            return
+        index_properties = utils.read_json_file(
+            "", "%s_mappings.json" % index_name, to_json=True)
+        if "'type': 'mapper_parsing_exception'" in formatted_exception or\
+                "RequestError(400, 'illegal_argument_exception'" in formatted_exception:
+            if index_name in self.tables_to_recreate:
+                self.delete_index(index_name)
+                self.create_index(index_name, index_properties)
+
     def bulk_index(self, index_name, bulk_actions):
         exists_index = False
         index_properties = utils.read_json_file(
@@ -217,9 +248,13 @@ class EsClient:
             exists_index = True
         if exists_index:
             try:
-                self.es_client.indices.put_mapping(
-                    index=index_name,
-                    body=index_properties)
+                try:
+                    self.es_client.indices.put_mapping(
+                        index=index_name,
+                        body=index_properties)
+                except: # noqa
+                    formatted_exception = traceback.format_exc()
+                    self._recreate_index_if_needed(bulk_actions, formatted_exception)
                 logger.debug('Indexing %d docs...' % len(bulk_actions))
                 try:
                     success_count, errors = elasticsearch.helpers.bulk(self.es_client,
@@ -227,8 +262,9 @@ class EsClient:
                                                                        chunk_size=1000,
                                                                        request_timeout=30,
                                                                        refresh=True)
-                except Exception as err:
-                    logger.error(err)
+                except: # noqa
+                    formatted_exception = traceback.format_exc()
+                    self._recreate_index_if_needed(bulk_actions, formatted_exception)
                     self.update_settings_after_read_only()
                     success_count, errors = elasticsearch.helpers.bulk(self.es_client,
                                                                        bulk_actions,
@@ -275,13 +311,14 @@ class EsClient:
     def delete_old_info(self, max_days_store):
         for index in [
                 self.main_index, self.rp_aa_stats_index,
-                self.task_done_index, self.rp_model_train_stats_index]:
+                self.task_done_index, self.rp_model_train_stats_index,
+                self.rp_suggest_metrics_index, self.rp_model_remove_stats_index]:
             last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
             last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
             all_ids = set()
             try:
                 search_query = {
-                    "size": 10000,
+                    "size": 1000,
                     "query": {
                         "bool": {
                             "filter": [

@@ -20,6 +20,7 @@ from time import time
 from sklearn.metrics import f1_score, accuracy_score
 from commons import postgres_dao
 from commons import es_client
+from commons import models_remover
 from utils import utils
 
 logger = logging.getLogger("metricsGatherer.metrics_gatherer")
@@ -34,6 +35,7 @@ class MetricsGatherer:
             esHost=app_settings["esHost"],
             grafanaHost=app_settings["grafanaHost"],
             app_config=app_settings)
+        self.models_remover = models_remover.ModelsRemover(app_settings)
 
     def get_current_date_template(self, project_id, project_name, cur_date):
         return {"on": 0,  "changed_type": 0, "AA_analyzed": 0,
@@ -290,6 +292,7 @@ class MetricsGatherer:
                     '_source': row,
                 } for row in gathered_rows]
                 self.es_client.bulk_index(self.es_client.main_index, bulk_actions)
+                self.models_remover.apply_remove_model_policies(project_id)
             except Exception as err:
                 logger.error("Error occured for project %s", project_info)
                 logger.error(err)

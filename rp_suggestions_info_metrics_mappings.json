@@ -28,7 +28,7 @@
             "type": "integer"
         },
         "reciprocalRank": {
-            "type": "float"
+            "type": "integer"
         },
         "esScore": {
             "type": "float"
@@ -54,17 +54,20 @@
             "type": "integer"
         },
         "isUserChoice": {
-            "type": "boolean"
+            "type": "integer"
         },
         "processedTime": {
             "type": "float"
         },
         "notFoundResults": {
-            "type": "boolean"
+            "type": "integer"
         },
         "savedDate": {
             "type":   "date",
             "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd"
+        },
+        "module_version": {
+            "type": "keyword"
         }
     }
 }

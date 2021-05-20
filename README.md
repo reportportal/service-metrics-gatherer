@@ -54,6 +54,9 @@
 
 **ES_PROJECT_INDEX_PREFIX** - by default "", the prefix which is added to the created for each project indices. Our index name is the project id, so if it is 34, then the index "34" will be created. If you set ES_PROJECT_INDEX_PREFIX="rp_", then "rp_34" index will be created. We create several other indices which are sharable between projects, and this perfix won't influence them: rp_aa_stats, rp_stats, rp_model_train_stats, rp_done_tasks, rp_suggestions_info_metrics. **NOTE**: This prefix should be the same as for service-auto-analyzer image, this will ensure we check the same indices.
 
+**AUTO_ANALYSIS_MODEL_REMOVE_POLICY** - by default "f1-score<=80|percent_not_found_aa>70", the conditions for removing custom auto-analysis models, so that they were retrained. The conditions are checked and applied if at least one condition is satisfied. The available metrics: f1-score, accuracy, percent_not_found_aa. The available comparison operators: >=, <=, <, >, =, ==.
+
+**SUGGEST_MODEL_REMOVE_POLICY** - by default "reciprocalRank<=80|notFoundResults>70", the conditions for removing custom suggestion models, so that they were retrained. The conditions are checked and applied if at least one condition is satisfied. The available metrics: reciprocalRank, notFoundResults. The available comparison operators: >=, <=, <, >, =, ==.
 
 # Instructions for analyzer setup without Docker
 
