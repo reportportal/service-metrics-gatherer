@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1621514205334,
+        "iteration": 1622015834663,
         "links": [],
         "panels": [
             {
@@ -308,7 +308,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: 1 AND project: $project",
+                        "query": "userChoice: 1 AND project: $project",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -523,7 +523,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: 1 AND project: $project",
+                        "query": "userChoice: 1 AND project: $project",
                         "refId": "B",
                         "timeField": "savedDate"
                     },
@@ -577,7 +577,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: 0 AND notFoundResults: 0 AND project: $project",
+                        "query": "userChoice: 0 AND notFoundResults: 0 AND project: $project",
                         "refId": "D",
                         "timeField": "savedDate"
                     }
@@ -1505,7 +1505,7 @@
                 ],
                 "timeFrom": null,
                 "timeShift": null,
-                "title": "Panel Title",
+                "title": "Used log lines",
                 "type": "table"
             }
         ],
@@ -1571,7 +1571,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 21
+        "version": 25
     },
     "meta": {
         "canAdmin": true,
@@ -1590,9 +1590,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-05-20T12:40:19Z",
+        "updated": "2021-05-26T07:58:37Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 21
+        "version": 25
     }
 }

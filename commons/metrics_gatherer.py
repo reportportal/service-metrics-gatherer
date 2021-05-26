@@ -118,8 +118,6 @@ class MetricsGatherer:
                     unique_launch_ids.add(launch_id)
             if analyzed_test_item_type is None:
                 continue
-            if real_test_item_type is not None and real_test_item_type[:2].lower() in ["ti", "nd"]:
-                continue
             analyzed_test_item_types.append(analyzed_test_item_type)
             if real_test_item_type is not None:
                 real_test_item_types.append(real_test_item_type)
