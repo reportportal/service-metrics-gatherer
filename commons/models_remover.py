@@ -42,6 +42,8 @@ class ModelsRemover:
     def apply_remove_model_policies(self, project_id):
         _amqp_client = None
         try:
+            if not self.app_config["amqpUrl"].strip():
+                return
             _amqp_client = amqp.AmqpClient(self.app_config)
             bulk_actions = []
             for model_type in self.model_policies:
