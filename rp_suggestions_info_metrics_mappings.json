@@ -18,6 +18,9 @@
         "relevantLogId": {
             "type": "keyword"
         },
+        "launchId": {
+            "type": "integer"
+        },
         "isMergedLog": {
             "type": "boolean"
         },
