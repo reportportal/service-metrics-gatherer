@@ -18,6 +18,12 @@
         "relevantLogId": {
             "type": "keyword"
         },
+        "launchId": {
+            "type": "integer"
+        },
+        "launchName": {
+            "type": "keyword"
+        },
         "isMergedLog": {
             "type": "boolean"
         },
@@ -67,6 +73,9 @@
             "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd"
         },
         "module_version": {
+            "type": "keyword"
+        },
+        "methodName": {
             "type": "keyword"
         }
     }
