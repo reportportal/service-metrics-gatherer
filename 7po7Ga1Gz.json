@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1617708392805,
+        "iteration": 1625129088905,
         "links": [],
         "panels": [
             {
@@ -55,8 +55,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -89,7 +92,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved AND metric_name: $metric_name",
+                        "query": "sub_model_type: all AND model_saved: 1 AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -117,7 +120,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND model_saved: $model_saved  AND metric_name: $metric_name",
+                        "query": "sub_model_type: all AND model_saved: 1 AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -169,9 +172,7 @@
                 "datasource": "rp_model_train_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
+                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -208,9 +209,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -258,9 +260,7 @@
                 "datasource": "rp_model_train_stats",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
+                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -297,9 +297,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -399,9 +400,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -449,6 +451,9 @@
                 "datasource": "rp_model_train_stats",
                 "fieldConfig": {
                     "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
                         "custom": {},
                         "mappings": [],
                         "thresholds": {
@@ -486,22 +491,23 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
                             {
-                                "$$hashKey": "object:149",
-                                "field": "gather_date",
+                                "field": "project_id",
                                 "id": "2",
                                 "settings": {
-                                    "interval": "1d",
-                                    "min_doc_count": 0,
-                                    "trimEdges": 0
+                                    "min_doc_count": "0",
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
                                 },
-                                "type": "date_histogram"
+                                "type": "terms"
                             }
                         ],
                         "metrics": [
@@ -524,8 +530,22 @@
                 "title": "Number of unique projects with saved models(sub_model_type: all)",
                 "transformations": [
                     {
+                        "id": "organize",
+                        "options": {
+                            "excludeByName": {
+                                "project_id": true
+                            },
+                            "indexByName": {},
+                            "renameByName": {}
+                        }
+                    },
+                    {
                         "id": "reduce",
-                        "options": {}
+                        "options": {
+                            "reducers": [
+                                "sum"
+                            ]
+                        }
                     }
                 ],
                 "type": "stat"
@@ -564,8 +584,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -735,8 +758,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -877,8 +903,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1006,8 +1035,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1135,8 +1167,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1266,8 +1301,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1395,8 +1433,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1491,7 +1532,7 @@
             }
         ],
         "refresh": false,
-        "schemaVersion": 26,
+        "schemaVersion": 27,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -1507,6 +1548,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"project_id\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Project Id",
@@ -1514,7 +1557,7 @@
                     "name": "project_id",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"project_id\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1535,6 +1578,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"model_type\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Model type",
@@ -1564,6 +1609,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"sub_model_type\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Sub model type",
@@ -1592,6 +1639,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"new_model\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "New model name",
@@ -1599,7 +1648,7 @@
                     "name": "new_model",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"new_model\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1620,6 +1669,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": "{\"find\": \"terms\", \"field\": \"baseline_model\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Baseline model name",
@@ -1648,6 +1699,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": "{\"find\": \"terms\", \"field\": \"module_version\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Module version",
@@ -1676,6 +1729,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": "{\"find\": \"terms\", \"field\": \"model_saved\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Model saved",
@@ -1705,6 +1760,8 @@
                     },
                     "datasource": "rp_model_train_stats",
                     "definition": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Metric name",
@@ -1724,6 +1781,8 @@
                 },
                 {
                     "datasource": "rp_model_train_stats",
+                    "description": null,
+                    "error": null,
                     "filters": [],
                     "hide": 0,
                     "label": "Custom Filters",
@@ -1753,14 +1812,14 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 10
+        "version": 13
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-04-01T09:30:12Z",
+        "created": "2021-03-17T14:17:56Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -1772,9 +1831,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2021-04-06T11:32:00Z",
+        "updated": "2021-07-01T08:45:56Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 10
+        "version": 13
     }
 }

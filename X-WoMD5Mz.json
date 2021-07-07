@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1621514816144,
+        "iteration": 1625233143456,
         "links": [],
         "panels": [
             {
@@ -58,7 +58,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -178,7 +178,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -304,7 +304,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -328,7 +328,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "on: 1 AND gather_date: [\"now-2d\" TO \"now+1d\"] AND launch_analyzed: [1 TO 200000]",
+                        "query": "on: 1 AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -382,7 +382,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -483,7 +483,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "alias": "",
@@ -576,7 +576,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -721,7 +721,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -868,7 +868,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -901,7 +901,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "AA_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -957,7 +957,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "AA_analyzed: [1 TO 200000]",
                         "refId": "C",
                         "timeField": "gather_date"
                     }
@@ -1043,7 +1043,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1119,6 +1119,118 @@
                 }
             },
             {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 0,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 36,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "7.4.2",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Total Auto analysis runs a day",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
                 "datasource": "rp_stats",
                 "fieldConfig": {
                     "defaults": {
@@ -1145,15 +1257,15 @@
                 },
                 "gridPos": {
                     "h": 8,
-                    "w": 12,
-                    "x": 0,
+                    "w": 8,
+                    "x": 8,
                     "y": 17
                 },
                 "id": 16,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1218,15 +1330,15 @@
                 },
                 "gridPos": {
                     "h": 8,
-                    "w": 12,
-                    "x": 12,
+                    "w": 8,
+                    "x": 16,
                     "y": 17
                 },
                 "id": 18,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1301,7 +1413,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1476,7 +1588,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": true,
                 "renderer": "flot",
@@ -1676,7 +1788,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1747,7 +1859,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1818,7 +1930,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "targets": [
                     {
                         "bucketAggs": [],
@@ -1908,8 +2020,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "7.4.2",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1989,7 +2104,7 @@
                 }
             }
         ],
-        "schemaVersion": 26,
+        "schemaVersion": 27,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -2088,14 +2203,14 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 22
+        "version": 16
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-05-17T12:33:51Z",
+        "created": "2021-03-17T14:17:56Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
@@ -2107,9 +2222,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-05-20T12:53:34Z",
+        "updated": "2021-07-02T13:41:33Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 22
+        "version": 16
     }
 }
