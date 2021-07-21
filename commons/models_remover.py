@@ -52,10 +52,10 @@ class ModelsRemover:
                         "project": project_id,
                         "model_type": model_type
                     }), "get_model_info")
+                logger.debug("Model info: %s", model_info)
                 model_folder = model_info["model_folder"]
                 if not model_folder.strip():
                     continue
-                logger.debug("Model folder %s", model_folder)
                 should_be_deleted, cur_metrics, module_version = self.should_model_be_deleted(
                     model_type, project_id)
                 is_deleted = 0
