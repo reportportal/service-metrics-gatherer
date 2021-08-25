@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1625233143456,
+        "iteration": 1629882094243,
         "links": [],
         "panels": [
             {
@@ -91,7 +91,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -211,7 +211,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -754,7 +754,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -782,7 +782,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -901,7 +901,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "AA_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND AA_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -929,7 +929,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "AA_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND AA_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -957,7 +957,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "AA_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND AA_analyzed: [1 TO 200000]",
                         "refId": "C",
                         "timeField": "gather_date"
                     }
@@ -1184,7 +1184,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1446,7 +1446,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -1474,7 +1474,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id AND on: $on",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -1502,7 +1502,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id AND on: $on",
                         "refId": "C",
                         "timeField": "gather_date"
                     }
@@ -1621,7 +1621,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -1649,7 +1649,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "launch_analyzed: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND launch_analyzed: [1 TO 200000]",
                         "refId": "B",
                         "timeField": "gather_date"
                     },
@@ -1677,7 +1677,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id AND on: $on",
                         "refId": "C",
                         "timeField": "gather_date"
                     },
@@ -1705,7 +1705,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id AND on: $on",
                         "refId": "D",
                         "timeField": "gather_date"
                     }
@@ -1813,7 +1813,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -1884,7 +1884,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -2055,7 +2055,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "errors_count: [1 TO 200000]",
+                        "query": "project_id: $project_id AND on: $on AND errors_count: [1 TO 200000]",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -2129,7 +2129,7 @@
                     "name": "project_id",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"project_id\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -2160,7 +2160,7 @@
                     "name": "on",
                     "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"on\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -2203,7 +2203,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 23
+        "version": 26
     },
     "meta": {
         "canAdmin": true,
@@ -2222,9 +2222,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-08-23T14:31:09Z",
+        "updated": "2021-08-25T09:06:26Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 23
+        "version": 26
     }
 }

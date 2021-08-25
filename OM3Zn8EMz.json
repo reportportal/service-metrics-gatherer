@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1629793643082,
+        "iteration": 1629881920662,
         "links": [],
         "panels": [
             {
@@ -93,6 +93,30 @@
                         ],
                         "query": "project: $project",
                         "refId": "A",
+                        "timeField": "savedDate"
+                    },
+                    {
+                        "alias": "Average Reciprocal rank only with chosen",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "reciprocalRank",
+                                "id": "1",
+                                "type": "avg"
+                            }
+                        ],
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
+                        "refId": "B",
                         "timeField": "savedDate"
                     }
                 ],
@@ -1578,7 +1602,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 11
+        "version": 12
     },
     "meta": {
         "canAdmin": true,
@@ -1597,9 +1621,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-08-24T08:31:02Z",
+        "updated": "2021-08-25T09:01:32Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 11
+        "version": 12
     }
 }
