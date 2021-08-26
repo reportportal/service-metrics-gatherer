@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1629881920662,
+        "iteration": 1629967238566,
         "links": [],
         "panels": [
             {
@@ -1112,6 +1112,284 @@
                 }
             },
             {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_suggestions_info_metrics",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {}
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 7,
+                    "w": 11,
+                    "x": 0,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 32,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "7.4.2",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "Unique projects run suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    },
+                    {
+                        "alias": "Unique projects which chose suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "userChoice: 1",
+                        "refId": "B",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "thresholds": [],
+                "timeRegions": [],
+                "title": "Unique projects usage",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_aa_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {},
+                        "custom": {},
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": []
+                        }
+                    },
+                    "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 7,
+                    "w": 13,
+                    "x": 11,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 34,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "7.4.2",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "run auto-analysis",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "method: auto_analysis",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "alias": "run suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "method: suggest",
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Run auto-analysis vs run suggestions",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
@@ -1140,7 +1418,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 0,
-                    "y": 17
+                    "y": 24
                 },
                 "id": 20,
                 "options": {
@@ -1212,7 +1490,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 12,
-                    "y": 17
+                    "y": 24
                 },
                 "id": 22,
                 "options": {
@@ -1284,7 +1562,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 0,
-                    "y": 25
+                    "y": 32
                 },
                 "id": 24,
                 "options": {
@@ -1354,7 +1632,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 12,
-                    "y": 25
+                    "y": 32
                 },
                 "id": 26,
                 "options": {
@@ -1424,7 +1702,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 0,
-                    "y": 33
+                    "y": 40
                 },
                 "id": 28,
                 "options": {
@@ -1494,7 +1772,7 @@
                     "h": 8,
                     "w": 12,
                     "x": 12,
-                    "y": 33
+                    "y": 40
                 },
                 "id": 30,
                 "options": {
@@ -1602,7 +1880,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 12
+        "version": 13
     },
     "meta": {
         "canAdmin": true,
@@ -1621,9 +1899,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-08-25T09:01:32Z",
+        "updated": "2021-08-26T09:12:23Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 12
+        "version": 13
     }
 }
