@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1630072973612,
+        "iteration": 1630311067614,
         "links": [],
         "panels": [
             {
@@ -906,7 +906,7 @@
                 },
                 "lines": true,
                 "linewidth": 1,
-                "nullPointMode": "null",
+                "nullPointMode": "connected",
                 "options": {
                     "alertThreshold": true
                 },
@@ -1025,7 +1025,7 @@
                 },
                 "lines": true,
                 "linewidth": 1,
-                "nullPointMode": "null",
+                "nullPointMode": "connected",
                 "options": {
                     "alertThreshold": true
                 },
@@ -2022,7 +2022,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 18
+        "version": 19
     },
     "meta": {
         "canAdmin": true,
@@ -2041,9 +2041,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-08-27T14:11:37Z",
+        "updated": "2021-08-30T08:11:58Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 18
+        "version": 19
     }
 }
