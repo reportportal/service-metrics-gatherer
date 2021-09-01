@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1630311067614,
+        "iteration": 1630489814807,
         "links": [],
         "panels": [
             {
@@ -1735,7 +1735,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND userChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1789,7 +1789,7 @@
                                 "field": "project",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": "1",
+                                    "min_doc_count": "0",
                                     "order": "asc",
                                     "orderBy": "1",
                                     "size": "10"
@@ -1805,7 +1805,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project  AND userChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -2022,7 +2022,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 19
+        "version": 20
     },
     "meta": {
         "canAdmin": true,
@@ -2041,9 +2041,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-08-30T08:11:58Z",
+        "updated": "2021-09-01T09:52:14Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 19
+        "version": 20
     }
 }

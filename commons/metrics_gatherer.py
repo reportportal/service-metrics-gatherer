@@ -43,7 +43,7 @@ class MetricsGatherer:
                 "launch_analyzed": 0,
                 "manually_analyzed": 0, "project_id": project_id,
                 "project_name": project_name, "gather_date": cur_date.date().strftime("%Y-%m-%d"),
-                "gather_datetime": cur_date.date().strftime("%Y-%m-%d %H:%M:%S"),
+                "gather_datetime": cur_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "percent_not_found_aa": 0, "avg_processing_time_only_found_test_item_aa": 0.0,
                 "avg_processing_time_test_item_aa": 0.0, "percent_not_found_suggest": 0,
                 "avg_processing_time_test_item_suggest": 0.0,
@@ -253,10 +253,11 @@ class MetricsGatherer:
         sorted_dates = sorted(project_aa_states.items(), key=lambda x: x[0])
         for row in gathered_rows:
             while len(project_aa_states) > cur_state_ind:
-                if row["gather_date"] < sorted_dates[cur_state_ind][0]:
+                gather_date = datetime.datetime.strptime(row["gather_date"], '%Y-%m-%d').date()
+                if gather_date < sorted_dates[cur_state_ind][0]:
                     row["on"] = 1 - sorted_dates[cur_state_ind][1][0]
                     break
-                elif row["gather_date"] == sorted_dates[cur_state_ind][0]:
+                elif gather_date == sorted_dates[cur_state_ind][0]:
                     row["on"] = sorted_dates[cur_state_ind][1][1]
                     cur_state_ind += 1
                 else:
