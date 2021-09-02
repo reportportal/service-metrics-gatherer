@@ -21,7 +21,7 @@ class SuggestModelRemovePolicy(ModelRemovePolicy):
 
     def __init__(self, app_config,
                  conditions_field="suggestModelRemovePolicy",
-                 model_name="suggest"):
+                 model_name="suggestion"):
         ModelRemovePolicy.__init__(
             self, app_config, conditions_field=conditions_field, model_name=model_name)
 
