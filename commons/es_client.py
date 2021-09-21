@@ -193,6 +193,13 @@ class EsClient:
                 logger.error(err)
             return False
 
+    def object_exists(self, index_name, row_id):
+        try:
+            _ = self.es_client.get(index_name, id=row_id)
+            return True
+        except Exception as err: # noqa
+            return False
+
     def create_index(self, index_name, index_properties):
         logger.debug("Creating '%s' Elasticsearch index", str(index_name))
         try:

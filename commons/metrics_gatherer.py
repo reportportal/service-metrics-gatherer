@@ -280,6 +280,9 @@ class MetricsGatherer:
                 project_aa_states = {}
                 for st_date_day in range((period_end - period_start).days + 1):
                     cur_date = period_start + datetime.timedelta(days=st_date_day)
+                    cur_date_row_id = "%s_%s" % (project_id, cur_date.date().strftime("%Y-%m-%d"))
+                    if self.es_client.object_exists(self.es_client.main_index, cur_date_row_id):
+                        continue
                     project_aa_states = self.find_sequence_of_aa_enability(
                         project_id, cur_date, project_aa_states)
                     gathered_row = self.gather_metrics_by_project(project_id, project_name, cur_date)
@@ -291,7 +294,8 @@ class MetricsGatherer:
                     '_source': row,
                 } for row in gathered_rows]
                 self.es_client.bulk_index(self.es_client.main_index, bulk_actions)
-                self.models_remover.apply_remove_model_policies(project_id)
+                if gathered_rows:
+                    self.models_remover.apply_remove_model_policies(project_id)
             except Exception as err:
                 logger.error("Error occured for project %s", project_info)
                 logger.error(err)
