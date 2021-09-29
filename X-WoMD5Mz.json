@@ -23,7 +23,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1632918633045,
+        "iteration": 1632918633049,
         "links": [],
         "panels": [
             {
@@ -2228,6 +2228,23 @@
                         "query": "",
                         "refId": "D",
                         "timeField": "gather_date"
+                    },
+                    {
+                        "alias": "",
+                        "bucketAggs": [],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "settings": {
+                                    "size": "500"
+                                },
+                                "type": "raw_data"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "E",
+                        "timeField": "gather_date"
                     }
                 ],
                 "title": "Projects which run auto-analysis and manually analyzed",
@@ -2273,9 +2290,35 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
+                                "AA_analyzed": true,
                                 "Total": true,
                                 "Unique Count 1": true,
-                                "Unique Count 2": true
+                                "Unique Count 2": true,
+                                "_id": true,
+                                "_index": true,
+                                "_type": true,
+                                "accuracy": true,
+                                "avg_processing_time_only_found_test_item_aa": true,
+                                "avg_processing_time_test_item_aa": true,
+                                "avg_processing_time_test_item_cluster": true,
+                                "avg_processing_time_test_item_suggest": true,
+                                "changed_type": true,
+                                "errors": true,
+                                "errors_count": true,
+                                "f1-score": true,
+                                "gather_date": true,
+                                "gather_datetime": true,
+                                "highlight": true,
+                                "launch_added": true,
+                                "launch_analyzed": true,
+                                "manually_analyzed": true,
+                                "model_info": true,
+                                "module_version": true,
+                                "on": true,
+                                "percent_not_found_aa": true,
+                                "percent_not_found_cluster": true,
+                                "percent_not_found_suggest": true,
+                                "sort": true
                             },
                             "indexByName": {},
                             "renameByName": {
@@ -2440,6 +2483,23 @@
                         "query": "",
                         "refId": "D",
                         "timeField": "gather_date"
+                    },
+                    {
+                        "alias": "",
+                        "bucketAggs": [],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "settings": {
+                                    "size": "500"
+                                },
+                                "type": "raw_data"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "E",
+                        "timeField": "gather_date"
                     }
                 ],
                 "title": "Projects which don't use auto-analysis",
@@ -2481,12 +2541,39 @@
                         "id": "organize",
                         "options": {
                             "excludeByName": {
+                                "AA_analyzed": true,
                                 "Sum 1": true,
                                 "Sum 4": true,
                                 "Total": false,
                                 "Unique Count": true,
                                 "Unique Count 1": false,
-                                "Unique Count 2": false
+                                "Unique Count 2": false,
+                                "_id": true,
+                                "_index": true,
+                                "_type": true,
+                                "accuracy": true,
+                                "avg_processing_time_only_found_test_item_aa": true,
+                                "avg_processing_time_test_item_aa": true,
+                                "avg_processing_time_test_item_cluster": true,
+                                "avg_processing_time_test_item_suggest": true,
+                                "changed_type": true,
+                                "errors": true,
+                                "errors_count": true,
+                                "f1-score": true,
+                                "gather_date": true,
+                                "gather_datetime": true,
+                                "highlight": true,
+                                "launch_added": true,
+                                "launch_analyzed": true,
+                                "manually_analyzed": true,
+                                "model_info": true,
+                                "module_version": true,
+                                "on": true,
+                                "percent_not_found_aa": true,
+                                "percent_not_found_cluster": true,
+                                "percent_not_found_suggest": true,
+                                "project_id": false,
+                                "sort": true
                             },
                             "indexByName": {},
                             "renameByName": {
@@ -2609,7 +2696,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 9
+        "version": 10
     },
     "meta": {
         "canAdmin": true,
@@ -2629,9 +2716,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-09-29T12:32:01Z",
+        "updated": "2021-09-29T12:42:56Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 9
+        "version": 10
     }
 }
