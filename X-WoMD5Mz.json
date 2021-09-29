@@ -23,7 +23,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1632901105742,
+        "iteration": 1632918633045,
         "links": [],
         "panels": [
             {
@@ -1925,7 +1925,7 @@
                                 "type": "raw_data"
                             }
                         ],
-                        "query": "",
+                        "query": "project_id: $project_id AND on: $on",
                         "refId": "A",
                         "timeField": "gather_date"
                     }
@@ -2609,7 +2609,7 @@
         "timezone": "",
         "title": "RP Analyzer dashboard",
         "uid": "X-WoMD5Mz",
-        "version": 8
+        "version": 9
     },
     "meta": {
         "canAdmin": true,
@@ -2629,9 +2629,9 @@
         "provisionedExternalId": "",
         "slug": "rp-analyzer-dashboard",
         "type": "db",
-        "updated": "2021-09-29T12:27:40Z",
+        "updated": "2021-09-29T12:32:01Z",
         "updatedBy": "admin",
         "url": "/d/X-WoMD5Mz/rp-analyzer-dashboard",
-        "version": 8
+        "version": 9
     }
 }
