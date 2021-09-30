@@ -9,6 +9,12 @@
                     "hide": true,
                     "iconColor": "rgba(0, 211, 255, 1)",
                     "name": "Annotations & Alerts",
+                    "target": {
+                        "limit": 100,
+                        "matchAny": false,
+                        "tags": [],
+                        "type": "dashboard"
+                    },
                     "type": "dashboard"
                 }
             ]
@@ -17,7 +23,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1630489814807,
+        "iteration": 1633000339938,
         "links": [],
         "panels": [
             {
@@ -26,12 +32,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -58,7 +58,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -167,7 +167,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -207,7 +206,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -216,7 +215,7 @@
                                 "field": "project",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_term",
                                     "size": "0"
@@ -234,14 +233,14 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND userChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
                 ],
                 "timeFrom": null,
                 "timeShift": null,
-                "title": "Unique projects",
+                "title": "Unique projects which chose any ML suggestion",
                 "transformations": [
                     {
                         "id": "organize",
@@ -269,7 +268,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -309,7 +307,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -367,7 +365,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -407,7 +404,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -467,6 +464,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -496,7 +494,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "alias": "total_runs",
@@ -626,7 +624,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {},
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -666,7 +663,7 @@
                     "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -727,16 +724,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {},
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": []
-                        }
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -763,7 +750,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -879,12 +866,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -911,7 +892,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -998,12 +979,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -1030,7 +1005,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1117,12 +1092,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -1149,7 +1118,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1255,12 +1224,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -1287,7 +1250,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1395,17 +1358,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_aa_stats",
-                "fieldConfig": {
-                    "defaults": {
-                        "color": {},
-                        "custom": {},
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": []
-                        }
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -1432,7 +1384,7 @@
                     "alertThreshold": true
                 },
                 "percentage": false,
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1537,6 +1489,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1566,7 +1519,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1578,7 +1531,7 @@
                                     "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "1",
-                                    "size": "10"
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1609,6 +1562,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1638,7 +1592,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1681,6 +1635,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1710,7 +1665,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1751,6 +1706,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1780,7 +1736,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1821,6 +1777,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1850,7 +1807,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1891,6 +1848,7 @@
                     "defaults": {
                         "custom": {
                             "align": null,
+                            "displayMode": "auto",
                             "filterable": false
                         },
                         "mappings": [],
@@ -1920,7 +1878,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.4.2",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1956,7 +1914,7 @@
                 "type": "table"
             }
         ],
-        "schemaVersion": 27,
+        "schemaVersion": 30,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -1984,7 +1942,6 @@
                     "skipUrlSync": false,
                     "sort": 0,
                     "tagValuesQuery": "",
-                    "tags": [],
                     "tagsQuery": "",
                     "type": "query",
                     "useTags": false
@@ -2022,18 +1979,19 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 20
+        "version": 10
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-06-28T07:49:31Z",
+        "created": "2021-09-24T14:51:20Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
         "folderTitle": "General",
+        "folderUid": "",
         "folderUrl": "",
         "hasAcl": false,
         "isFolder": false,
@@ -2041,9 +1999,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-09-01T09:52:14Z",
+        "updated": "2021-09-30T11:15:58Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 20
+        "version": 10
     }
 }
