@@ -1546,7 +1546,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1604,7 +1604,7 @@
                                     "min_doc_count": "1",
                                     "order": "asc",
                                     "orderBy": "1",
-                                    "size": "10"
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1619,7 +1619,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1677,7 +1677,7 @@
                                     "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "1",
-                                    "size": "10"
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1748,7 +1748,7 @@
                                     "min_doc_count": "0",
                                     "order": "asc",
                                     "orderBy": "1",
-                                    "size": "10"
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1979,7 +1979,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 10
+        "version": 12
     },
     "meta": {
         "canAdmin": true,
@@ -1999,9 +1999,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-09-30T11:15:58Z",
+        "updated": "2021-09-30T13:32:19Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 10
+        "version": 12
     }
 }
