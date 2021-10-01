@@ -23,7 +23,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1633000339938,
+        "iteration": 1633068445954,
         "links": [],
         "panels": [
             {
@@ -186,7 +186,7 @@
                 },
                 "gridPos": {
                     "h": 5,
-                    "w": 4,
+                    "w": 3,
                     "x": 11,
                     "y": 0
                 },
@@ -268,6 +268,9 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -287,8 +290,103 @@
                 },
                 "gridPos": {
                     "h": 5,
-                    "w": 4,
-                    "x": 15,
+                    "w": 3,
+                    "x": 14,
+                    "y": 0
+                },
+                "id": 38,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "lastNotNull"
+                        ],
+                        "fields": "",
+                        "values": false
+                    },
+                    "text": {},
+                    "textMode": "auto"
+                },
+                "pluginVersion": "8.1.0",
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "project",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "notFoundResults: 0",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "title": "Unique projects, which has ML suggestions",
+                "transformations": [
+                    {
+                        "id": "organize",
+                        "options": {
+                            "excludeByName": {
+                                "Unique Count": true
+                            },
+                            "indexByName": {},
+                            "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
+                        }
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "datasource": "rp_suggestions_info_metrics",
+                "fieldConfig": {
+                    "defaults": {
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 5,
+                    "w": 2,
+                    "x": 17,
                     "y": 0
                 },
                 "id": 10,
@@ -1979,7 +2077,7 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 12
+        "version": 20
     },
     "meta": {
         "canAdmin": true,
@@ -1999,9 +2097,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-09-30T13:32:19Z",
+        "updated": "2021-10-01T06:13:26Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 12
+        "version": 20
     }
 }
