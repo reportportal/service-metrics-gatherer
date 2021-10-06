@@ -191,12 +191,13 @@ class TestMetricsGatherer(unittest.TestCase):
     def test_fill_right_aa_enable_states(self):
         _metrics_gatherer = metrics_gatherer.MetricsGatherer(self.get_app_config())
         _metrics_gatherer.fill_right_aa_enable_states([
-            {"gather_date": date(2020, 10, 10) + timedelta(days=i), "on": 0} for i in range(7)],
+            {"gather_date": (
+                date(2020, 10, 10) + timedelta(days=i)).strftime("%Y-%m-%d"), "on": 0} for i in range(7)],
             {date(2020, 10, 11): (0, 0), date(2020, 10, 14): (1, 0), date(2020, 10, 15): (1, 1)}) == [
-            {'gather_date': date(2020, 10, 10), 'on': 1},
-            {'gather_date': date(2020, 10, 11), 'on': 0},
-            {'gather_date': date(2020, 10, 12), 'on': 0},
-            {'gather_date': date(2020, 10, 13), 'on': 0},
-            {'gather_date': date(2020, 10, 14), 'on': 0},
-            {'gather_date': date(2020, 10, 15), 'on': 1},
-            {'gather_date': date(2020, 10, 16), 'on': 0}]
+            {'gather_date': date(2020, 10, 10).strftime("%Y-%m-%d"), 'on': 1},
+            {'gather_date': date(2020, 10, 11).strftime("%Y-%m-%d"), 'on': 0},
+            {'gather_date': date(2020, 10, 12).strftime("%Y-%m-%d"), 'on': 0},
+            {'gather_date': date(2020, 10, 13).strftime("%Y-%m-%d"), 'on': 0},
+            {'gather_date': date(2020, 10, 14).strftime("%Y-%m-%d"), 'on': 0},
+            {'gather_date': date(2020, 10, 15).strftime("%Y-%m-%d"), 'on': 1},
+            {'gather_date': date(2020, 10, 16).strftime("%Y-%m-%d"), 'on': 0}]

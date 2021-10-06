@@ -9,6 +9,12 @@
                     "hide": true,
                     "iconColor": "rgba(0, 211, 255, 1)",
                     "name": "Annotations & Alerts",
+                    "target": {
+                        "limit": 100,
+                        "matchAny": false,
+                        "tags": [],
+                        "type": "dashboard"
+                    },
                     "type": "dashboard"
                 }
             ]
@@ -17,7 +23,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1622015834663,
+        "iteration": 1633068445954,
         "links": [],
         "panels": [
             {
@@ -26,12 +32,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -54,8 +54,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -90,6 +93,30 @@
                         ],
                         "query": "project: $project",
                         "refId": "A",
+                        "timeField": "savedDate"
+                    },
+                    {
+                        "alias": "Average Reciprocal rank only with chosen",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "reciprocalRank",
+                                "id": "1",
+                                "type": "avg"
+                            }
+                        ],
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
+                        "refId": "B",
                         "timeField": "savedDate"
                     }
                 ],
@@ -140,9 +167,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -162,7 +186,7 @@
                 },
                 "gridPos": {
                     "h": 5,
-                    "w": 4,
+                    "w": 3,
                     "x": 11,
                     "y": 0
                 },
@@ -179,9 +203,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -190,7 +215,7 @@
                                 "field": "project",
                                 "id": "2",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
                                     "orderBy": "_term",
                                     "size": "0"
@@ -208,14 +233,14 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND userChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
                 ],
                 "timeFrom": null,
                 "timeShift": null,
-                "title": "Unique projects",
+                "title": "Unique projects which chose any ML suggestion",
                 "transformations": [
                     {
                         "id": "organize",
@@ -243,8 +268,8 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
+                        "color": {
+                            "mode": "thresholds"
                         },
                         "mappings": [],
                         "thresholds": {
@@ -265,8 +290,103 @@
                 },
                 "gridPos": {
                     "h": 5,
-                    "w": 4,
-                    "x": 15,
+                    "w": 3,
+                    "x": 14,
+                    "y": 0
+                },
+                "id": 38,
+                "options": {
+                    "colorMode": "value",
+                    "graphMode": "area",
+                    "justifyMode": "auto",
+                    "orientation": "auto",
+                    "reduceOptions": {
+                        "calcs": [
+                            "lastNotNull"
+                        ],
+                        "fields": "",
+                        "values": false
+                    },
+                    "text": {},
+                    "textMode": "auto"
+                },
+                "pluginVersion": "8.1.0",
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "project",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "_term",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "notFoundResults: 0",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "title": "Unique projects, which has ML suggestions",
+                "transformations": [
+                    {
+                        "id": "organize",
+                        "options": {
+                            "excludeByName": {
+                                "Unique Count": true
+                            },
+                            "indexByName": {},
+                            "renameByName": {}
+                        }
+                    },
+                    {
+                        "id": "reduce",
+                        "options": {
+                            "reducers": [
+                                "count"
+                            ]
+                        }
+                    }
+                ],
+                "type": "stat"
+            },
+            {
+                "datasource": "rp_suggestions_info_metrics",
+                "fieldConfig": {
+                    "defaults": {
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 5,
+                    "w": 2,
+                    "x": 17,
                     "y": 0
                 },
                 "id": 10,
@@ -282,9 +402,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -342,9 +463,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -381,9 +499,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -442,7 +561,9 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -471,7 +592,7 @@
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "alias": "total_runs",
@@ -601,9 +722,6 @@
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
-                        "custom": {
-                            "align": null
-                        },
                         "mappings": [],
                         "thresholds": {
                             "mode": "absolute",
@@ -640,9 +758,10 @@
                         "fields": "",
                         "values": false
                     },
+                    "text": {},
                     "textMode": "auto"
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -703,28 +822,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -747,8 +844,11 @@
                 "lines": true,
                 "linewidth": 1,
                 "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -782,7 +882,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "isUserChoice: 1",
+                        "query": "userChoice: 1",
                         "refId": "A",
                         "timeField": "savedDate"
                     },
@@ -864,12 +964,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -891,9 +985,12 @@
                 },
                 "lines": true,
                 "linewidth": 1,
-                "nullPointMode": "null",
+                "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -980,12 +1077,6 @@
                 "dashLength": 10,
                 "dashes": false,
                 "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {}
-                    },
-                    "overrides": []
-                },
                 "fill": 1,
                 "fillGradient": 0,
                 "gridPos": {
@@ -1007,9 +1098,12 @@
                 },
                 "lines": true,
                 "linewidth": 1,
-                "nullPointMode": "null",
+                "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
                 "percentage": false,
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "pointradius": 2,
                 "points": false,
                 "renderer": "flot",
@@ -1091,11 +1185,410 @@
                 }
             },
             {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_suggestions_info_metrics",
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 0,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 32,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "8.1.0",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "Unique projects run suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    },
+                    {
+                        "alias": "Unique projects which chose suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "project",
+                                "id": "1",
+                                "type": "cardinality"
+                            }
+                        ],
+                        "query": "userChoice: 1",
+                        "refId": "B",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Unique projects usage",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_suggestions_info_metrics",
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 8,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 36,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "connected",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "8.1.0",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "user chose suggestion",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "field": "matchScore",
+                                "id": "1",
+                                "type": "avg"
+                            }
+                        ],
+                        "query": "project: $project AND userChoice: 1",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    },
+                    {
+                        "alias": "user didn't choose suggestion",
+                        "bucketAggs": [
+                            {
+                                "field": "savedDate",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "field": "matchScore",
+                                "id": "1",
+                                "type": "avg"
+                            }
+                        ],
+                        "query": "project: $project AND userChoice: 0 AND resultPosition: [0 TO 5]",
+                        "refId": "B",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Mean scores chosen vs not chosen suggestions",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
+                "aliasColors": {},
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "rp_aa_stats",
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                    "h": 8,
+                    "w": 8,
+                    "x": 16,
+                    "y": 17
+                },
+                "hiddenSeries": false,
+                "id": 34,
+                "legend": {
+                    "avg": false,
+                    "current": false,
+                    "max": false,
+                    "min": false,
+                    "show": true,
+                    "total": false,
+                    "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                    "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "8.1.0",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                    {
+                        "alias": "run auto-analysis",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d",
+                                    "min_doc_count": "0",
+                                    "trimEdges": "0"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "method: auto_analysis",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    },
+                    {
+                        "alias": "run suggestions",
+                        "bucketAggs": [
+                            {
+                                "field": "gather_date",
+                                "id": "2",
+                                "settings": {
+                                    "interval": "1d"
+                                },
+                                "type": "date_histogram"
+                            }
+                        ],
+                        "hide": false,
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "method: suggest",
+                        "refId": "B",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Run auto-analysis vs run suggestions",
+                "tooltip": {
+                    "shared": true,
+                    "sort": 0,
+                    "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                    "buckets": null,
+                    "mode": "time",
+                    "name": null,
+                    "show": true,
+                    "values": []
+                },
+                "yaxes": [
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    },
+                    {
+                        "format": "short",
+                        "label": null,
+                        "logBase": 1,
+                        "max": null,
+                        "min": null,
+                        "show": true
+                    }
+                ],
+                "yaxis": {
+                    "align": false,
+                    "alignLevel": null
+                }
+            },
+            {
                 "datasource": "rp_suggestions_info_metrics",
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1118,13 +1611,13 @@
                     "h": 8,
                     "w": 12,
                     "x": 0,
-                    "y": 17
+                    "y": 25
                 },
                 "id": 20,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1134,9 +1627,9 @@
                                 "id": "2",
                                 "settings": {
                                     "min_doc_count": "1",
-                                    "order": "asc",
+                                    "order": "desc",
                                     "orderBy": "1",
-                                    "size": "10"
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1151,7 +1644,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1166,7 +1659,9 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1189,13 +1684,13 @@
                     "h": 8,
                     "w": 12,
                     "x": 12,
-                    "y": 17
+                    "y": 25
                 },
                 "id": 22,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1205,9 +1700,9 @@
                                 "id": "2",
                                 "settings": {
                                     "min_doc_count": "1",
-                                    "order": "desc",
-                                    "orderBy": "_term",
-                                    "size": "10"
+                                    "order": "asc",
+                                    "orderBy": "1",
+                                    "size": "0"
                                 },
                                 "type": "terms"
                             }
@@ -1222,7 +1717,7 @@
                                 "type": "avg"
                             }
                         ],
-                        "query": "project: $project",
+                        "query": "project: $project AND reciprocalRank: [1 TO 100]",
                         "refId": "A",
                         "timeField": "savedDate"
                     }
@@ -1237,145 +1732,9 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": []
-                },
-                "gridPos": {
-                    "h": 8,
-                    "w": 12,
-                    "x": 0,
-                    "y": 25
-                },
-                "id": 24,
-                "options": {
-                    "showHeader": true
-                },
-                "pluginVersion": "7.1.1",
-                "targets": [
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:2229",
-                                "field": "project",
-                                "id": "2",
-                                "settings": {
-                                    "min_doc_count": "1",
-                                    "order": "asc",
-                                    "orderBy": "_term",
-                                    "size": "10"
-                                },
-                                "type": "terms"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:2227",
-                                "field": "select field",
-                                "id": "1",
-                                "type": "count"
-                            }
-                        ],
-                        "query": "project: $project",
-                        "refId": "A",
-                        "timeField": "savedDate"
-                    }
-                ],
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Projects with most suggestion runs",
-                "type": "table"
-            },
-            {
-                "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {
-                            "align": null
-                        },
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": []
-                },
-                "gridPos": {
-                    "h": 8,
-                    "w": 12,
-                    "x": 12,
-                    "y": 25
-                },
-                "id": 26,
-                "options": {
-                    "showHeader": true
-                },
-                "pluginVersion": "7.1.1",
-                "targets": [
-                    {
-                        "bucketAggs": [
-                            {
-                                "$$hashKey": "object:2389",
-                                "field": "project",
-                                "id": "2",
-                                "settings": {
-                                    "min_doc_count": "1",
-                                    "order": "desc",
-                                    "orderBy": "_term",
-                                    "size": "10"
-                                },
-                                "type": "terms"
-                            }
-                        ],
-                        "metrics": [
-                            {
-                                "$$hashKey": "object:2387",
-                                "field": "select field",
-                                "id": "1",
-                                "type": "count"
-                            }
-                        ],
-                        "query": "project: $project",
-                        "refId": "A",
-                        "timeField": "savedDate"
-                    }
-                ],
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "The projects use suggestions the least",
-                "type": "table"
-            },
-            {
-                "datasource": "rp_suggestions_info_metrics",
-                "fieldConfig": {
-                    "defaults": {
-                        "custom": {
-                            "align": null
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1400,11 +1759,153 @@
                     "x": 0,
                     "y": 33
                 },
+                "id": 24,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "8.1.0",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:2229",
+                                "field": "project",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "1",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:2227",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "project: $project AND userChoice: 1",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Projects with most suggestion runs",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_suggestions_info_metrics",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 33
+                },
+                "id": 26,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "8.1.0",
+                "targets": [
+                    {
+                        "bucketAggs": [
+                            {
+                                "$$hashKey": "object:2389",
+                                "field": "project",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "0",
+                                    "order": "asc",
+                                    "orderBy": "1",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "$$hashKey": "object:2387",
+                                "field": "select field",
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "project: $project  AND userChoice: 1",
+                        "refId": "A",
+                        "timeField": "savedDate"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "The projects use suggestions the least",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_suggestions_info_metrics",
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 41
+                },
                 "id": 28,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1444,7 +1945,9 @@
                 "fieldConfig": {
                     "defaults": {
                         "custom": {
-                            "align": null
+                            "align": null,
+                            "displayMode": "auto",
+                            "filterable": false
                         },
                         "mappings": [],
                         "thresholds": {
@@ -1467,13 +1970,13 @@
                     "h": 8,
                     "w": 12,
                     "x": 12,
-                    "y": 33
+                    "y": 41
                 },
                 "id": 30,
                 "options": {
                     "showHeader": true
                 },
-                "pluginVersion": "7.1.1",
+                "pluginVersion": "8.1.0",
                 "targets": [
                     {
                         "bucketAggs": [
@@ -1509,7 +2012,7 @@
                 "type": "table"
             }
         ],
-        "schemaVersion": 26,
+        "schemaVersion": 30,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -1523,6 +2026,8 @@
                     },
                     "datasource": "rp_suggestions_info_metrics",
                     "definition": " {\"find\": \"terms\", \"field\": \"project\"}",
+                    "description": null,
+                    "error": null,
                     "hide": 0,
                     "includeAll": true,
                     "label": "Project",
@@ -1530,18 +2035,19 @@
                     "name": "project",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"project\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
                     "tagValuesQuery": "",
-                    "tags": [],
                     "tagsQuery": "",
                     "type": "query",
                     "useTags": false
                 },
                 {
                     "datasource": "rp_suggestions_info_metrics",
+                    "description": null,
+                    "error": null,
                     "filters": [],
                     "hide": 0,
                     "label": "Custom Filters",
@@ -1571,18 +2077,19 @@
         "timezone": "",
         "title": "RP Suggestions dashboard",
         "uid": "OM3Zn8EMz",
-        "version": 25
+        "version": 20
     },
     "meta": {
         "canAdmin": true,
         "canEdit": true,
         "canSave": true,
         "canStar": true,
-        "created": "2021-05-17T12:33:52Z",
+        "created": "2021-09-24T14:51:20Z",
         "createdBy": "admin",
         "expires": "0001-01-01T00:00:00Z",
         "folderId": 0,
         "folderTitle": "General",
+        "folderUid": "",
         "folderUrl": "",
         "hasAcl": false,
         "isFolder": false,
@@ -1590,9 +2097,9 @@
         "provisionedExternalId": "",
         "slug": "rp-suggestions-dashboard",
         "type": "db",
-        "updated": "2021-05-26T07:58:37Z",
+        "updated": "2021-10-01T06:13:26Z",
         "updatedBy": "admin",
         "url": "/d/OM3Zn8EMz/rp-suggestions-dashboard",
-        "version": 25
+        "version": 20
     }
 }

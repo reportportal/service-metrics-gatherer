@@ -17,7 +17,7 @@
         "gnetId": null,
         "graphTooltip": 0,
         "id": null,
-        "iteration": 1625129088905,
+        "iteration": 1629792922431,
         "links": [],
         "panels": [
             {
@@ -605,9 +605,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -647,9 +647,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -793,7 +793,7 @@
                                 "type": "count"
                             }
                         ],
-                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
+                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "A",
                         "timeField": "gather_date"
                     },
@@ -821,7 +821,7 @@
                                 "type": "cardinality"
                             }
                         ],
-                        "query": "model_saved : 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
+                        "query": "model_saved: 1 AND sub_model_type: all AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
                         "refId": "B",
                         "timeField": "gather_date"
                     }
@@ -924,9 +924,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -1188,9 +1188,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -1322,9 +1322,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -1454,9 +1454,9 @@
                                 "field": "sub_model_type",
                                 "id": "3",
                                 "settings": {
-                                    "min_doc_count": 0,
+                                    "min_doc_count": "1",
                                     "order": "desc",
-                                    "orderBy": "_term",
+                                    "orderBy": "1",
                                     "size": "10"
                                 },
                                 "type": "terms"
@@ -1529,6 +1529,146 @@
                     "align": false,
                     "alignLevel": null
                 }
+            },
+            {
+                "datasource": "rp_model_train_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
+                        "custom": {
+                            "align": null,
+                            "filterable": false
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 27
+                },
+                "id": 26,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.4.2",
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "1",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Projects with trained models",
+                "type": "table"
+            },
+            {
+                "datasource": "rp_model_train_stats",
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {
+                            "mode": "thresholds"
+                        },
+                        "custom": {
+                            "align": null,
+                            "filterable": false
+                        },
+                        "mappings": [],
+                        "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                                {
+                                    "color": "green",
+                                    "value": null
+                                },
+                                {
+                                    "color": "red",
+                                    "value": 80
+                                }
+                            ]
+                        }
+                    },
+                    "overrides": []
+                },
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 27
+                },
+                "id": 28,
+                "options": {
+                    "showHeader": true
+                },
+                "pluginVersion": "7.4.2",
+                "targets": [
+                    {
+                        "alias": "",
+                        "bucketAggs": [
+                            {
+                                "field": "project_id",
+                                "id": "2",
+                                "settings": {
+                                    "min_doc_count": "1",
+                                    "order": "desc",
+                                    "orderBy": "1",
+                                    "size": "0"
+                                },
+                                "type": "terms"
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "id": "1",
+                                "type": "count"
+                            }
+                        ],
+                        "query": "sub_model_type: all AND model_saved: 1 AND project_id: $project_id AND model_type: $model_type AND new_model: $new_model AND baseline_model: $baseline_model AND module_version: $module_version AND metric_name: $metric_name",
+                        "refId": "A",
+                        "timeField": "gather_date"
+                    }
+                ],
+                "title": "Projects with saved models",
+                "type": "table"
             }
         ],
         "refresh": false,
@@ -1587,7 +1727,7 @@
                     "name": "model_type",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"model_type\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1618,7 +1758,7 @@
                     "name": "sub_model_type",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"sub_model_type\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1678,7 +1818,7 @@
                     "name": "baseline_model",
                     "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"baseline_model\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1708,7 +1848,7 @@
                     "name": "module_version",
                     "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"module_version\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1738,7 +1878,7 @@
                     "name": "model_saved",
                     "options": [],
                     "query": "{\"find\": \"terms\", \"field\": \"model_saved\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1769,7 +1909,7 @@
                     "name": "metric_name",
                     "options": [],
                     "query": " {\"find\": \"terms\", \"field\": \"metric_name\"}",
-                    "refresh": 1,
+                    "refresh": 2,
                     "regex": "",
                     "skipUrlSync": false,
                     "sort": 0,
@@ -1812,7 +1952,7 @@
         "timezone": "",
         "title": "RP Model training dashboard",
         "uid": "7po7Ga1Gz",
-        "version": 13
+        "version": 26
     },
     "meta": {
         "canAdmin": true,
@@ -1831,9 +1971,9 @@
         "provisionedExternalId": "",
         "slug": "rp-model-training-dashboard",
         "type": "db",
-        "updated": "2021-07-01T08:45:56Z",
+        "updated": "2021-08-24T08:27:08Z",
         "updatedBy": "admin",
         "url": "/d/7po7Ga1Gz/rp-model-training-dashboard",
-        "version": 13
+        "version": 26
     }
 }

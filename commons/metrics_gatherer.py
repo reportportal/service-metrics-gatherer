@@ -43,7 +43,7 @@ class MetricsGatherer:
                 "launch_analyzed": 0,
                 "manually_analyzed": 0, "project_id": project_id,
                 "project_name": project_name, "gather_date": cur_date.date().strftime("%Y-%m-%d"),
-                "gather_datetime": cur_date.date().strftime("%Y-%m-%d %H:%M:%S"),
+                "gather_datetime": cur_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "percent_not_found_aa": 0, "avg_processing_time_only_found_test_item_aa": 0.0,
                 "avg_processing_time_test_item_aa": 0.0, "percent_not_found_suggest": 0,
                 "avg_processing_time_test_item_suggest": 0.0,
@@ -253,10 +253,11 @@ class MetricsGatherer:
         sorted_dates = sorted(project_aa_states.items(), key=lambda x: x[0])
         for row in gathered_rows:
             while len(project_aa_states) > cur_state_ind:
-                if row["gather_date"] < sorted_dates[cur_state_ind][0]:
+                gather_date = datetime.datetime.strptime(row["gather_date"], '%Y-%m-%d').date()
+                if gather_date < sorted_dates[cur_state_ind][0]:
                     row["on"] = 1 - sorted_dates[cur_state_ind][1][0]
                     break
-                elif row["gather_date"] == sorted_dates[cur_state_ind][0]:
+                elif gather_date == sorted_dates[cur_state_ind][0]:
                     row["on"] = sorted_dates[cur_state_ind][1][1]
                     cur_state_ind += 1
                 else:
@@ -279,6 +280,9 @@ class MetricsGatherer:
                 project_aa_states = {}
                 for st_date_day in range((period_end - period_start).days + 1):
                     cur_date = period_start + datetime.timedelta(days=st_date_day)
+                    cur_date_row_id = "%s_%s" % (project_id, cur_date.date().strftime("%Y-%m-%d"))
+                    if self.es_client.object_exists(self.es_client.main_index, cur_date_row_id):
+                        continue
                     project_aa_states = self.find_sequence_of_aa_enability(
                         project_id, cur_date, project_aa_states)
                     gathered_row = self.gather_metrics_by_project(project_id, project_name, cur_date)
@@ -290,7 +294,8 @@ class MetricsGatherer:
                     '_source': row,
                 } for row in gathered_rows]
                 self.es_client.bulk_index(self.es_client.main_index, bulk_actions)
-                self.models_remover.apply_remove_model_policies(project_id)
+                if gathered_rows:
+                    self.models_remover.apply_remove_model_policies(project_id)
             except Exception as err:
                 logger.error("Error occured for project %s", project_info)
                 logger.error(err)
