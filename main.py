@@ -27,6 +27,7 @@ from flask_cors import CORS
 from utils import utils
 import threading
 import json
+from commons import amqp
 
 
 APP_CONFIG = {
@@ -156,6 +157,12 @@ def get_health_status():
         status += "Grafana is not healthy;"
     if not _postgres_dao.test_query_handling():
         status += "Postgres is not healthy;"
+    if APP_CONFIG["amqpUrl"].strip():
+        try:
+            _ = amqp.AmqpClient(APP_CONFIG)
+        except Exception as err:
+            logger.error(err)
+            status += "Connection to Rabbitmq is not healthy;"
     if status:
         logger.error("Metrics gatherer health check status failed: %s", status)
         return Response(json.dumps({"status": status}), status=503, mimetype='application/json')
