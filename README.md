@@ -79,7 +79,7 @@ Perform next steps inside source directory of the analyzer.
 ```
 4. Start the uwsgi server, you can change properties, such as the workers quantity for running the metrics gatherer in the several processes
 ```
-  /venv/bin/uwsgi -workers 1 --socket :3031 --wsgi-file main.py --master --http :5000 --threads 1 --lazy-apps 1 --wsgi-env-behavior holy --virtualenv /venv
+  /venv/bin/uwsgi --workers 1 --socket :3031 --wsgi-file main.py --master --http :5000 --threads 1 --lazy-apps 1 --wsgi-env-behavior holy --virtualenv /venv
   ```
  
 ## For Windows:
