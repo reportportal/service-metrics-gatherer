@@ -63,7 +63,9 @@ APP_CONFIG = {
     "autoAnalysisModelRemovePolicy": os.getenv(
         "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=80|percent_not_found_aa>70"),
     "suggestModelRemovePolicy": os.getenv(
-        "SUGGEST_MODEL_REMOVE_POLICY", "reciprocalRank<=80|notFoundResults>70")
+        "SUGGEST_MODEL_REMOVE_POLICY", "reciprocalRank<=80|notFoundResults>70"),
+    "metricsHttpPort":   int(os.getenv("METRICS_HTTP_PORT", 5000)),
+    "metricsPathToLog":  os.getenv("METRICS_FILE_LOGGING_PATH", "/tmp/metrics_config.log")
 }
 
 
@@ -103,7 +105,7 @@ def start_metrics_gathering():
 
 
 log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
-logging.config.fileConfig(log_file_path)
+logging.config.fileConfig(log_file_path, defaults={'logfilename': APP_CONFIG["metricsPathToLog"]})
 if APP_CONFIG["logLevel"].lower() == "debug":
     logging.disable(logging.NOTSET)
 elif APP_CONFIG["logLevel"].lower() == "info":
@@ -198,7 +200,7 @@ def scheduling_tasks():
 
 
 def start_http_server():
-    application.run(host='0.0.0.0', port=5000)
+    application.run(host='0.0.0.0', port=APP_CONFIG["metricsHttpPort"])
 
 
 create_thread(scheduling_tasks, ())
