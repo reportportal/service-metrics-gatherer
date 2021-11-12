@@ -58,6 +58,10 @@
 
 **SUGGEST_MODEL_REMOVE_POLICY** - by default "reciprocalRank<=80|notFoundResults>70", the conditions for removing custom suggestion models, so that they were retrained. The conditions are checked and applied if at least one condition is satisfied. The available metrics: reciprocalRank, notFoundResults. The available comparison operators: >=, <=, <, >, =, ==.
 
+**METRICS_HTTP_PORT** - by default "5000", the http port for checking status of the metrics-gatherer. It is used when you run the metrics-gatherer without Docker and uwsgi. If you use Docker, you will use the port 5000 and remap it to the port you want. If you use wsqgi for running the metrics-gatherer, you can remap the port with --http :5000 parameter in cmd or app.ini.
+
+**METRICS_FILE_LOGGING_PATH** - by default "/tmp/config.log", the file for logging what's happenning with the metrics-gatherer.
+
 # Instructions for analyzer setup without Docker
 
 Install python with the version 3.7.4. (it is the version on which the service was developed, but it should work on the versions starting from 3.6).
