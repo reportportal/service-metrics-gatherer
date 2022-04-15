@@ -22,8 +22,8 @@ node {
                 withEnv(["AWS_URI=${AWS_URI}", "AWS_REGION=${AWS_REGION}"]) {
                     sh 'docker tag reportportal-dev/service-metrics-gatherer ${AWS_URI}/service-metrics-gatherer'
                     sh 'docker tag reportportal-dev/service-metrics-gatherer ${LOCAL_REGISTRY}/service-metrics-gatherer'
-                    sh 'docker push ${LOCAL_REGISTRY}/metrics-gatherer'
-                    def image = env.AWS_URI + '/metrics-gatherer'
+                    sh 'docker push ${LOCAL_REGISTRY}/service-metrics-gatherer'
+                    def image = env.AWS_URI + '/service-metrics-gatherer'
                     def url = 'https://' + env.AWS_URI
                     def credentials = 'ecr:' + env.AWS_REGION + ':aws_credentials'
                     docker.withRegistry(url, credentials) {
