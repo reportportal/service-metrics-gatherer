@@ -48,28 +48,26 @@ class EsClient:
     def create_es_client(self, es_host, app_config):
         if not app_config["esVerifyCerts"]:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        kwargs = {
+            "timeout": 30,
+            "max_retries": 5,
+            "retry_on_timeout": True,
+            "use_ssl": app_config["esUseSsl"],
+            "verify_certs": app_config["esVerifyCerts"],
+            "ssl_show_warn": app_config["esSslShowWarn"],
+            "ca_certs": app_config["esCAcert"],
+            "client_cert": app_config["esClientCert"],
+            "client_key": app_config["esClientKey"],
+        }
+
+        if app_config["esUser"]:
+            kwargs["http_auth"] = (app_config["esUser"],
+                                   app_config["esPassword"])
+
         if app_config["turnOffSslVerification"]:
-            return elasticsearch.Elasticsearch(
-                [es_host], timeout=30,
-                max_retries=5, retry_on_timeout=True,
-                http_auth=(app_config["esUser"], app_config["esPassword"]),
-                use_ssl=app_config["esUseSsl"],
-                verify_certs=app_config["esVerifyCerts"],
-                ssl_show_warn=app_config["esSslShowWarn"],
-                ca_certs=app_config["esCAcert"],
-                client_cert=app_config["esClientCert"],
-                client_key=app_config["esClientKey"],
-                connection_class=RequestsHttpConnection)
-        return elasticsearch.Elasticsearch(
-            [es_host], timeout=30,
-            max_retries=5, retry_on_timeout=True,
-            http_auth=(app_config["esUser"], app_config["esPassword"]),
-            use_ssl=app_config["esUseSsl"],
-            verify_certs=app_config["esVerifyCerts"],
-            ssl_show_warn=app_config["esSslShowWarn"],
-            ca_certs=app_config["esCAcert"],
-            client_cert=app_config["esClientCert"],
-            client_key=app_config["esClientKey"])
+            kwargs["connection_class"] = RequestsHttpConnection
+
+        return elasticsearch.Elasticsearch([es_host], **kwargs)
 
     def update_settings_after_read_only(self):
         requests.put(
