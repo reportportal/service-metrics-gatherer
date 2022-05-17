@@ -55,7 +55,8 @@ APP_CONFIG = {
     "esClientCert":      os.getenv("ES_CLIENT_CERT", ""),
     "esClientKey":       os.getenv("ES_CLIENT_KEY", ""),
     "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip(),
-    "amqpUrl":           os.getenv("AMQP_URL", "").strip("/").strip("\\"),
+    "amqpUrl":           os.getenv("AMQP_URL", "").strip("/").strip("\\") + "/" + os.getenv(
+        "AMQP_VIRTUAL_HOST", "analyzer"),
     "exchangeName":      os.getenv("AMQP_EXCHANGE_NAME", "analyzer"),
     "analyzerPriority":  int(os.getenv("ANALYZER_PRIORITY", "1")),
     "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),

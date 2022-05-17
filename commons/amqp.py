@@ -27,7 +27,7 @@ class AmqpClient:
 
     def __init__(self, app_config):
         self.app_config = app_config
-        amqp_full_url = app_config["amqpUrl"].rstrip("\\").rstrip("/") + "/analyzer?heartbeat=600"
+        amqp_full_url = app_config["amqpUrl"].rstrip("\\").rstrip("/") + "?heartbeat=600"
         self.connection = pika.BlockingConnection(pika.connection.URLParameters(amqp_full_url))
         self.response = None
         self.corr_id = None
