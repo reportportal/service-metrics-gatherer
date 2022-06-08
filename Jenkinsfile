@@ -28,7 +28,7 @@ node {
         }
         
         stage('Cleanup') {
-            withEnv(["AWS_URI=${AWS_URI}", "LOCAL_REGISTRY=${LOCAL_REGISTRY}"]) {
+            withEnv(["AWS_URI=${AWS_URI}"]) {
                 sh 'docker rmi ${AWS_URI}/service-metrics-gatherer:SNAPSHOT-${BUILD_NUMBER}'
                 sh 'docker rmi reportportal-dev/service-metrics-gatherer:latest'
             }
