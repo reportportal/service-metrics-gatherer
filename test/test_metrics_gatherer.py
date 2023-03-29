@@ -16,7 +16,6 @@
 
 import unittest
 import logging
-import sure # noqa
 from commons import metrics_gatherer
 from datetime import datetime, date, timedelta
 from unittest.mock import MagicMock
