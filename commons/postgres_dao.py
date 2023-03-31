@@ -63,7 +63,7 @@ class PostgresDAO:
         except (Exception, psycopg2.Error) as error:
             logger.error("Error while connecting to PostgreSQL %s", error)
         finally:
-            if(connection):
+            if connection:
                 cursor.close()
                 connection.close()
         return final_results
@@ -85,7 +85,7 @@ class PostgresDAO:
             logger.error("Error while connecting to PostgreSQL %s", error)
             result = False
         finally:
-            if(connection):
+            if connection:
                 cursor.close()
                 connection.close()
         return result
