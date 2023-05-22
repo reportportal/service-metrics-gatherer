@@ -16,7 +16,6 @@
 
 import unittest
 import logging
-import sure # noqa
 from utils import utils
 import datetime
 from freezegun import freeze_time

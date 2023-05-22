@@ -1,4 +1,10 @@
-# service-metrics-gatherer
+# Metrics publishing service for ReportPortal auto-analysis
+
+[![Tests](https://github.com/reportportal/service-metrics-gatherer/actions/workflows/tests.yml/badge.svg)](https://github.com/reportportal/service-metrics-gatherer/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/github/reportportal/service-metrics-gatherer/branch/master/graph/badge.svg?token=WFSK47YFWV)](https://codecov.io/github/reportportal/service-metrics-gatherer)
+[![Join Slack chat!](https://slack.epmrpp.reportportal.io/badge.svg)](https://slack.epmrpp.reportportal.io/)
+[![stackoverflow](https://img.shields.io/badge/reportportal-stackoverflow-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/reportportal)
+[![Build with Love](https://img.shields.io/badge/build%20with-❤%EF%B8%8F%E2%80%8D-lightgrey.svg)](http://reportportal.io?style=flat)
 
 # Environment variables for configuration
 
