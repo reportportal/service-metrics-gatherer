@@ -17,4 +17,3 @@ schedule==1.1.0
 freezegun==1.2.2
 pika==1.2.1
 urllib3==1.26.5
-wheel==0.36.2
