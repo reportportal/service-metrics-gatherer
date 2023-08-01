@@ -31,9 +31,9 @@ from commons import amqp
 
 
 APP_CONFIG = {
-    "esHost":            os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
-    "esUser":            os.getenv("ES_USER", "").strip(),
-    "esPassword":        os.getenv("ES_PASSWORD", "").strip(),
+    "esHost":            os.getenv("RP_ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
+    "esUser":            os.getenv("RP_ES_USER", "").strip(),
+    "esPassword":        os.getenv("RP_ES_PASSWORD", "").strip(),
     "grafanaHost":       os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
     "esHostGrafanaDataSource": os.getenv(
         "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
