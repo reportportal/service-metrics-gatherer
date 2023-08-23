@@ -17,3 +17,4 @@ schedule==1.1.0
 freezegun==1.2.2
 pika==1.2.1
 urllib3==1.26.5
+certifi==2023.7.22
