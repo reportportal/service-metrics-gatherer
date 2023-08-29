@@ -317,7 +317,8 @@ class EsClient:
         for index in [
             self.main_index, self.rp_aa_stats_index,
             self.task_done_index, self.rp_model_train_stats_index,
-            self.rp_suggest_metrics_index, self.rp_model_remove_stats_index]:
+            self.rp_suggest_metrics_index, self.rp_model_remove_stats_index
+        ]:
             last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
             last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
             all_ids = set()

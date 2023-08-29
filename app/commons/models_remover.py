@@ -32,7 +32,8 @@ class ModelsRemover:
         self.model_policies = {}
         for policy in [
             AutoAnalysisModelRemovePolicy(app_config),
-            SuggestModelRemovePolicy(app_config)]:
+            SuggestModelRemovePolicy(app_config)
+        ]:
             self.model_policies[policy.model_name] = policy
         self.es_client = es_client.EsClient(
             esHost=app_config["esHost"],
