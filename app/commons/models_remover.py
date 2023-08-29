@@ -1,26 +1,26 @@
-"""
-* Copyright 2019 EPAM Systems
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-"""
-import logging
-import json
-from commons import amqp
-from commons import es_client
-from utils import utils
+#  Copyright 2023 EPAM Systems
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
 import datetime
-from commons.model_remove_policy.auto_analysis_model_remove_policy import AutoAnalysisModelRemovePolicy
-from commons.model_remove_policy.suggest_model_remove_policy import SuggestModelRemovePolicy
+import json
+import logging
+
+from app.commons import amqp
+from app.commons import es_client
+from app.commons.model_remove_policy.auto_analysis_model_remove_policy import AutoAnalysisModelRemovePolicy
+from app.commons.model_remove_policy.suggest_model_remove_policy import SuggestModelRemovePolicy
+from app.utils import utils, text_processing
 
 logger = logging.getLogger("metricsGatherer.models_remover")
 
@@ -31,8 +31,8 @@ class ModelsRemover:
         self.app_config = app_config
         self.model_policies = {}
         for policy in [
-                AutoAnalysisModelRemovePolicy(app_config),
-                SuggestModelRemovePolicy(app_config)]:
+            AutoAnalysisModelRemovePolicy(app_config),
+            SuggestModelRemovePolicy(app_config)]:
             self.model_policies[policy.model_name] = policy
         self.es_client = es_client.EsClient(
             esHost=app_config["esHost"],
@@ -70,7 +70,7 @@ class ModelsRemover:
                     "model_folder": model_folder,
                     "project_id": project_id,
                     "metric_conditions": self.model_policies[model_type].get_conditions(),
-                    "metric_values": utils.convert_metrics_to_string(cur_metrics),
+                    "metric_values": text_processing.convert_metrics_to_string(cur_metrics),
                     "model_removed": is_deleted,
                     "gather_date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     "module_version": module_version
