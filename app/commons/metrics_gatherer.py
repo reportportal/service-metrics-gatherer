@@ -1,27 +1,27 @@
-"""
-* Copyright 2019 EPAM Systems
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-"""
+#  Copyright 2023 EPAM Systems
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
 
-import logging
 import datetime
+import logging
 from time import time
+
 from sklearn.metrics import f1_score, accuracy_score
-from commons import postgres_dao
-from commons import es_client
-from commons import models_remover
-from utils import utils
+
+from app.commons import es_client
+from app.commons import models_remover
+from app.commons import postgres_dao
+from app.utils import text_processing
 
 logger = logging.getLogger("metricsGatherer.metrics_gatherer")
 
@@ -38,7 +38,7 @@ class MetricsGatherer:
         self.models_remover = models_remover.ModelsRemover(app_settings)
 
     def get_current_date_template(self, project_id, project_name, cur_date):
-        return {"on": 0,  "changed_type": 0, "AA_analyzed": 0,
+        return {"on": 0, "changed_type": 0, "AA_analyzed": 0,
                 "f1-score": 0, "accuracy": 0,
                 "launch_analyzed": 0,
                 "manually_analyzed": 0, "project_id": project_id,
@@ -272,7 +272,7 @@ class MetricsGatherer:
             try:
                 project_id = project_info["id"]
                 project_name = project_info["name"]
-                project_with_prefix = utils.unite_project_name(
+                project_with_prefix = text_processing.unite_project_name(
                     str(project_id), self.app_settings["esProjectIndexPrefix"])
                 if not self.es_client.index_exists(project_with_prefix, print_error=False):
                     continue
