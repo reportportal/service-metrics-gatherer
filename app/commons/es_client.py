@@ -95,7 +95,7 @@ class EsClient:
     def create_grafana_data_source(self, esHostGrafanaDatasource, index_name, time_field):
         index_exists = False
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
+            "res", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
@@ -134,7 +134,7 @@ class EsClient:
 
     def import_dashboard(self, dashboard_id):
         dashboard_info = utils.read_json_file(
-            "", "{}.json".format(dashboard_id), to_json=True)
+            "res", "{}.json".format(dashboard_id), to_json=True)
         requests.post("%s/api/dashboards/db" % self.grafanaHost, data=json.dumps({
             "dashboard": dashboard_info["dashboard"],
             "folderId": dashboard_info["meta"]["folderId"],
@@ -234,7 +234,7 @@ class EsClient:
         if not index_name.strip():
             return
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
+            "res", "%s_mappings.json" % index_name, to_json=True)
         if "'type': 'mapper_parsing_exception'" in formatted_exception or \
                 "RequestError(400, 'illegal_argument_exception'" in formatted_exception:
             if index_name in self.tables_to_recreate:
@@ -244,7 +244,7 @@ class EsClient:
     def bulk_index(self, index_name, bulk_actions):
         exists_index = False
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
+            "res", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
