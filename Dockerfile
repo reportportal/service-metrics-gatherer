@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:3.10.12 as test
+FROM --platform=$BUILDPLATFORM python:3.10.13 as test
 
 RUN apt-get update && apt-get install -y build-essential \
     && rm -rf /var/lib/apt/lists/* \
@@ -19,7 +19,7 @@ RUN "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r requirements-dev.txt
 
 RUN make test-all
 
-FROM --platform=$BUILDPLATFORM python:3.10.12 as builder
+FROM --platform=$BUILDPLATFORM python:3.10.13 as builder
 
 RUN apt-get update && apt-get install -y build-essential \
     && rm -rf /var/lib/apt/lists/* \
@@ -47,7 +47,7 @@ RUN mkdir /backend \
     && cp -r /build/app /backend/ \
     && cp -r /build/res /backend/
 
-FROM --platform=$BUILDPLATFORM python:3.10.12-slim
+FROM --platform=$BUILDPLATFORM python:3.10.13-slim
 RUN apt-get update && apt-get -y upgrade \
     && apt-get install -y libxml2 libgomp1 tzdata curl libpq5 \
     && rm -rf /var/lib/apt/lists/*
