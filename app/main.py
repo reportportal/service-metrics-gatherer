@@ -1,72 +1,70 @@
-"""
-* Copyright 2019 EPAM Systems
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-"""
+#  Copyright 2023 EPAM Systems
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
 
-import logging
+import datetime
+import json
 import logging.config
 import os
-import schedule
+import threading
 import time
-from commons import metrics_gatherer, es_client, postgres_dao
-import datetime
+
+import schedule
 from flask import Flask, Response
 from flask import jsonify
 from flask_cors import CORS
-from utils import utils
-import threading
-import json
-from commons import amqp
 
+from app.commons import metrics_gatherer, es_client
+from app.commons import postgres_dao, amqp
+from app.utils import utils, text_processing
 
 APP_CONFIG = {
-    "esHost":            os.getenv("RP_ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
-    "esUser":            os.getenv("RP_ES_USER", "").strip(),
-    "esPassword":        os.getenv("RP_ES_PASSWORD", "").strip(),
-    "grafanaHost":       os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
+    "esHost": os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
+    "esUser": os.getenv("ES_USER", "").strip(),
+    "esPassword": os.getenv("ES_PASSWORD", "").strip(),
+    "grafanaHost": os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
     "esHostGrafanaDataSource": os.getenv(
         "ES_HOST_GRAFANA_DATASOURCE", "http://localhost:9200").strip("/").strip("\\"),
-    "logLevel":          os.getenv("LOGGING_LEVEL", "DEBUG"),
-    "postgresUser":      os.getenv("POSTGRES_USER", ""),
-    "postgresPassword":  os.getenv("POSTGRES_PASSWORD", ""),
-    "postgresDatabase":  os.getenv("POSTGRES_DB", "reportportal"),
-    "postgresHost":      os.getenv("POSTGRES_HOST", "localhost"),
-    "postgresPort":      os.getenv("POSTGRES_PORT", 5432),
-    "allowedStartTime":  os.getenv("ALLOWED_START_TIME", "22:00"),
-    "allowedEndTime":    os.getenv("ALLOWED_END_TIME", "08:00"),
-    "maxDaysStore":      os.getenv("MAX_DAYS_STORE", "500"),
-    "timeInterval":      os.getenv("TIME_INTERVAL", "hour").lower(),
+    "logLevel": os.getenv("LOGGING_LEVEL", "DEBUG"),
+    "postgresUser": os.getenv("POSTGRES_USER", ""),
+    "postgresPassword": os.getenv("POSTGRES_PASSWORD", ""),
+    "postgresDatabase": os.getenv("POSTGRES_DB", "reportportal"),
+    "postgresHost": os.getenv("POSTGRES_HOST", "localhost"),
+    "postgresPort": os.getenv("POSTGRES_PORT", 5432),
+    "allowedStartTime": os.getenv("ALLOWED_START_TIME", "22:00"),
+    "allowedEndTime": os.getenv("ALLOWED_END_TIME", "08:00"),
+    "maxDaysStore": os.getenv("MAX_DAYS_STORE", "500"),
+    "timeInterval": os.getenv("TIME_INTERVAL", "hour").lower(),
     "turnOffSslVerification": json.loads(os.getenv("ES_TURN_OFF_SSL_VERIFICATION", "false").lower()),
-    "esVerifyCerts":     json.loads(os.getenv("ES_VERIFY_CERTS", "false").lower()),
-    "esUseSsl":          json.loads(os.getenv("ES_USE_SSL", "false").lower()),
-    "esSslShowWarn":     json.loads(os.getenv("ES_SSL_SHOW_WARN", "false").lower()),
-    "esCAcert":          os.getenv("ES_CA_CERT", ""),
-    "esClientCert":      os.getenv("ES_CLIENT_CERT", ""),
-    "esClientKey":       os.getenv("ES_CLIENT_KEY", ""),
-    "esProjectIndexPrefix":  os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip(),
-    "amqpUrl":           os.getenv("AMQP_URL", "").strip("/").strip("\\") + "/" + os.getenv(
+    "esVerifyCerts": json.loads(os.getenv("ES_VERIFY_CERTS", "false").lower()),
+    "esUseSsl": json.loads(os.getenv("ES_USE_SSL", "false").lower()),
+    "esSslShowWarn": json.loads(os.getenv("ES_SSL_SHOW_WARN", "false").lower()),
+    "esCAcert": os.getenv("ES_CA_CERT", ""),
+    "esClientCert": os.getenv("ES_CLIENT_CERT", ""),
+    "esClientKey": os.getenv("ES_CLIENT_KEY", ""),
+    "esProjectIndexPrefix": os.getenv("ES_PROJECT_INDEX_PREFIX", "").strip(),
+    "amqpUrl": os.getenv("AMQP_URL", "").strip("/").strip("\\") + "/" + os.getenv(
         "AMQP_VIRTUAL_HOST", "analyzer"),
-    "exchangeName":      os.getenv("AMQP_EXCHANGE_NAME", "analyzer"),
-    "analyzerPriority":  int(os.getenv("ANALYZER_PRIORITY", "1")),
-    "analyzerIndex":     json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
+    "exchangeName": os.getenv("AMQP_EXCHANGE_NAME", "analyzer"),
+    "analyzerPriority": int(os.getenv("ANALYZER_PRIORITY", "1")),
+    "analyzerIndex": json.loads(os.getenv("ANALYZER_INDEX", "true").lower()),
     "analyzerLogSearch": json.loads(os.getenv("ANALYZER_LOG_SEARCH", "true").lower()),
     "autoAnalysisModelRemovePolicy": os.getenv(
         "AUTO_ANALYSIS_MODEL_REMOVE_POLICY", "f1-score<=80|percent_not_found_aa>70"),
     "suggestModelRemovePolicy": os.getenv(
         "SUGGEST_MODEL_REMOVE_POLICY", "reciprocalRank<=80|notFoundResults>70"),
-    "metricsHttpPort":   int(os.getenv("METRICS_HTTP_PORT", 5000)),
-    "metricsPathToLog":  os.getenv("METRICS_FILE_LOGGING_PATH", "/tmp/metrics_config.log")
+    "metricsHttpPort": int(os.getenv("METRICS_HTTP_PORT", 5000)),
+    "metricsPathToLog": os.getenv("METRICS_FILE_LOGGING_PATH", "/tmp/metrics_config.log")
 }
 
 
@@ -105,7 +103,7 @@ def start_metrics_gathering():
         logger.debug("Task for today was already completed...")
 
 
-log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logging.conf')
+log_file_path = 'res/logging.conf'
 logging.config.fileConfig(log_file_path, defaults={'logfilename': APP_CONFIG["metricsPathToLog"]})
 if APP_CONFIG["logLevel"].lower() == "debug":
     logging.disable(logging.NOTSET)
@@ -137,12 +135,12 @@ while True:
             for dashboard_id in ["X-WoMD5Mz", "7po7Ga1Gz", "OM3Zn8EMz"]:
                 _es_client.import_dashboard(dashboard_id)
                 logger.info("Imported dashboard '%s' into Grafana %s" % (
-                    dashboard_id, utils.remove_credentials_from_url(
+                    dashboard_id, text_processing.remove_credentials_from_url(
                         APP_CONFIG["grafanaHost"])))
             break
     except Exception as e:
         logger.error(e)
-        logger.error("Can't import dashboard into Grafana %s" % utils.remove_credentials_from_url(
+        logger.error("Can't import dashboard into Grafana %s" % text_processing.remove_credentials_from_url(
             APP_CONFIG["grafanaHost"]))
         time.sleep(10)
 

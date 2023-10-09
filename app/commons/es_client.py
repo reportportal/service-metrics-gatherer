@@ -1,29 +1,29 @@
-"""
-* Copyright 2019 EPAM Systems
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-"""
+#  Copyright 2023 EPAM Systems
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
 
+import datetime
+import json
 import logging
 import traceback
+
 import elasticsearch
 import elasticsearch.helpers
-from elasticsearch import RequestsHttpConnection
-from utils import utils
 import requests
-import json
-import datetime
 import urllib3
+from elasticsearch import RequestsHttpConnection
+
+from app.utils import utils, text_processing
 
 logger = logging.getLogger("metricsGatherer.es_client")
 
@@ -95,7 +95,7 @@ class EsClient:
     def create_grafana_data_source(self, esHostGrafanaDatasource, index_name, time_field):
         index_exists = False
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
+            "res", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
@@ -104,14 +104,14 @@ class EsClient:
             index_exists = True
         if index_exists:
             self.delete_grafana_datasource_by_name(index_name)
-            es_user, es_pass = utils.get_credentials_from_url(esHostGrafanaDatasource)
+            es_user, es_pass = text_processing.get_credentials_from_url(esHostGrafanaDatasource)
             try:
                 requests.post(
                     "%s/api/datasources" % self.grafanaHost,
                     data=json.dumps({
                         "name": index_name,
                         "type": "elasticsearch",
-                        "url": utils.remove_credentials_from_url(esHostGrafanaDatasource),
+                        "url": text_processing.remove_credentials_from_url(esHostGrafanaDatasource),
                         "access": "proxy",
                         "basicAuth": len(es_user) > 0,
                         "basicAuthUser": es_user,
@@ -134,7 +134,7 @@ class EsClient:
 
     def import_dashboard(self, dashboard_id):
         dashboard_info = utils.read_json_file(
-            "", "{}.json".format(dashboard_id), to_json=True)
+            "res", "{}.json".format(dashboard_id), to_json=True)
         requests.post("%s/api/dashboards/db" % self.grafanaHost, data=json.dumps({
             "dashboard": dashboard_info["dashboard"],
             "folderId": dashboard_info["meta"]["folderId"],
@@ -154,14 +154,14 @@ class EsClient:
             content = json.loads(data, strict=False)
             return content
         except Exception as err:
-            logger.error("Error with loading url: %s", utils.remove_credentials_from_url(url))
+            logger.error("Error with loading url: %s", text_processing.remove_credentials_from_url(url))
             logger.error(err)
         return []
 
     def is_healthy(self):
         """Check whether elasticsearch is healthy"""
         try:
-            url = utils.build_url(self.esHost, ["_cluster/health"])
+            url = text_processing.build_url(self.esHost, ["_cluster/health"])
             res = EsClient.send_request(url, "GET", self.app_config["esUser"], self.app_config["esPassword"])
             return res["status"] in ["green", "yellow"]
         except Exception as err:
@@ -172,7 +172,7 @@ class EsClient:
     def is_grafana_healthy(self):
         """Check whether grafana is healthy"""
         try:
-            url = utils.build_url(self.grafanaHost, ["api/health"])
+            url = text_processing.build_url(self.grafanaHost, ["api/health"])
             res = EsClient.send_request(url, "GET", "", "")
             return res["database"].lower() == "ok"
         except Exception as err:
@@ -195,7 +195,7 @@ class EsClient:
         try:
             _ = self.es_client.get(index_name, id=row_id)
             return True
-        except Exception as err: # noqa
+        except Exception as err:  # noqa
             return False
 
     def create_index(self, index_name, index_properties):
@@ -209,7 +209,7 @@ class EsClient:
             return response
         except Exception as err:
             logger.error("Couldn't create index")
-            logger.error("ES Url %s", utils.remove_credentials_from_url(
+            logger.error("ES Url %s", text_processing.remove_credentials_from_url(
                 self.esHost))
             logger.error(err)
             return {}
@@ -218,12 +218,12 @@ class EsClient:
         """Delete the whole index"""
         try:
             self.es_client.indices.delete(index=str(index_name))
-            logger.info("ES Url %s", utils.remove_credentials_from_url(self.esHost))
+            logger.info("ES Url %s", text_processing.remove_credentials_from_url(self.esHost))
             logger.debug("Deleted index %s", str(index_name))
             return True
         except Exception as err:
             logger.error("Not found %s for deleting", str(index_name))
-            logger.error("ES Url %s", utils.remove_credentials_from_url(self.esHost))
+            logger.error("ES Url %s", text_processing.remove_credentials_from_url(self.esHost))
             logger.error(err)
             return False
 
@@ -234,8 +234,8 @@ class EsClient:
         if not index_name.strip():
             return
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
-        if "'type': 'mapper_parsing_exception'" in formatted_exception or\
+            "res", "%s_mappings.json" % index_name, to_json=True)
+        if "'type': 'mapper_parsing_exception'" in formatted_exception or \
                 "RequestError(400, 'illegal_argument_exception'" in formatted_exception:
             if index_name in self.tables_to_recreate:
                 self.delete_index(index_name)
@@ -244,7 +244,7 @@ class EsClient:
     def bulk_index(self, index_name, bulk_actions):
         exists_index = False
         index_properties = utils.read_json_file(
-            "", "%s_mappings.json" % index_name, to_json=True)
+            "res", "%s_mappings.json" % index_name, to_json=True)
         if not self.index_exists(index_name, print_error=False):
             response = self.create_index(index_name, index_properties)
             if len(response):
@@ -257,7 +257,7 @@ class EsClient:
                     self.es_client.indices.put_mapping(
                         index=index_name,
                         body=index_properties)
-                except: # noqa
+                except:  # noqa
                     formatted_exception = traceback.format_exc()
                     self._recreate_index_if_needed(bulk_actions, formatted_exception)
                 logger.debug('Indexing %d docs...' % len(bulk_actions))
@@ -267,7 +267,7 @@ class EsClient:
                                                                        chunk_size=1000,
                                                                        request_timeout=30,
                                                                        refresh=True)
-                except: # noqa
+                except:  # noqa
                     formatted_exception = traceback.format_exc()
                     self._recreate_index_if_needed(bulk_actions, formatted_exception)
                     self.update_settings_after_read_only()
@@ -315,9 +315,10 @@ class EsClient:
 
     def delete_old_info(self, max_days_store):
         for index in [
-                self.main_index, self.rp_aa_stats_index,
-                self.task_done_index, self.rp_model_train_stats_index,
-                self.rp_suggest_metrics_index, self.rp_model_remove_stats_index]:
+            self.main_index, self.rp_aa_stats_index,
+            self.task_done_index, self.rp_model_train_stats_index,
+            self.rp_suggest_metrics_index, self.rp_model_remove_stats_index
+        ]:
             last_allowed_date = datetime.datetime.now() - datetime.timedelta(days=int(max_days_store))
             last_allowed_date = last_allowed_date.strftime("%Y-%m-%d")
             all_ids = set()
@@ -347,8 +348,8 @@ class EsClient:
                 for _id in all_ids:
                     bodies.append({
                         "_op_type": "delete",
-                        "_id":      _id,
-                        "_index":   index,
+                        "_id": _id,
+                        "_index": index,
                     })
                 success_count, errors = elasticsearch.helpers.bulk(self.es_client,
                                                                    bodies,
