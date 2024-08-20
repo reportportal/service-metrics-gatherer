@@ -14,7 +14,7 @@ RUN make test-all
 
 
 FROM --platform=${BUILDPLATFORM} python:3.10.14-slim as builder
-RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev\
+RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev libpq-dev\
     && rm -rf /var/lib/apt/lists/* \
     && python -m venv /venv \
     && mkdir /build
