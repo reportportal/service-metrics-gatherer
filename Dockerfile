@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} python:3.10.13 as test
+FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14 as test
 RUN apt-get update && apt-get install -y build-essential \
     && rm -rf /var/lib/apt/lists/* \
     && python -m venv /venv \
@@ -13,8 +13,8 @@ RUN "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r requirements-dev.txt
 RUN make test-all
 
 
-FROM --platform=${BUILDPLATFORM} python:3.10.13 as builder
-RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev\
+FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14 as builder
+RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev libpq-dev\
     && rm -rf /var/lib/apt/lists/* \
     && python -m venv /venv \
     && mkdir /build
@@ -24,8 +24,8 @@ WORKDIR /build
 COPY ./ ./
 RUN "${VIRTUAL_ENV}/bin/pip" install --upgrade pip \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "${VIRTUAL_ENV}/bin/pip install --no-cache-dir -r requirements.txt"
-ARG APP_VERSION
-ARG RELEASE_MODE
+ARG APP_VERSION=""
+ARG RELEASE_MODE=false
 ARG GITHUB_TOKEN
 RUN if [ "${RELEASE_MODE}" = "true" ]; then make release v=${APP_VERSION} githubtoken=${GITHUB_TOKEN}; else if [ "${APP_VERSION}" != "" ]; then make build-release v=${APP_VERSION}; fi ; fi
 RUN mkdir /backend \
@@ -34,7 +34,7 @@ RUN mkdir /backend \
     && cp -r /build/res /backend/
 
 
-FROM --platform=${BUILDPLATFORM} python:3.10.13-slim
+FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14
 RUN apt-get update && apt-get -y upgrade \
     && apt-get install -y libxml2 libgomp1 tzdata curl libpq5 libpcre3 libpcre3-dev\
     && rm -rf /var/lib/apt/lists/*
