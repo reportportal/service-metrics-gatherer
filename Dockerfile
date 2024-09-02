@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14 as test
+FROM --platform=${BUILDPLATFORM} python:3.10.14-slim as test
 RUN apt-get update && apt-get install -y build-essential \
     && rm -rf /var/lib/apt/lists/* \
     && python -m venv /venv \
@@ -13,7 +13,7 @@ RUN "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r requirements-dev.txt
 RUN make test-all
 
 
-FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14 as builder
+FROM --platform=${BUILDPLATFORM} python:3.10.14-slim as builder
 RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev libpq-dev\
     && rm -rf /var/lib/apt/lists/* \
     && python -m venv /venv \
@@ -34,7 +34,7 @@ RUN mkdir /backend \
     && cp -r /build/res /backend/
 
 
-FROM --platform=${BUILDPLATFORM} bitnami/python:3.10.14
+FROM --platform=${BUILDPLATFORM} python:3.10.14-slim
 RUN apt-get update && apt-get -y upgrade \
     && apt-get install -y libxml2 libgomp1 tzdata curl libpq5 libpcre3 libpcre3-dev\
     && rm -rf /var/lib/apt/lists/*
