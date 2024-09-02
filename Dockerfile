@@ -37,6 +37,8 @@ RUN mkdir /backend \
 FROM --platform=${BUILDPLATFORM} python:3.10.14-slim
 RUN apt-get update && apt-get -y upgrade \
     && apt-get install -y libxml2 libgomp1 tzdata curl libpq5 libpcre3 libpcre3-dev\
+    && apt-get remove --purge -y libaom3 \
+    && apt-get autoremove --purge -y \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /venv /venv
 WORKDIR /backend/
