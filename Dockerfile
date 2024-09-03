@@ -1,6 +1,6 @@
-FROM --platform=${BUILDPLATFORM} python:3.11.9-slim as test
-RUN apt-get update && apt-get install -y build-essential \
-    && rm -rf /var/lib/apt/lists/* \
+FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest as test
+USER root
+RUN dnf -y upgrade \
     && python -m venv /venv \
     && mkdir /build
 ENV VIRTUAL_ENV=/venv
@@ -12,10 +12,12 @@ RUN "${VIRTUAL_ENV}/bin/pip" install --upgrade pip \
 RUN "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r requirements-dev.txt
 RUN make test-all
 
-
-FROM --platform=${BUILDPLATFORM} python:3.11.9-slim as builder
-RUN apt-get update && apt-get install -y build-essential libpcre3 libpcre3-dev libpq-dev\
-    && rm -rf /var/lib/apt/lists/* \
+FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest as builder
+USER root
+RUN dnf -y upgrade && dnf -y install pcre-devel libpq-devel \
+    && dnf -y remove emacs-filesystem libjpeg-turbo libtiff libpng wget \
+    && dnf -y autoremove \
+    && dnf clean all \
     && python -m venv /venv \
     && mkdir /build
 ENV VIRTUAL_ENV=/venv
@@ -23,6 +25,7 @@ ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 WORKDIR /build
 COPY ./ ./
 RUN "${VIRTUAL_ENV}/bin/pip" install --upgrade pip \
+    && "${VIRTUAL_ENV}/bin/pip" install --upgrade setuptools \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "${VIRTUAL_ENV}/bin/pip install --no-cache-dir -r requirements.txt"
 ARG APP_VERSION=""
 ARG RELEASE_MODE=false
@@ -33,21 +36,20 @@ RUN mkdir /backend \
     && cp -r /build/app /backend/ \
     && cp -r /build/res /backend/
 
-
-FROM --platform=${BUILDPLATFORM} python:3.11.9-slim
-RUN apt-get update && apt-get -y upgrade \
-    && apt-get install -y libxml2 libgomp1 tzdata curl libpq5 libpcre3 libpcre3-dev\
-    && apt-get remove --purge -y libaom3 \
-    && apt-get autoremove --purge -y \
-    && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /venv /venv
+FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest
+USER root
 WORKDIR /backend/
+COPY --from=builder /venv /venv
 COPY --from=builder /backend ./
-
+RUN dnf -y upgrade && dnf -y install tzdata libpq libgomp pcre-devel \
+    && dnf -y remove emacs-filesystem libjpeg-turbo libtiff libpng wget \
+    && dnf -y autoremove \
+    && dnf clean all \
+    && pip install --upgrade pip \
+    && pip install --upgrade setuptools
 # Create a group and user
 RUN groupadd uwsgi && useradd -g uwsgi uwsgi
 USER uwsgi
-
 EXPOSE 5000
 ENV VIRTUAL_ENV="/venv"
 # uWSGI configuration (customize as needed):
