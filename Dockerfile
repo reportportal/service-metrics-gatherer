@@ -41,7 +41,7 @@ USER root
 WORKDIR /backend/
 COPY --from=builder /venv /venv
 COPY --from=builder /backend ./
-RUN dnf -y upgrade && dnf -y install tzdata libpq libgomp pcre-devel \
+RUN dnf -y upgrade && dnf -y install pcre-devel \
     && dnf -y remove emacs-filesystem libjpeg-turbo libtiff libpng wget \
     && dnf -y autoremove \
     && dnf clean all \
