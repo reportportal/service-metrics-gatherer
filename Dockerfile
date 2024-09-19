@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest as test
+FROM registry.access.redhat.com/ubi8/python-311:latest as test
 USER root
 RUN dnf -y upgrade \
     && python -m venv /venv \
@@ -12,7 +12,7 @@ RUN "${VIRTUAL_ENV}/bin/pip" install --upgrade pip \
 RUN "${VIRTUAL_ENV}/bin/pip" install --no-cache-dir -r requirements-dev.txt
 RUN make test-all
 
-FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest as builder
+FROM registry.access.redhat.com/ubi8/python-311:latest as builder
 USER root
 RUN dnf -y upgrade && dnf -y install pcre-devel libpq-devel \
     && dnf -y remove emacs-filesystem libjpeg-turbo libtiff libpng wget \
@@ -36,7 +36,7 @@ RUN mkdir /backend \
     && cp -r /build/app /backend/ \
     && cp -r /build/res /backend/
 
-FROM --platform=${BUILDPLATFORM} registry.access.redhat.com/ubi8/python-311:latest
+FROM registry.access.redhat.com/ubi8/python-311:latest
 USER root
 WORKDIR /backend/
 COPY --from=builder /venv /venv
