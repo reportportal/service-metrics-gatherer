@@ -3,6 +3,17 @@ name: Retag RC Docker image
 on:
   pull_request_review:
     types: [submitted]
+  workflow_dispatch:
+    inputs:
+      docker_tag:
+        description: 'Docker.io image tag'
+        required: true
+        default: 'latest'
+      ecr_tag:
+        description: 'AWS ECR image tag'
+        required: true
+        default: 'latest'
+        
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}               # set this to your preferred AWS region, e.g. us-west-1
@@ -17,7 +28,7 @@ jobs:
     name: Retag and push image 
     runs-on: ubuntu-latest
     environment: rc
-    if: github.event.pull_request.base.ref == 'master' || github.event.pull_request.base.ref == 'main'
+    if: github.event.review.state == 'approved' && (github.event.pull_request.base.ref == 'master' || github.event.pull_request.base.ref == 'main')
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -69,3 +80,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- :whale: Docker image: $TARGET_REGISTRY/$TARGET_REPOSITORY:$IMAGE_TAG" >> $GITHUB_STEP_SUMMARY
           echo "- :octocat: The commit SHA from which the build was performed: [$GITHUB_SHA](https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA)" >> $GITHUB_STEP_SUMMARY
+  manual-retag-image:
+    name: Manual Retag and push image
+    runs-on: ubuntu-latest
+    environment: rc
