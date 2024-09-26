@@ -3,7 +3,7 @@ name: Retag RC Docker image
 on:
   pull_request_review:
     types: [submitted]
-
+      
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}               # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}       # set this to your Amazon ECR repository name
@@ -17,7 +17,7 @@ jobs:
     name: Retag and push image 
     runs-on: ubuntu-latest
     environment: rc
-    if: github.event.pull_request.base.ref == 'master' || github.event.pull_request.base.ref == 'main'
+    if: github.event.review.state == 'approved' && (github.event.pull_request.base.ref == 'master' || github.event.pull_request.base.ref == 'main')
     steps:
       - name: Checkout
         uses: actions/checkout@v3
