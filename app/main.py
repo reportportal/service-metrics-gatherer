@@ -29,7 +29,7 @@ from app.commons import postgres_dao, amqp
 from app.utils import utils, text_processing
 
 APP_CONFIG = {
-    "esHost": os.getenv("ES_HOST", "http://localhost:9200").strip("/").strip("\\"),
+    "esHost": os.getenv("ES_HOSTS", "http://localhost:9200").strip("/").strip("\\"),
     "esUser": os.getenv("ES_USER", "").strip(),
     "esPassword": os.getenv("ES_PASSWORD", "").strip(),
     "grafanaHost": os.getenv("GRAFANA_HOST", "").strip("/").strip("\\"),
