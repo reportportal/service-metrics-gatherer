@@ -91,23 +91,3 @@ Perform next steps inside source directory of the analyzer.
 ```
   /venv/bin/uwsgi --workers 1 --socket :3031 --wsgi-file main.py --master --http :5000 --threads 1 --lazy-apps --wsgi-env-behavior holy --virtualenv /venv
   ```
- 
-## For Windows:
-1. Create a virtual environment with any name (in the example **env**)
-```
-python -m venv env
-```
-2. Activate the virtual environment
-```
-call env\Scripts\activate.bat
-```
-3. Install python libraries
-```
-python -m pip install -r requirements_windows.txt
-```
-4. Start the program.
-```
-python main.py
-```
-
-
