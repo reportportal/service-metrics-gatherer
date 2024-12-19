@@ -45,11 +45,11 @@ COPY --from=builder /backend ./
 ENV VIRTUAL_ENV="/venv"
 # uWSGI configuration (customize as needed):
 ENV PATH="${VIRTUAL_ENV}/bin:${PATH}" PYTHONPATH=/backend \
-    FLASK_APP=app/main.py UWSGI_WSGI_FILE=app/main.py UWSGI_SOCKET=:3031 UWSGI_HTTP=:5001 \
+    FLASK_APP=app/main.py UWSGI_WSGI_FILE=app/main.py UWSGI_SOCKET=:3031 UWSGI_HTTP=:5000 \
     UWSGI_VIRTUALENV=${VIRTUAL_ENV} UWSGI_MASTER=1 UWSGI_WORKERS=4 UWSGI_THREADS=8 UWSGI_MAX_FD=10000 \
     UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy PYTHONDONTWRITEBYTECODE=1
 
-RUN dnf -y upgrade && dnf -y install python3.11 python3.11-pip ca-certificates pcre-devel \
+RUN dnf -y upgrade && dnf -y install python3.11 python3.11-pip ca-certificates pcre-devel libpq-devel \
     && dnf -y autoremove \
     && dnf clean all \
     && groupadd uwsgi && useradd -g uwsgi uwsgi \
@@ -60,7 +60,7 @@ RUN dnf -y upgrade && dnf -y install python3.11 python3.11-pip ca-certificates p
     && pip install --upgrade setuptools
 
 USER uwsgi
-EXPOSE 5001
+EXPOSE 5000
 
 # Start uWSGI
 CMD ["/venv/bin/uwsgi", "--http-auto-chunked", "--http-keepalive"]
