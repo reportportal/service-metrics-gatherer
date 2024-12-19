@@ -49,15 +49,13 @@ ENV PATH="${VIRTUAL_ENV}/bin:${PATH}" PYTHONPATH=/backend \
     UWSGI_VIRTUALENV=${VIRTUAL_ENV} UWSGI_MASTER=1 UWSGI_WORKERS=4 UWSGI_THREADS=8 UWSGI_MAX_FD=10000 \
     UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy PYTHONDONTWRITEBYTECODE=1
 
-RUN dnf -y upgrade && dnf -y install python3.11 python3.11-pip ca-certificates pcre-devel libpq-devel \
+RUN dnf -y upgrade && dnf -y install python3.11 ca-certificates pcre-devel libpq-devel \
     && dnf -y autoremove \
     && dnf clean all \
     && groupadd uwsgi && useradd -g uwsgi uwsgi \
     && chown -R uwsgi:uwsgi ${VIRTUAL_ENV} \
     && chown -R uwsgi:uwsgi /backend \
-    && source "${VIRTUAL_ENV}/bin/activate" \
-    && pip install --upgrade pip \
-    && pip install --upgrade setuptools
+    && source "${VIRTUAL_ENV}/bin/activate"
 
 USER uwsgi
 EXPOSE 5000
