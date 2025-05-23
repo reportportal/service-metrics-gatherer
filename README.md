@@ -10,9 +10,9 @@
 
 **ES_HOSTS** - Elasticsearch host (can be either like this "http://elasticsearch:9200", or with login and password delimited by : and separated from the host name by @)
 
-**ES_USER** - Elasticsearch host login, set up here the username for elasticsearch, if you choose setup username here, in the **ES_HOST** you should leave only url without login and password
+**ES_USER** - Elasticsearch host login, set up here the username for elasticsearch, if you choose setup username here, in the **ES_HOSTS** you should leave only url without login and password
 
-**ES_PASSWORD** - Elasticsearch host password, set up here the password for elasticsearch, if you choose setup the password here, in the **ES_HOST** you should leave only url without login and password
+**ES_PASSWORD** - Elasticsearch host password, set up here the password for elasticsearch, if you choose setup the password here, in the **ES_HOSTS** you should leave only url without login and password
 
 **AMQP_URL** - an url to the rabbitmq instance
 
