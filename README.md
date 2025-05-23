@@ -8,7 +8,7 @@
 
 # Environment variables for configuration
 
-**ES_HOST** - Elasticsearch host (can be either like this "http://elasticsearch:9200", or with login and password delimited by : and separated from the host name by @)
+**ES_HOSTS** - Elasticsearch host (can be either like this "http://elasticsearch:9200", or with login and password delimited by : and separated from the host name by @)
 
 **ES_USER** - Elasticsearch host login, set up here the username for elasticsearch, if you choose setup username here, in the **ES_HOST** you should leave only url without login and password
 
